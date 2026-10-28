@@ -3,9 +3,11 @@ import Home from './Home.jsx';
 import Registration from './Registration.jsx';
 import Admin from './Admin.jsx';
 import CurrentAffairs from './CurrentAffairs.jsx';
+import CurrentAffairsAdmin from './CurrentAffairsAdmin.jsx';
 
 function readRoute() {
   const route = window.location.hash.replace(/^#/, '') || '/';
+  if (route.startsWith('/ca-admin')) return '/ca-admin';
   if (route.startsWith('/admin')) return '/admin';
   if (route.startsWith('/register')) return '/register';
   if (route.startsWith('/current-affairs')) return '/current-affairs';
@@ -23,5 +25,6 @@ export default function App() {
   if (route === '/register') return <Registration onHome={home} onAdmin={() => { window.location.hash = '/admin'; }} />;
   if (route === '/admin') return <Admin onHome={home} onRegister={() => { window.location.hash = '/register'; }} />;
   if (route === '/current-affairs') return <CurrentAffairs onHome={home} />;
+  if (route === '/ca-admin') return <CurrentAffairsAdmin onHome={home} />;
   return <Home />;
 }

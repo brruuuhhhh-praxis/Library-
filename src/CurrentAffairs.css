@@ -14,3 +14,82 @@
 .ca-footer{max-width:1180px;margin:0 auto;padding:20px 28px 26px;border-top:1px solid var(--ca-line);display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap}.ca-footer span{font-size:10px;color:#7e877f}
 .ss-ca-preview{position:relative;overflow:hidden;max-width:1120px;margin:12px auto 64px;padding:30px 34px;border-radius:20px;background:#203a33;color:#fff;display:flex;justify-content:space-between;align-items:center;gap:24px;box-shadow:0 17px 36px #24372e18}.ss-ca-preview::after{content:'';position:absolute;right:14%;top:-95px;width:230px;height:230px;border:1px solid #ffffff17;border-radius:50%;pointer-events:none}.ss-ca-preview-copy{position:relative;z-index:1}.ss-ca-preview-kicker{font-size:9px;letter-spacing:.18em;color:#e8c27d;font-weight:800}.ss-ca-preview h2{font-size:clamp(22px,3vw,30px);line-height:1.4;margin:9px 0 6px;color:#fff}.ss-ca-preview h2 em{font-style:normal;color:#ebc982}.ss-ca-preview p{font-size:12px;line-height:1.8;color:#d4ded7;margin:0}.ss-ca-preview-tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:15px}.ss-ca-preview-tags span{border:1px solid #ffffff2a;border-radius:20px;padding:6px 10px;color:#f0e4cc;font-size:10px}.ss-ca-preview-cta{position:relative;z-index:1;flex-shrink:0;display:inline-flex;align-items:center;justify-content:center;gap:9px;padding:13px 17px;border-radius:10px;background:#e2b868;color:#203a33;text-decoration:none;font-size:12px;font-weight:900;white-space:nowrap;min-height:46px}.ss-ca-preview-cta:hover{background:#f0ca80}
 @media(max-width:760px){.ca-topbar{padding:16px 18px}.ca-brand-mark{width:39px;height:39px}.ca-brand b{font-size:13px}.ca-brand small{font-size:8px}.ca-back-link{font-size:11px}.ca-hero{padding:38px 18px 26px;grid-template-columns:1fr;gap:22px}.ca-hero h1{font-size:clamp(36px,11vw,51px);margin-top:15px}.ca-hero-copy>p{font-size:13px}.ca-hero-stamp{min-height:auto;padding:19px;display:grid;grid-template-columns:32px 1fr;column-gap:10px;align-items:center}.ca-hero-stamp svg{grid-row:1/4;margin:0}.ca-hero-stamp>span{align-self:end}.ca-hero-stamp b{margin:2px 0;font-size:16px}.ca-hero-stamp small{grid-column:2}.ca-content-wrap{padding:0 18px 40px}.ca-edition-bar{padding:13px;align-items:flex-start;flex-direction:column}.ca-edition-bar input{width:100%}.ca-category-tabs{gap:6px;margin:20px 0 27px}.ca-category-tabs button{padding:10px 5px;min-height:65px;flex-direction:column;gap:5px;font-size:10px}.ca-category-tabs button span{font-size:17px}.ca-list-heading{align-items:stretch;flex-direction:column;gap:13px}.ca-list-heading h2,.ca-quiz-intro h2{font-size:22px}.ca-search{width:100%;min-width:0}.ca-story-card{grid-template-columns:32px minmax(0,1fr);gap:11px;padding:15px 13px}.ca-story-card h3{font-size:14px}.ca-story-card p{font-size:12px}.ca-story-number{font-size:12px}.ca-story-meta{font-size:9px}.ca-quiz-panel{padding:19px 15px;margin-top:33px}.ca-quiz-intro{align-items:flex-start}.ca-options{grid-template-columns:1fr}.ca-quiz-body h3{font-size:15px}.ca-footer{padding:18px;flex-direction:column;align-items:flex-start}.ss-ca-preview{margin:6px 16px 44px;padding:23px 20px;flex-direction:column;align-items:stretch;gap:18px;border-radius:16px}.ss-ca-preview-cta{white-space:normal;width:100%}.ss-ca-preview h2{font-size:25px}.ss-ca-preview p{font-size:11px}}
+
+
+/* SHRI SHYAM — PREMIUM FINISH PASS 2026 */
+.ca-page{--ca-ink:#182b35;--ca-muted:#62727b;--ca-gold:#c6a66b;--ca-paper:#f5f3ed;--ca-line:#e4ded2}
+.ca-topbar{max-width:1240px;padding-top:18px;padding-bottom:18px}
+.ca-brand-mark{border:1px solid #c6a66b5c;box-shadow:0 7px 18px #172a3810}
+.ca-hero{max-width:1240px;padding-top:clamp(42px,6vw,76px);padding-bottom:clamp(35px,5vw,58px)}
+.ca-hero h1{line-height:1.32;text-wrap:balance}
+.ca-hero-copy>p{font-family:'Noto Sans Devanagari',sans-serif;font-size:14px;max-width:62ch}
+.ca-hero-stamp{border-radius:22px;border-color:#d9c79f;box-shadow:0 20px 45px #172a3810}
+.ca-content-wrap{max-width:1240px}
+.ca-edition-bar{box-shadow:0 8px 22px #172a3807;border-radius:16px;padding:18px 20px}
+.ca-edition-bar input:focus,.ca-search:focus-within{outline:2px solid #c6a66b70;outline-offset:2px}
+.ca-category-tabs button{border-radius:14px;min-height:64px;transition:transform .22s,box-shadow .22s,border-color .22s}
+.ca-category-tabs button.is-active{background:linear-gradient(135deg,#203a33,#102923);box-shadow:0 12px 25px #203a3322}
+.ca-list-heading h2,.ca-quiz-intro h2{font-family:'Noto Sans Devanagari',sans-serif;font-size:clamp(22px,2.5vw,28px)}
+.ca-search{border-radius:13px;min-height:46px}
+.ca-story-card{border-radius:17px;box-shadow:0 8px 24px #182b3507;transition:transform .2s,border-color .2s,box-shadow .2s}
+.ca-story-card:hover{transform:translateY(-2px);border-color:#d4c093;box-shadow:0 15px 32px #182b350d}
+.ca-story-main h3{font-family:'Noto Sans Devanagari',sans-serif;line-height:1.7}
+.ca-story-main>p{font-family:'Noto Sans Devanagari',sans-serif;line-height:1.9}
+.ca-source-link{border-radius:8px}
+.ca-quiz-panel{border-radius:22px;box-shadow:0 18px 42px #172a3810}
+.ca-options button{border-radius:12px;min-height:52px}
+.ca-options button:focus-visible,.ca-primary-button:focus-visible,.ca-category-tabs button:focus-visible{outline:2px solid #c6a66b;outline-offset:3px}
+.ca-primary-button{border-radius:11px;min-height:46px}
+.ca-footer{max-width:none;padding-left:max(28px,calc((100vw - 1184px)/2));padding-right:max(28px,calc((100vw - 1184px)/2))}
+@media(max-width:700px){
+  .ca-topbar{padding:15px 17px}.ca-brand b{font-size:13px}.ca-brand small{font-size:8px}
+  .ca-hero{padding:36px 18px 28px;grid-template-columns:1fr;gap:22px}
+  .ca-hero h1{font-size:clamp(34px,9vw,46px)}.ca-hero-copy>p{font-size:13px}
+  .ca-hero-stamp{min-height:0;padding:18px;display:grid;grid-template-columns:30px 1fr;column-gap:10px;align-items:center}
+  .ca-hero-stamp svg{grid-row:span 3;margin:0}.ca-hero-stamp b{font-size:16px;margin:4px 0}
+  .ca-content-wrap{padding:0 14px 38px}.ca-edition-bar{align-items:stretch;flex-direction:column;padding:14px}
+  .ca-edition-bar input{width:100%}.ca-category-tabs{gap:7px;margin:20px 0 25px}
+  .ca-category-tabs button{min-height:62px;padding:10px 5px;flex-direction:column;gap:4px;font-size:10px}
+  .ca-list-heading{align-items:stretch;flex-direction:column;gap:13px}.ca-search{min-width:0;width:100%}
+  .ca-footer{padding:20px 16px;align-items:flex-start;flex-direction:column;gap:10px}
+}
+/* 2) Current Affairs: distinct jewel-toned aubergine, not the same navy as hero/gallery */
+.ss-ca-preview{
+  position:relative;
+  isolation:isolate;
+  overflow:hidden;
+  background:radial-gradient(ellipse at 88% 8%,#7b5368 0%,#7b536800 42%),
+             radial-gradient(ellipse at 10% 110%,#694d3d 0%,#694d3d00 45%),
+             linear-gradient(118deg,#261d31 0%,#3b293e 55%,#4a3041 100%)!important;
+  border-top:1px solid #d6b67955;
+  border-bottom:1px solid #d6b67955;
+}
+.ss-ca-preview:after{
+  content:"";
+  position:absolute;
+  z-index:-1;
+  width:260px;height:260px;
+  right:-95px;top:-155px;
+  border:1px solid #e7ca8a38;
+  border-radius:50%;
+  box-shadow:0 0 0 22px #e7ca8a09,0 0 0 48px #e7ca8a07,0 0 0 78px #e7ca8a05;
+  pointer-events:none;
+}
+.ss-ca-preview-copy h2{color:#fffaf0}
+.ss-ca-preview-copy h2 em{color:#f0d695}
+.ss-ca-preview-copy p{color:#e0d7e0}
+.ss-ca-preview-kicker{color:#e6ca8b}
+.ss-ca-preview-tags span{border-color:#ead6b34a;color:#f4e8d2;background:#ffffff0b}
+.ss-ca-preview-cta{border:1px solid #efd394;background:linear-gradient(135deg,#f4dfa7,#c6a15a);color:#1d2935!important;box-shadow:0 5px 0 #8e6c38,0 10px 22px #05070f35,inset 0 1px 0 #fff7}
+.ss-ca-preview-cta:hover{transform:translateY(-2px);box-shadow:0 7px 0 #8e6c38,0 14px 24px #05070f38,inset 0 1px 0 #fff7}
+
+
+@media(max-width:760px){
+  .ss-ca-preview{background:radial-gradient(ellipse at 100% 0%,#795168 0%,#79516800 44%),linear-gradient(135deg,#281e33,#493143)!important}
+}
+
+
+/* SHRI SHYAM BRAND SYSTEM - WIDER CURRENT AFFAIRS HEADER */
+.ca-topbar{width:100%;max-width:1320px;padding-left:clamp(18px,4vw,54px);padding-right:clamp(18px,4vw,54px);gap:22px}
+.ca-brand{min-width:0}.ca-brand .library-brand{max-width:100%}
+@media(max-width:760px){.ca-topbar{padding:14px 15px;gap:10px}.ca-brand .library-brand{gap:6px}.ca-brand .library-brand__caption{font-size:5px}}

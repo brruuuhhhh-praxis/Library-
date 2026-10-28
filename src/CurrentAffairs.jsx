@@ -5,6 +5,7 @@ import {
 } from 'lucide-react';
 import { isSupabaseConfigured, supabase } from './lib/supabase.js';
 import './CurrentAffairs.css';
+import LibraryBrand from './LibraryBrand.jsx';
 
 const CATEGORIES = [
   { id: 'national', label: 'राष्ट्रीय समसामयिकी', short: 'राष्ट्रीय', emoji: '🇮🇳' },
@@ -122,9 +123,8 @@ export default function CurrentAffairs({ onHome }) {
   return (
     <main className="ca-page">
       <header className="ca-topbar">
-        <a className="ca-brand" href="#/" onClick={onHome} aria-label="श्री श्याम लाइब्रेरी होम">
-          <span className="ca-brand-mark"><Newspaper size={22} /></span>
-          <span><b>श्री श्याम लाइब्रेरी</b><small>DAILY CURRENT AFFAIRS</small></span>
+        <a className="ca-brand" href="#/" onClick={onHome} aria-label="श्री लाइब्रेरी होम">
+          <LibraryBrand variant="compact-light" tagline="A PLACE FOR FOCUSED MINDS" caption="DAILY CURRENT AFFAIRS" />
         </a>
         <a className="ca-back-link" href="#/" onClick={onHome}><ArrowLeft size={17} /> होम पेज</a>
       </header>
@@ -211,7 +211,7 @@ export default function CurrentAffairs({ onHome }) {
         </section>
       </section>
 
-      <footer className="ca-footer"><a href="#/" onClick={onHome}><ArrowLeft size={15} /> श्री श्याम लाइब्रेरी पर वापस जाएँ</a><span>© {new Date().getFullYear()} श्री श्याम लाइब्रेरी · ज्ञान रोज़, तैयारी रोज़</span></footer>
+      <footer className="ca-footer"><a href="#/" onClick={onHome}><ArrowLeft size={15} /> श्री लाइब्रेरी पर वापस जाएँ</a><span>© {new Date().getFullYear()} श्री लाइब्रेरी · ज्ञान रोज़, तैयारी रोज़</span></footer>
     </main>
   );
 }

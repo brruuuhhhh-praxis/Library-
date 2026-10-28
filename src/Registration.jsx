@@ -3,6 +3,7 @@ import { ArrowLeft, BookOpen, CheckCircle2, Printer, ShieldCheck } from 'lucide-
 import { isSupabaseConfigured, supabase } from './lib/supabase.js';
 import './Booking.css';
 import { LIBRARY_NAME, LIBRARY_TAGLINE } from './libraryConfig.js';
+import LibraryBrand from './LibraryBrand.jsx';
 
 const blankForm = { full_name:'', father_name:'', date_of_birth:'', mobile:'', alternate_mobile:'', address:'', emergency_contact:'', id_type:'Aadhaar Card', joining_date:new Date().toISOString().slice(0,10), seat_no:'' };
 const demoSeats = Array.from({ length: 50 }, (_, i) => ({ seat_no: i + 1, status: 'available' }));
@@ -49,7 +50,7 @@ export default function Registration({ onHome, onAdmin }) {
   }
 
   return <main className="booking-page">
-    <header className="booking-topbar"><button type="button" className="booking-back" onClick={onHome}><ArrowLeft size={17}/> होमपेज</button><a className="booking-brand" href={import.meta.env.BASE_URL}><span className="booking-brand-icon"><BookOpen size={23}/></span><span><strong>{LIBRARY_NAME}</strong><small>MEMBERSHIP REGISTRATION</small></span></a><button type="button" className="booking-admin-link" onClick={onAdmin}>एडमिन लॉगिन</button></header>
+    <header className="booking-topbar"><button type="button" className="booking-back" onClick={onHome}><ArrowLeft size={17}/> होमपेज</button><a className="booking-brand" href={import.meta.env.BASE_URL}><LibraryBrand variant="booking" tagline={LIBRARY_TAGLINE} caption="MEMBERSHIP REGISTRATION" /></a><button type="button" className="booking-admin-link" onClick={onAdmin}>एडमिन लॉगिन</button></header>
     <section className="booking-hero"><span className="booking-kicker">YOUR SPACE. YOUR GOALS.</span><h1>अपनी पढ़ाई की जगह<br/><em>आज ही चुनें।</em></h1><p>रजिस्ट्रेशन फॉर्म भरें और उपलब्ध 50 सीटों में से अपनी पसंद की सीट चुनें।</p><div className="booking-stats"><div><strong>{loadingSeats ? '—' : available}</strong><span>उपलब्ध सीटें</span></div><div><strong>50</strong><span>कुल सीटें</span></div><div><strong><ShieldCheck size={22}/></strong><span>निजी रिकॉर्ड सुरक्षित</span></div></div></section>
     {!isSupabaseConfigured && <div className="booking-config-note"><strong>सेटअप बाकी है</strong><p>यह पेज तैयार है, लेकिन ऑनलाइन बुकिंग तभी रिकॉर्ड होगी जब Supabase डेटाबेस बनाया जाए और GitHub Actions में उसके public URL तथा anon key जोड़े जाएँ। अभी फ़ॉर्म सबमिट करने पर कोई डेटा सेव नहीं होता।</p></div>}
     <form className="booking-form" onSubmit={submit}>
@@ -80,8 +81,7 @@ export default function Registration({ onHome, onAdmin }) {
     <section className="membership-print-docs" aria-label="प्रिंट होने वाला सदस्यता फॉर्म और आईडी कार्ड">
       <article className="membership-print-form">
         <header className="mpf-header">
-          <div className="mpf-brand-mark"><BookOpen size={28}/></div>
-          <div className="mpf-brand-copy"><h1>{LIBRARY_NAME}</h1><p>{LIBRARY_TAGLINE}</p><span>MEMBERSHIP REGISTRATION FORM</span></div>
+          <LibraryBrand variant="print-dark" tagline={LIBRARY_TAGLINE} caption="MEMBERSHIP REGISTRATION FORM" />
           <div className="mpf-photo-box"><span>पासपोर्ट साइज<br/>फोटो</span></div>
         </header>
         <div className="mpf-meta"><span>रजिस्ट्रेशन नं.: <b>{receipt ? receipt.registration_no : 'रजिस्ट्रेशन के बाद जारी होगा'}</b></span><span>दिनांक: <b>{form.joining_date || '________________'}</b></span></div>
@@ -99,8 +99,8 @@ export default function Registration({ onHome, onAdmin }) {
         <footer className="mpf-footer"><span>{LIBRARY_NAME}</span><span>कार्यालय उपयोग हेतु · मूल पहचान-पत्र देखकर सत्यापित करें</span></footer>
       </article>
       <article className="membership-id-card">
-        <header className="mic-header"><div className="mic-logo"><BookOpen size={22}/></div><div><h2>{LIBRARY_NAME}</h2><p>{LIBRARY_TAGLINE}</p><p>LIBRARY MEMBER ID CARD</p></div></header>
-        <div className="mic-body"><div className="mic-photo"><span>पासपोर्ट<br/>फोटो</span></div><div className="mic-member"><span className="mic-label">MEMBER NAME</span><h3>{form.full_name || 'सदस्य का नाम'}</h3><p><b>पिता / अभिभावक:</b> {form.father_name || '—'}</p><p><b>रजिस्ट्रेशन नं.:</b> {receipt ? receipt.registration_no : 'रजिस्ट्रेशन के बाद जारी होगा'}</p><p><b>सीट नंबर:</b> भुगतान के बाद आवंटित होगी</p><p><b>जॉइनिंग:</b> {form.joining_date || '—'}</p></div></div>
+        <header className="mic-header"><LibraryBrand variant="id-card" tagline={LIBRARY_TAGLINE} caption="LIBRARY MEMBER ID CARD" /></header>
+        <div className="mic-body"><div className="mic-photo"><span>पासपोर्ट<br/>फोटो</span></div><div className="mic-member"><span className="mic-label">MEMBER NAME</span><h3>{form.full_name || 'सदस्य का नाम'}</h3><p><b>पिता / अभिभावक:</b> {form.father_name || '—'}</p><p><b>रजिस्ट्रेशन नं.:</b> {receipt ? receipt.registration_no : 'रजिस्ट्रेशन के बाद जारी होगा'}</p><p><b>चुनी हुई सीट:</b> {receipt?.seat_no ? `सीट ${receipt.seat_no}` : (form.seat_no ? `सीट ${form.seat_no}` : 'रजिस्ट्रेशन के बाद चुनें')}</p><p><b>जॉइनिंग:</b> {form.joining_date || '—'}</p></div></div>
         <div className="mic-bottom"><div><span>सदस्य के हस्ताक्षर</span><i></i></div><div><span>अधिकृत हस्ताक्षर</span><i></i></div></div><footer>यह कार्ड {LIBRARY_NAME} की संपत्ति है। मिलने पर लाइब्रेरी में लौटाएँ।</footer>
       </article>
     </section>

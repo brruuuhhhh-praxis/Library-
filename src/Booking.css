@@ -52,3 +52,131 @@
 @media print {
   .booking-seat-head,.booking-seat-grid,.booking-selected-seat,.booking-actions,.booking-id-note,.booking-signatures,.booking-privacy { display:none!important; }
 }
+
+
+/* SHRI SHYAM — PREMIUM FINISH PASS 2026 */
+.booking-page{--bp-gold:#c6a66b;--bp-goldlight:#f2dfb5;--bp-bg:#f5f3ed}
+.booking-topbar{position:sticky;top:0;z-index:30;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);background:rgba(13,29,43,.96)}
+.booking-form{border-radius:22px;box-shadow:0 24px 64px #1025360c}
+.booking-form-head,.booking-seat-head{align-items:center}
+.booking-fields label{line-height:1.6}
+.booking-fields input,.booking-fields textarea,.booking-fields select{border-radius:12px;transition:border-color .18s,box-shadow .18s,background .18s}
+.booking-fields input:hover,.booking-fields textarea:hover,.booking-fields select:hover{border-color:#c9b27e}
+.booking-fields input:focus-visible,.booking-fields textarea:focus-visible,.booking-fields select:focus-visible{outline:2px solid #c6a66b65;outline-offset:2px}
+.booking-seat-grid{gap:10px}
+.booking-seat{border-radius:13px;min-height:70px;position:relative;overflow:hidden}
+.booking-seat.is-available{background:linear-gradient(145deg,#f6fbf7,#eaf4ed)}
+.booking-seat.is-selected{background:linear-gradient(145deg,#20495a,#102a39);border-color:#c6a66b;box-shadow:0 0 0 3px #c6a66b35,0 12px 24px #102a391b}
+.booking-seat.is-booked{opacity:.72}
+.booking-selected-seat{padding:13px 15px;border-radius:11px;background:#f5f0e4;border:1px solid #e7dcc4}
+.booking-error,.booking-success{border-radius:13px;line-height:1.8}
+.booking-submit,.booking-print{border-radius:12px;min-height:49px;transition:transform .18s,box-shadow .18s,filter .18s}
+.booking-submit:not(:disabled):hover,.booking-print:hover{transform:translateY(-1px);box-shadow:0 10px 22px #172a3810}
+.booking-consent{padding:13px 14px;border:1px solid #e9e3d8;border-radius:12px;background:#fcfbf7}
+.booking-consent input{width:17px;height:17px;accent-color:#173b4b;flex-shrink:0}
+.booking-signatures{margin-top:35px}
+.booking-print{background:linear-gradient(135deg,#f6e7bf,#d2b16f);border-color:#c6a66b;color:#152b3a}
+.membership-print-form{box-shadow:0 12px 28px #1025360a}
+.mic-header{border-bottom-color:#c6a66b}
+.membership-id-card{border-radius:12px;overflow:hidden;box-shadow:0 10px 25px #10253612}
+@media(max-width:760px){
+  .booking-topbar{position:relative;gap:7px}.booking-form{border-radius:16px}
+  .booking-seat-grid{grid-template-columns:repeat(5,minmax(0,1fr));gap:7px}.booking-seat{min-height:59px}
+  .booking-form-head{align-items:flex-start}
+}
+@media(prefers-reduced-motion:reduce){.booking-fields input,.booking-fields textarea,.booking-fields select,.booking-seat,.booking-submit,.booking-print{transition:none!important}}
+
+
+/* SHRI SHYAM — DISTINCT SECTION BACKGROUNDS + 3D SEATS V1 */
+/* 3D seating: raised seat tops, visible lower edge through layered shadows, pressed state */
+.booking-seat-grid{perspective:1000px;gap:11px}
+.booking-seat{
+  transform:translateY(0) rotateX(0deg);
+  transform-style:preserve-3d;
+  border:1px solid #b9d8c4;
+  border-radius:12px;
+  background:linear-gradient(145deg,#ffffff 0%,#eaf6ee 58%,#d7ebdf 100%);
+  box-shadow:0 5px 0 #80ad91,0 8px 15px #183c2d15,inset 0 1px 0 #ffffff;
+  transition:transform .16s ease,box-shadow .16s ease,filter .16s ease;
+  -webkit-tap-highlight-color:transparent;
+}
+.booking-seat strong{font-size:18px;font-weight:800;letter-spacing:.3px;text-shadow:0 1px 0 #ffffffb5}
+.booking-seat small{font-size:10px;font-weight:700;letter-spacing:.15px}
+.booking-seat.is-available:hover{
+  transform:translateY(-3px) rotateX(2deg);
+  border-color:#57916e;
+  box-shadow:0 8px 0 #80ad91,0 13px 19px #183c2d1d,inset 0 1px 0 #ffffff;
+}
+.booking-seat.is-selected{
+  transform:translateY(-1px);
+  border:1px solid #ead18a;
+  color:#fff3ce;
+  background:linear-gradient(145deg,#315b6b 0%,#18384a 62%,#102a3a 100%);
+  box-shadow:0 5px 0 #866936,0 10px 20px #102a3a35,inset 0 1px 0 #ffffff50,0 0 0 2px #c6a66b38;
+}
+.booking-seat.is-selected strong{text-shadow:0 1px 2px #0005}
+.booking-seat.is-booked{
+  border-color:#d3d8db;
+  background:linear-gradient(145deg,#f0f2f3,#dce1e4);
+  box-shadow:0 4px 0 #b9c0c5,0 6px 11px #172a380c,inset 0 1px 0 #fff;
+  filter:saturate(.65);
+}
+.booking-seat.is-booked strong{text-shadow:none}
+.booking-seat:active:not(:disabled){transform:translateY(3px);box-shadow:0 2px 0 #80ad91,0 3px 7px #183c2d12,inset 0 1px 0 #ffffff}
+.booking-seat.is-selected:active{box-shadow:0 2px 0 #866936,0 3px 9px #102a3a25,inset 0 1px 0 #ffffff30}
+.booking-seat:focus-visible{outline:2px solid #c6a66b;outline-offset:3px}
+@media(max-width:760px){
+  .booking-seat-grid{gap:8px}
+  .booking-seat{min-height:59px;border-radius:10px;box-shadow:0 4px 0 #80ad91,0 7px 12px #183c2d13,inset 0 1px 0 #fff}
+  .booking-seat.is-selected{box-shadow:0 4px 0 #866936,0 8px 14px #102a3a2a,inset 0 1px 0 #ffffff50,0 0 0 2px #c6a66b30}
+  .booking-seat.is-booked{box-shadow:0 3px 0 #b9c0c5,0 5px 9px #172a380a,inset 0 1px 0 #fff}
+}
+@media(prefers-reduced-motion:reduce){.booking-seat{transition:none!important}}
+
+
+/* SHRI SHYAM BRAND SYSTEM - MEMBERSHIP, ID CARD AND ADMIN */
+.booking-topbar{width:100%;min-height:82px;height:auto;padding:12px clamp(14px,4.2vw,64px);gap:14px}
+.booking-brand{flex:0 1 auto;min-width:0;max-width:60%;gap:0}.booking-brand .library-brand{min-width:0;max-width:100%}.booking-brand .library-brand__content{min-width:0}
+.mpf-header{grid-template-columns:minmax(0,1fr) 27mm!important}.mpf-header>.library-brand{min-width:0;overflow:hidden}
+.mic-header>.library-brand{width:100%;min-width:0}.mic-header .library-brand__content{min-width:0;overflow:hidden}
+.admin-print-brand{display:flex;align-items:center;justify-content:flex-start;margin-bottom:10px}
+@media(max-width:760px){.booking-topbar{min-height:70px;height:auto;padding:9px 10px;gap:7px}.booking-brand{max-width:56%}.booking-topbar .booking-back,.booking-topbar .booking-admin-link{font-size:9px;white-space:nowrap}.mpf-header{grid-template-columns:minmax(0,1fr) 24mm!important;gap:7px!important}}
+
+
+/* PREMIUM 3D SEAT SELECTOR — styling only, selection logic unchanged */
+.booking-seat-grid .booking-seat{
+  position:relative;
+  isolation:isolate;
+  border:1px solid rgba(255,255,255,.9)!important;
+  border-radius:13px!important;
+  background:linear-gradient(145deg,#fafffd 0%,#d9eee5 54%,#b9d9cc 100%)!important;
+  color:#1e654e!important;
+  box-shadow:0 5px 0 #8ab9a5,0 8px 15px rgba(19,69,53,.13),inset 0 1px 0 #fff!important;
+  transform:translateY(0);
+  transition:transform .18s ease,box-shadow .18s ease,filter .18s ease;
+}
+.booking-seat-grid .booking-seat:before{
+  content:"";position:absolute;inset:1px;border-radius:11px;
+  background:linear-gradient(125deg,rgba(255,255,255,.8),transparent 48%,rgba(255,255,255,.14));
+  pointer-events:none;z-index:-1;
+}
+.booking-seat-grid .booking-seat.is-available:hover{
+  transform:translateY(-3px) perspective(500px) rotateX(3deg);
+  box-shadow:0 8px 0 #6eaa92,0 14px 22px rgba(19,69,53,.2),inset 0 1px 0 #fff!important;
+  filter:saturate(1.08);
+}
+.booking-seat-grid .booking-seat.is-selected{
+  background:linear-gradient(145deg,#ffe8a1 0%,#e5b84d 55%,#bd8529 100%)!important;
+  color:#18293a!important;border-color:#fff0be!important;
+  box-shadow:0 5px 0 #99651b,0 10px 22px rgba(166,117,29,.28),inset 0 1px 0 #fff8dc!important;
+  transform:translateY(-2px);
+}
+.booking-seat-grid .booking-seat.is-booked{
+  background:linear-gradient(145deg,#f0f2f4,#d9dfe4)!important;
+  color:#8a949c!important;box-shadow:0 3px 0 #b8c0c6!important;
+}
+@media(max-width:600px){
+ .booking-seat-grid{gap:7px!important}
+ .booking-seat-grid .booking-seat{min-height:58px;border-radius:10px!important}
+}
+@media(prefers-reduced-motion:reduce){.booking-seat-grid .booking-seat{transition:none!important}}

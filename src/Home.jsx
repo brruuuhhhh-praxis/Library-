@@ -59,30 +59,24 @@ export default function Home() {
       <section className="ss-hero">
         <div className="ss-hero-image" role="img" aria-label="A warm, modern study library interior" />
         <div className="ss-hero-shade" />
-        <div className="ss-hero-content">
-          <div className="ss-eyebrow"><span /> A PREMIUM STUDY SPACE <span /></div>
-          <p className="ss-hero-kicker">शांत माहौल <i>·</i> बेहतर तैयारी <i>·</i> उज्ज्वल भविष्य</p>
-          <h1>जहाँ एकाग्रता<br />बनती है <em>सफलता</em> की आदत।</h1>
-          <p className="ss-hero-description">श्री लाइब्रेरी — आपके लक्ष्य और मेहनत के लिए एक शांत, सुविधाजनक और अनुशासित अध्ययन स्थल।</p>
-          <div className="ss-exam-pills" aria-label="Exam preparation categories">
-            <span><GraduationCap size={15} /> UPSC</span><span>RPSC</span><span>SSC</span><span>RAILWAY</span><span>और भी</span>
-          </div>
-          <div className="ss-hero-actions">
-            <a className="ss-button ss-button-gold" href="#/register">अपनी सीट बुक करें <ArrowRight size={17} /></a>
-            <a className="ss-button ss-button-outline" href="#facilities-preview"><span className="ss-play">▶</span> लाइब्रेरी देखें</a>
+        <div className="ss-hero-content ss-hero-minimal-content" aria-label="Library hero">
+          <p className="ss-hero-signature-quote">Success is when your signature becomes an autograph.</p>
+          <div className="ss-hero-actions ss-hero-minimal-actions">
+            <a className="ss-button ss-button-gold" href="#/register">अपना रजिस्ट्रेशन करें <ArrowRight size={17} /></a>
           </div>
         </div>
-        <div className="ss-hero-note"><Quote size={19} /><span>आज की एकाग्रता,<br /><b>कल की सफलता।</b></span></div>
-        <div className="ss-hero-bottomline"><span>DISCIPLINE</span><i /> <span>CONSISTENCY</span><i /> <span>YOUR FUTURE</span></div>
+        {/* SS HERO LEFT QUOTE GLASS CARDS V3: keep hero text minimal */}
       </section>
 
-      {/* 3. CAPACITY STRIP — separate overlapping horizontal dashboard */}
+      {/* SS HERO PORTRAIT GLASS V2: paired vertical glass cards */}
+      <div className="ss-hero-followup-cards">
+      {/* 3. LIBRARY SNAPSHOT */}
       <section className="ss-capacity-wrap" aria-label="Library capacity">
         <div className="ss-capacity-card">
           <div className="ss-capacity-intro"><span className="ss-live-dot" /> <span>LIBRARY SNAPSHOT</span><small>आपकी पढ़ाई, आपकी जगह</small></div>
           <div className="ss-capacity-item"><strong>50</strong><span>कुल सीटें</span></div>
           <div className="ss-capacity-divider" />
-          <div className="ss-capacity-item"><Clock3 size={23} /><strong className="ss-time">समय-सारणी</strong><span>लाइब्रेरी के समय के लिए संपर्क करें</span></div>
+          <div className="ss-capacity-item"><Clock3 size={23} /><strong className="ss-time">समय-सारणी</strong><span>सुबह 6:00 बजे – रात 12:00 बजे</span></div>
           <a href="#/register" className="ss-capacity-link">सीट की जानकारी <ArrowUpRight size={17} /></a>
         </div>
       </section>
@@ -97,6 +91,8 @@ export default function Home() {
         </div>
         <a className="ss-ca-preview-cta" href="#/current-affairs">समसामयिकी पढ़ें <ArrowRight size={17} /></a>
       </section>
+
+      </div>
 
       {/* 4. FACILITIES — colourful bento grid, different from other sections */}
       <section className="ss-section ss-facilities-section" id="facilities-preview">
