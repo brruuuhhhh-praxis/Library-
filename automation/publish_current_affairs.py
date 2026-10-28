@@ -23,7 +23,7 @@ from zoneinfo import ZoneInfo
 IST = ZoneInfo("Asia/Kolkata")
 TIMEOUT = 25
 USER_AGENT = "ShriShyamLibrary-CurrentAffairsBot/1.0 (+https://github.com/brruuuhhhh-praxis/Library-)"
-GEMINI_MODEL = os.getenv("GEMINI_MODEL", "gemini-2.5-flash")
+GEMINI_MODEL = os.getenv("GEMINI_MODEL", "gemini-3.6-flash")
 
 # Reliable, public feeds. Rajasthan's west/east PIB regional feeds are included
 # alongside the official Rajasthan DIPR site scraper below.
@@ -269,7 +269,7 @@ def fetch_dipr(target_date: dt.date) -> list[dict]:
     return results
 
 
-def post_json(url: str, body: dict, headers: dict[str, str] | None = None, timeout: int = 60) -> dict:
+def post_json(url: str, body: dict, headers: dict[str, str] | None = None, timeout: int = 180) -> dict:
     payload = json.dumps(body, ensure_ascii=False).encode("utf-8")
     request_headers = {"Content-Type": "application/json", "Accept": "application/json", "User-Agent": USER_AGENT}
     if headers:
