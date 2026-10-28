@@ -23,7 +23,7 @@ from zoneinfo import ZoneInfo
 IST = ZoneInfo("Asia/Kolkata")
 TIMEOUT = 25
 USER_AGENT = "ShriShyamLibrary-CurrentAffairsBot/1.0 (+https://github.com/brruuuhhhh-praxis/Library-)"
-GEMINI_MODEL = os.getenv("GEMINI_MODEL", "gemini-3.8-flash")
+GEMINI_MODEL = os.getenv("GEMINI_MODEL", "gemini-2.5-flash")
 
 # Reliable, public feeds. Rajasthan's west/east PIB regional feeds are included
 # alongside the official Rajasthan DIPR site scraper below.
