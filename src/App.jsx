@@ -1,9 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { lazy, Suspense, useEffect, useState } from 'react';
 import Home from './Home.jsx';
-import Registration from './Registration.jsx';
-import Admin from './Admin.jsx';
-import CurrentAffairs from './CurrentAffairs.jsx';
-import CurrentAffairsAdmin from './CurrentAffairsAdmin.jsx';
+const Registration = lazy(() => import('./Registration.jsx'));
+const Admin = lazy(() => import('./Admin.jsx'));
+const CurrentAffairs = lazy(() => import('./CurrentAffairs.jsx'));
+const CurrentAffairsAdmin = lazy(() => import('./CurrentAffairsAdmin.jsx'));
+
+function RouteLoading() {
+  return <main role="status" aria-live="polite" style={{ minHeight: '45vh', display: 'grid', placeItems: 'center', padding: '2rem', color: '#17263A' }}>पेज लोड हो रहा है…</main>;
+}
 
 function readRoute() {
   const route = window.location.hash.replace(/^#/, '') || '/';
@@ -22,9 +26,9 @@ export default function App() {
     return () => window.removeEventListener('hashchange', update);
   }, []);
   const home = () => { window.location.hash = '/'; window.scrollTo({ top: 0, behavior: 'smooth' }); };
-  if (route === '/register') return <Registration onHome={home} onAdmin={() => { window.location.hash = '/admin'; }} />;
-  if (route === '/admin') return <Admin onHome={home} onRegister={() => { window.location.hash = '/register'; }} />;
-  if (route === '/current-affairs') return <CurrentAffairs onHome={home} />;
-  if (route === '/ca-admin') return <CurrentAffairsAdmin onHome={home} />;
+  if (route === '/register') return <Suspense fallback={<RouteLoading />}><Registration onHome={home} onAdmin={() => { window.location.hash = '/admin'; }} /></Suspense>;
+  if (route === '/admin') return <Suspense fallback={<RouteLoading />}><Admin onHome={home} onRegister={() => { window.location.hash = '/register'; }} /></Suspense>;
+  if (route === '/current-affairs') return <Suspense fallback={<RouteLoading />}><CurrentAffairs onHome={home} /></Suspense>;
+  if (route === '/ca-admin') return <Suspense fallback={<RouteLoading />}><CurrentAffairsAdmin onHome={home} /></Suspense>;
   return <Home />;
 }

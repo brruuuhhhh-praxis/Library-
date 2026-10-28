@@ -128,7 +128,7 @@ export default function Home() {
       {/* 5. INTRO — editorial layout, photo and story */}
       <section id="about-preview" className="ss-intro-section">
         <div className="ss-intro-photo-wrap">
-          <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=1200&q=85" alt="A bright, organised study room" />
+          <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=1200&q=85" alt="A bright, organised study room" loading="lazy" decoding="async" />
           <div className="ss-photo-label"><span className="ss-label-mark">श्री</span><span><b>एक शांत जगह</b><small>आपके बड़े लक्ष्य के लिए</small></span></div>
           <div className="ss-photo-index">01 <span>/</span> STUDY SPACE</div>
         </div>
@@ -148,7 +148,7 @@ export default function Home() {
         <div className="ss-gallery-header"><div><span className="ss-overline">A GLIMPSE INSIDE</span><h2>हमारी लाइब्रेरी की <em>झलक।</em></h2></div><a href="#gallery-preview" className="ss-round-link">पूरी गैलरी <ArrowUpRight size={18} /></a></div>
         <div className="ss-gallery-grid">
           {gallery.map((item, index) => <a href="#gallery-preview" className={`ss-gallery-item ${item.size}`} key={item.title}>
-            <img src={item.image} alt={item.title} loading="lazy" />
+            <img src={item.image} alt={item.title} loading="lazy" decoding="async" />
             <div className="ss-gallery-overlay"><span>0{index + 1} / SPACE</span><h3>{item.title}</h3><p>{item.caption}</p><span className="ss-gallery-arrow"><ArrowUpRight size={18} /></span></div>
           </a>)}
         </div>
