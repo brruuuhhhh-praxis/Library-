@@ -6,6 +6,7 @@ import {
   Zap, Armchair, Camera, Users, X, Building2, Sun, Quote
 } from 'lucide-react';
 import './Home.css';
+import './CurrentAffairs.css';
 
 const facilities = [
   { icon: BookOpen, title: 'शांत अध्ययन वातावरण', subtitle: 'Focus without distractions', tint: 'mint', number: '01' },
@@ -48,6 +49,7 @@ export default function Home() {
           <a className="active" href={import.meta.env.BASE_URL} onClick={closeMenu}>Home</a>
           <a href="#about-preview" onClick={closeMenu}>About Us</a>
           <a href="#facilities-preview" onClick={closeMenu}>Facilities</a>
+          <a href="#/current-affairs" onClick={closeMenu}>Current Affairs</a>
           <a href="#/register" onClick={closeMenu}>Membership</a>
           <a href="#contact-preview" onClick={closeMenu}>Contact</a>
           <a className="ss-nav-cta" href="#/register" onClick={closeMenu}>रजिस्ट्रेशन शुरू करें <ArrowRight size={16} /></a>
@@ -84,6 +86,17 @@ export default function Home() {
           <div className="ss-capacity-item"><Clock3 size={23} /><strong className="ss-time">समय-सारणी</strong><span>लाइब्रेरी के समय के लिए संपर्क करें</span></div>
           <a href="#/register" className="ss-capacity-link">सीट की जानकारी <ArrowUpRight size={17} /></a>
         </div>
+      </section>
+
+      {/* CURRENT AFFAIRS — exam-prep quick access */}
+      <section className="ss-ca-preview" aria-labelledby="ss-ca-preview-title">
+        <div className="ss-ca-preview-copy">
+          <span className="ss-ca-preview-kicker">DAILY CURRENT AFFAIRS · HINDI ONE-LINERS</span>
+          <h2 id="ss-ca-preview-title">रोज़ की समसामयिकी,<br /><em>परीक्षा की तैयारी के साथ।</em></h2>
+          <p>RPSC, RSSB और राजस्थान की अन्य प्रतियोगी परीक्षाओं के लिए संक्षिप्त अपडेट।</p>
+          <div className="ss-ca-preview-tags"><span>राष्ट्रीय</span><span>अंतरराष्ट्रीय</span><span>राजस्थान</span></div>
+        </div>
+        <a className="ss-ca-preview-cta" href="#/current-affairs">समसामयिकी पढ़ें <ArrowRight size={17} /></a>
       </section>
 
       {/* 4. FACILITIES — colourful bento grid, different from other sections */}
