@@ -1,0 +1,235 @@
+/* Shri Shyam Library — unified premium design system */
+:root {
+  --lux-forest: #183d32;
+  --lux-forest-deep: #102a23;
+  --lux-forest-soft: #2d5a4a;
+  --lux-champagne: #c7a76b;
+  --lux-champagne-light: #ead8ab;
+  --lux-ivory: #f6f4ee;
+  --lux-paper: #fffdf8;
+  --lux-ink: #1e2d27;
+  --lux-muted: #68746d;
+  --lux-line: #e3e0d5;
+  --lux-shadow: 0 14px 38px rgba(20, 45, 35, .09);
+}
+
+html { background: var(--lux-ivory); }
+body { background: var(--lux-ivory); color: var(--lux-ink); }
+button, a, input, select, textarea { -webkit-tap-highlight-color: transparent; }
+:where(a, button, input, select, textarea):focus-visible {
+  outline: 3px solid rgba(199, 167, 107, .7);
+  outline-offset: 3px;
+}
+
+/* HOME */
+.ss-home {
+  --ss-navy: var(--lux-forest-deep);
+  --ss-navy2: var(--lux-forest);
+  --ss-ink: var(--lux-ink);
+  --ss-gold: var(--lux-champagne);
+  --ss-goldlight: var(--lux-champagne-light);
+  --ss-cream: var(--lux-ivory);
+  --ss-paper: var(--lux-paper);
+  --ss-muted: var(--lux-muted);
+  --ss-line: var(--lux-line);
+  color: var(--lux-ink);
+  background: var(--lux-ivory);
+}
+.ss-navbar {
+  background: rgba(16, 42, 35, .97);
+  border-bottom-color: rgba(199, 167, 107, .42);
+  box-shadow: 0 10px 30px rgba(16, 42, 35, .12);
+}
+.ss-brand-mark {
+  border-color: rgba(199, 167, 107, .68);
+  background: linear-gradient(145deg, rgba(199,167,107,.13), rgba(255,255,255,.025));
+}
+.ss-hero { background-color: var(--lux-forest-deep); }
+.ss-hero-shade {
+  background: linear-gradient(90deg, rgba(10,31,25,.98) 0%, rgba(16,42,35,.94) 33%, rgba(16,42,35,.76) 54%, rgba(16,42,35,.28) 100%),
+              linear-gradient(0deg, rgba(10,31,25,.68), transparent 42%);
+}
+.ss-hero:before { background: linear-gradient(var(--lux-champagne), transparent 85%); }
+.ss-capacity-card {
+  background: var(--lux-paper);
+  border-color: var(--lux-line);
+  border-top-color: var(--lux-champagne);
+  box-shadow: var(--lux-shadow);
+}
+.ss-facilities-section { background: linear-gradient(180deg, #f8f6f0, #f0eee6); }
+/* One calm card family instead of a rainbow of unrelated tints. */
+.ss-facility-card[class*="tint-"] {
+  background: linear-gradient(145deg, #fffdf8, #f0efe8);
+  color: #234137;
+  border: 1px solid #e1ded3;
+  box-shadow: 0 8px 22px rgba(20,45,35,.045);
+}
+.ss-facility-card[class*="tint-"] .ss-facility-card-top svg {
+  background: #e8eee8;
+  color: var(--lux-forest-soft);
+}
+.ss-facility-card p { color: #6c7770; }
+.ss-intro-section { background: var(--lux-paper); }
+.ss-intro-photo-wrap:before { border-color: var(--lux-champagne); }
+.ss-photo-label { background: var(--lux-paper); border-color: var(--lux-line); }
+.ss-gallery-section { background: #102a23; }
+.ss-closing-cta {
+  background: radial-gradient(circle at 84% 20%, #2a5545 0, transparent 34%),
+              linear-gradient(115deg, #102a23, #1b4336);
+}
+.ss-footer { background: #0c211b; border-top-color: rgba(199,167,107,.32); }
+
+/* Premium buttons: strong contrast, restrained metal edge, tactile feedback. */
+.ss-button, .ss-nav-cta, .ss-ca-preview-cta,
+.ca-primary-button, .booking-submit {
+  position: relative;
+  isolation: isolate;
+  border: 1px solid var(--lux-champagne) !important;
+  border-radius: 12px !important;
+  background: linear-gradient(135deg, #214b3d, #102a23) !important;
+  color: #fff8e8 !important;
+  font-weight: 800;
+  box-shadow: 0 8px 20px rgba(16,42,35,.15), inset 0 1px 0 rgba(255,255,255,.11);
+  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease, filter .18s ease;
+}
+.ss-button-gold, .ss-nav-cta, .ss-ca-preview-cta, .booking-submit, .ca-primary-button {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+.ss-button:hover, .ss-nav-cta:hover, .ss-ca-preview-cta:hover,
+.ca-primary-button:hover, .booking-submit:hover {
+  transform: translateY(-2px);
+  border-color: #e7d5a5 !important;
+  box-shadow: 0 13px 28px rgba(16,42,35,.22), inset 0 1px 0 rgba(255,255,255,.15);
+  filter: brightness(1.07);
+}
+.ss-button:active, .ss-nav-cta:active, .ss-ca-preview-cta:active,
+.ca-primary-button:active, .booking-submit:active { transform: translateY(0); }
+.ss-button-outline {
+  background: rgba(255,255,255,.055) !important;
+  color: #fffdf5 !important;
+  border-color: rgba(255,255,255,.5) !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.07);
+}
+.ss-button-dark { background: #183d32 !important; }
+.ss-text-link, .ss-capacity-link { color: #785c2e !important; }
+.ss-round-link { border-color: rgba(199,167,107,.65); color: #ead8ab !important; }
+
+/* CURRENT AFFAIRS */
+.ca-page {
+  --ca-ink: var(--lux-ink);
+  --ca-muted: var(--lux-muted);
+  --ca-gold: var(--lux-champagne);
+  --ca-gold-dark: #785c2e;
+  --ca-paper: var(--lux-ivory);
+  --ca-line: var(--lux-line);
+  background: var(--lux-ivory);
+  color: var(--lux-ink);
+}
+.ca-topbar { border-bottom-color: var(--lux-line); }
+.ca-brand-mark { background: var(--lux-forest); color: var(--lux-champagne-light); }
+.ca-brand small { color: #748077; }
+.ca-back-link, .ca-footer a { color: #2d5546; }
+.ca-kicker, .ca-section-tag { color: #816533; }
+.ca-kicker span { background: var(--lux-champagne); }
+.ca-hero h1 em { color: #886a36; }
+.ca-hero-stamp {
+  background: linear-gradient(145deg, #fffdf8, #f0ede3);
+  border-color: #dfd5bd;
+  box-shadow: var(--lux-shadow);
+}
+.ca-hero-stamp svg, .ca-hero-stamp>span { color: #8b6c36; }
+.ca-edition-bar, .ca-story-card, .ca-category-tabs button,
+.ca-search, .ca-status { border-color: var(--lux-line); background: var(--lux-paper); }
+.ca-category-tabs button { color: #4e6258; }
+.ca-category-tabs button.is-active {
+  background: var(--lux-forest) !important;
+  color: #fffdf5 !important;
+  border-color: var(--lux-champagne) !important;
+  box-shadow: 0 8px 20px rgba(24,61,50,.14);
+}
+.ca-category-tabs button:hover { border-color: var(--lux-champagne); }
+.ca-story-number { color: #9b7a42; border-right-color: #e7e1d5; }
+.ca-story-meta span { background: #f0ece1; color: #785c2e; }
+.ca-story-card h3 { color: #20382e; }
+.ca-story-card p { color: #5f6d64; }
+.ca-story-card:hover { border-color: #cbb27b; box-shadow: 0 10px 25px rgba(20,45,35,.07); }
+.ca-status { color: #65736a; }
+.ca-status-error { border-color: #dfb8af; color: #81483d; }
+.ca-empty-icon { background: #ede9dd; color: #8b6c36; }
+.ca-quiz-panel {
+  background: linear-gradient(145deg, #173d31, #102a23) !important;
+  border-color: rgba(199,167,107,.45) !important;
+  box-shadow: 0 18px 45px rgba(16,42,35,.13);
+}
+.ca-explanation { border-left-color: var(--lux-champagne); }
+.ca-footer { border-top-color: var(--lux-line); }
+.ca-footer span { color: #748077; }
+.ss-ca-preview {
+  background: radial-gradient(circle at 88% 0, #2a5545 0, transparent 36%), linear-gradient(120deg, #183d32, #102a23);
+  border: 1px solid rgba(199,167,107,.35);
+  box-shadow: 0 18px 42px rgba(16,42,35,.13);
+}
+.ss-ca-preview-kicker { color: var(--lux-champagne-light); }
+.ss-ca-preview h2 em { color: var(--lux-champagne-light); }
+.ss-ca-preview-cta { white-space: nowrap; }
+
+/* REGISTRATION + ADMIN */
+.booking-page {
+  --bp-ink: var(--lux-ink);
+  --bp-navy: var(--lux-forest-deep);
+  --bp-teal: var(--lux-forest);
+  --bp-gold: var(--lux-champagne);
+  --bp-goldlight: var(--lux-champagne-light);
+  --bp-bg: var(--lux-ivory);
+  --bp-white: var(--lux-paper);
+  --bp-muted: var(--lux-muted);
+  --bp-line: var(--lux-line);
+  --bp-green: #2f6d55;
+  background: var(--lux-ivory);
+  color: var(--lux-ink);
+}
+.booking-topbar { background: #102a23; border-bottom-color: rgba(199,167,107,.42); }
+.booking-brand-icon { border-color: rgba(199,167,107,.65); color: var(--lux-champagne-light); }
+.booking-brand strong { color: var(--lux-champagne-light); }
+.booking-hero {
+  background: radial-gradient(ellipse at 50% -20%, #2b5746 0%, transparent 58%), linear-gradient(135deg, #102a23, #1b4336);
+}
+.booking-kicker { color: var(--lux-champagne-light); }
+.booking-form, .admin-login, .admin-summary article, .admin-panel, .admin-record {
+  background: var(--lux-paper);
+  border-color: var(--lux-line);
+}
+.booking-form { box-shadow: var(--lux-shadow); }
+.booking-fields input:focus, .booking-fields textarea:focus, .booking-fields select:focus,
+.admin-login input:focus { border-color: var(--lux-champagne); box-shadow: 0 0 0 3px rgba(199,167,107,.2); }
+.booking-seat.is-selected { background: var(--lux-forest); border-color: var(--lux-champagne); color: #fff1cc; box-shadow: 0 0 0 3px rgba(199,167,107,.22); }
+.booking-selected-seat, .admin-summary strong { color: var(--lux-forest); }
+.booking-id-note { background: #edf0e9; border-color: #dce3d8; color: #274b3d; }
+.booking-id-note>svg { color: #3b6e57; }
+.booking-print {
+  border-color: #d8ddd5;
+  background: #fffdf8;
+  color: #28483b;
+  border-radius: 11px;
+  transition: background .18s ease, border-color .18s ease, transform .18s ease, box-shadow .18s ease;
+}
+.booking-print:hover { border-color: var(--lux-champagne); background: #f2efe5; transform: translateY(-1px); box-shadow: 0 7px 16px rgba(16,42,35,.07); }
+.admin-lock { background: #eee9dc; color: #826431; }
+.admin-panel h3 { color: var(--lux-forest-deep); }
+.admin-record-main strong { color: var(--lux-forest-deep); }
+.admin-status.active { background: #e4efe6; color: #286143 !important; }
+.admin-status.cancelled { background: #f4e8e4; color: #82493e !important; }
+.admin-seat.is-available { background: #edf4ee; color: #2b6a50; border-color: #ccdfd0; }
+.admin-seat.is-booked { background: #f0eee9; color: #80635a; border-color: #e1d8d1; }
+.booking-footer { border-top-color: var(--lux-line); }
+
+@media (max-width: 760px) {
+  .ss-nav-links { background: #102a23; border-color: rgba(199,167,107,.38); }
+  .ss-capacity-card, .booking-form, .admin-login, .admin-panel { border-radius: 15px; }
+  .ss-ca-preview { border-radius: 16px; }
+  .ss-button, .ss-nav-cta, .ss-ca-preview-cta, .booking-submit, .ca-primary-button { min-height: 47px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; }
+}
