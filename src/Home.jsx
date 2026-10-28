@@ -166,6 +166,12 @@ export default function Home() {
       <footer id="contact-preview" className="ss-footer">
         <a className="ss-brand ss-footer-brand" href={import.meta.env.BASE_URL} aria-label="श्री लाइब्रेरी होम"><span className="ss-brand-lockup"><span className="ss-brand-emblem"><span className="ss-brand-shri">श्री</span><Sparkles className="ss-brand-ai" size={13} aria-hidden="true" /></span><span className="ss-brand-words"><strong><span>श्री</span> लाइब्रेरी</strong><small>A PLACE FOR FOCUSED MINDS · DEVOTION × AI</small></span></span></a>
         <p>एकाग्रता से तैयारी, तैयारी से सफलता।</p>
+        <section className="ss-contact-panel" aria-labelledby="ss-contact-panel-title">
+          <header className="ss-contact-panel-heading">
+            <span className="ss-contact-panel-kicker">CONTACT &amp; LOCATION</span>
+            <h2 id="ss-contact-panel-title">हमसे जुड़ें</h2>
+            <p>लाइब्रेरी का पता और संपर्क जानकारी</p>
+          </header>
         <a className="ss-contact-location-link" href="https://maps.app.goo.gl/92QvGfjMJF5mAWTL7?g_st=ac" target="_blank" rel="noopener noreferrer" aria-label="Google Maps पर लाइब्रेरी की लोकेशन खोलें">
           <span aria-hidden="true">📍</span> लाइब्रेरी की लोकेशन देखें <ArrowUpRight size={16} />
         </a>
@@ -192,6 +198,7 @@ export default function Home() {
             <span className="ss-footer-contact-arrow" aria-hidden="true">↗</span>
           </a>
         </div>
+        </section>
         <nav><a href="#about-preview">About Us</a><a href="#facilities-preview">Facilities</a><a href="#/register">Membership</a><a href="#contact-preview">Contact</a></nav>
         <small className="ss-copyright">© {new Date().getFullYear()} श्री लाइब्रेरी. All rights reserved.</small>
       </footer>
