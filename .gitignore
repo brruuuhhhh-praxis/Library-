@@ -22,3 +22,9 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Local Vite/Supabase credentials (never commit the real .env)
+.env
+.env.*
+!.env.example
+.upgrade-backup/
