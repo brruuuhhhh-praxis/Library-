@@ -2,23 +2,23 @@ import React, { useState } from 'react';
 import {
   ArrowRight, ArrowUpRight, BookOpen, Bookmark, CalendarDays, Check,
   ChevronDown, Clock3, Coffee, Droplets, GraduationCap, Leaf, Menu,
-  Monitor, ParkingCircle, ShieldCheck, Snowflake, Sparkles, Wifi,
+  Monitor, Newspaper, ShieldCheck, Snowflake, Sparkles, Wifi,
   Zap, Armchair, Camera, Users, X, Building2, Sun, Quote
 } from 'lucide-react';
 import './Home.css';
 import './CurrentAffairs.css';
 
 const facilities = [
-  { icon: BookOpen, title: 'शांत अध्ययन वातावरण', subtitle: 'Focus without distractions', tint: 'mint', number: '01' },
-  { icon: Armchair, title: 'व्यक्तिगत स्टडी डेस्क', subtitle: 'Your own space to focus', tint: 'peach', number: '02' },
-  { icon: Wifi, title: 'हाई-स्पीड Wi-Fi', subtitle: 'Stay connected when needed', tint: 'blue', number: '03' },
-  { icon: Snowflake, title: 'AC / कूल वातावरण', subtitle: 'Comfort through study hours', tint: 'lavender', number: '04' },
-  { icon: ShieldCheck, title: 'CCTV सुरक्षा', subtitle: 'A safer study environment', tint: 'rose', number: '05' },
-  { icon: Zap, title: 'पावर बैकअप', subtitle: 'Keep your study uninterrupted', tint: 'yellow', number: '06' },
-  { icon: Droplets, title: 'पीने का साफ पानी', subtitle: 'A refreshment essential', tint: 'sky', number: '07' },
-  { icon: Coffee, title: 'स्वच्छता और सुविधा', subtitle: 'Clean, comfortable premises', tint: 'sage', number: '08' },
-  { icon: Bookmark, title: 'बुक शेल्फ सुविधा', subtitle: 'Organised study resources', tint: 'sand', number: '09' },
-  { icon: ParkingCircle, title: 'पार्किंग सुविधा', subtitle: 'Convenience while you study', tint: 'steel', number: '10' },
+  { icon: BookOpen, title: 'Quiet Study Environment', subtitle: 'A calm space for focused preparation', tint: 'mint', number: '01' },
+  { icon: Armchair, title: 'Personal Study Desk', subtitle: 'Your own desk for daily study goals', tint: 'peach', number: '02' },
+  { icon: Wifi, title: 'High-Speed Wi-Fi', subtitle: 'Stay connected for digital learning', tint: 'blue', number: '03' },
+  { icon: Snowflake, title: 'AC-Cooled Comfort', subtitle: 'A comfortable space through study hours', tint: 'lavender', number: '04' },
+  { icon: ShieldCheck, title: 'CCTV Security', subtitle: 'A security-focused study environment', tint: 'rose', number: '05' },
+  { icon: Zap, title: 'Power Backup', subtitle: 'Keep your study sessions uninterrupted', tint: 'yellow', number: '06' },
+  { icon: Droplets, title: 'Clean Drinking Water', subtitle: 'Stay refreshed while you study', tint: 'sky', number: '07' },
+  { icon: Coffee, title: 'Clean & Hygienic Space', subtitle: 'A clean, comfortable study environment', tint: 'sage', number: '08' },
+  { icon: Bookmark, title: 'Personal Bookshelf', subtitle: 'Keep your study materials organized', tint: 'sand', number: '09' },
+  { icon: Newspaper, title: 'Daily Newspapers & Monthly CA Magazine', subtitle: 'Daily news and monthly current-affairs revision', tint: 'steel', number: '10' },
 ];
 
 const gallery = [
@@ -35,11 +35,10 @@ export default function Home() {
     <main className="ss-home">
       {/* 1. NAVBAR — dark, compact and editorial */}
       <header className="ss-navbar">
-        <a className="ss-brand" href={import.meta.env.BASE_URL} aria-label="Shri Shyam Library home" onClick={closeMenu}>
-          <span className="ss-brand-mark"><BookOpen size={27} strokeWidth={1.7} /></span>
-          <span className="ss-brand-copy">
-            <strong>श्री श्याम लाइब्रेरी</strong>
-            <small>A PLACE FOR FOCUSED MINDS</small>
+        <a className="ss-brand" href={import.meta.env.BASE_URL} aria-label="श्री लाइब्रेरी होम" onClick={closeMenu}>
+          <span className="ss-brand-lockup" aria-label="श्री लाइब्रेरी">
+            <span className="ss-brand-emblem"><span className="ss-brand-shri">श्री</span><Sparkles className="ss-brand-ai" size={13} aria-hidden="true" /></span>
+            <span className="ss-brand-words"><strong><span>श्री</span> लाइब्रेरी</strong><small>A PLACE FOR FOCUSED MINDS · DEVOTION × AI</small></span>
           </span>
         </a>
         <button className="ss-menu-toggle" onClick={() => setMenuOpen(!menuOpen)} aria-label={menuOpen ? 'Close menu' : 'Open menu'}>
@@ -64,7 +63,7 @@ export default function Home() {
           <div className="ss-eyebrow"><span /> A PREMIUM STUDY SPACE <span /></div>
           <p className="ss-hero-kicker">शांत माहौल <i>·</i> बेहतर तैयारी <i>·</i> उज्ज्वल भविष्य</p>
           <h1>जहाँ एकाग्रता<br />बनती है <em>सफलता</em> की आदत।</h1>
-          <p className="ss-hero-description">श्री श्याम लाइब्रेरी — आपके लक्ष्य और मेहनत के लिए एक शांत, सुविधाजनक और अनुशासित अध्ययन स्थल।</p>
+          <p className="ss-hero-description">श्री लाइब्रेरी — आपके लक्ष्य और मेहनत के लिए एक शांत, सुविधाजनक और अनुशासित अध्ययन स्थल।</p>
           <div className="ss-exam-pills" aria-label="Exam preparation categories">
             <span><GraduationCap size={15} /> UPSC</span><span>RPSC</span><span>SSC</span><span>RAILWAY</span><span>और भी</span>
           </div>
@@ -105,28 +104,33 @@ export default function Home() {
           <div><span className="ss-overline">MADE FOR YOUR FOCUS</span><h2>पढ़ाई के लिए <em>हर जरूरी सुविधा।</em></h2><p>आपके अध्ययन को सहज, शांत और व्यवस्थित बनाने के लिए सुविधाओं का ध्यान रखा गया है।</p></div>
           <a href="#facilities-preview" className="ss-text-link">सभी सुविधाएँ देखें <ArrowUpRight size={17} /></a>
         </div>
-        <div className="ss-facility-bento">
-          <article className="ss-facility-feature">
-            <div className="ss-feature-top"><span>01 / OUR SPACE</span><Sparkles size={20} /></div>
-            <div className="ss-feature-icon"><BookOpen size={31} /></div>
-            <h3>एकाग्रता का अपना कोना</h3>
-            <p>व्यक्तिगत स्टडी डेस्क और शांत वातावरण—ताकि ध्यान आपके लक्ष्य पर रहे।</p>
-            <a href="#facilities-preview" aria-label="Explore study facilities"><ArrowRight size={20} /></a>
-            <div className="ss-feature-decoration">FOCUS<br />& GROW</div>
-          </article>
-          {facilities.slice(1, 7).map((item) => {
+        <div className="ss-facility-bento ss-facility-icon-grid">
+          {facilities.map((item) => {
             const Icon = item.icon;
-            return <article className={`ss-facility-card tint-${item.tint}`} key={item.number}>
-              <div className="ss-facility-card-top"><span>{item.number}</span><Icon size={25} strokeWidth={1.8} /></div>
-              <h3>{item.title}</h3><p>{item.subtitle}</p>
-            </article>;
+            return (
+              <article
+                className={`ss-facility-card ss-facility-icon-tile tint-${item.tint}`}
+                key={item.number}
+                title={item.title}
+                aria-label={item.title}
+              >
+                <span className="ss-facility-number">{item.number}</span>
+                <span className="ss-facility-icon-art" aria-hidden="true">
+                  <Icon size={43} strokeWidth={1.7} />
+                </span>
+                <div className="ss-facility-english-copy">
+  <strong>{item.title}</strong>
+  <small>{item.subtitle}</small>
+</div>
+              </article>
+            );
           })}
         </div>
-        <div className="ss-facility-footnote"><Check size={16} /><span>सभी सुविधाओं की जानकारी और नियमों के लिए Facilities पेज देखें।</span><a href="#facilities-preview">Explore Facilities <ArrowRight size={15} /></a></div>
+        <div className="ss-facility-footnote"><Check size={16} /><span>शांत अध्ययन से लेकर दैनिक समाचार-पत्र और मासिक CA मैगज़ीन तक—ज़रूरी सुविधाएँ एक जगह।</span><a href="#facilities-preview">Explore Facilities <ArrowRight size={15} /></a></div>
       </section>
 
       {/* 5. INTRO — editorial layout, photo and story */}
-      <section className="ss-intro-section">
+      <section id="about-preview" className="ss-intro-section">
         <div className="ss-intro-photo-wrap">
           <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=1200&q=85" alt="A bright, organised study room" />
           <div className="ss-photo-label"><span className="ss-label-mark">श्री</span><span><b>एक शांत जगह</b><small>आपके बड़े लक्ष्य के लिए</small></span></div>
@@ -136,7 +140,7 @@ export default function Home() {
           <span className="ss-overline">WELCOME TO SHRI SHYAM</span>
           <h2>सपने बड़े हों,<br /><em>तो तैयारी भी खास हो।</em></h2>
           <div className="ss-gold-rule" />
-          <p>श्री श्याम लाइब्रेरी उन विद्यार्थियों के लिए एक अध्ययन स्थल है, जो अपने लक्ष्य के प्रति गंभीर हैं और नियमित पढ़ाई के लिए शांत व सुविधाजनक माहौल चाहते हैं।</p>
+          <p>श्री लाइब्रेरी उन विद्यार्थियों के लिए एक अध्ययन स्थल है, जो अपने लक्ष्य के प्रति गंभीर हैं और नियमित पढ़ाई के लिए शांत व सुविधाजनक माहौल चाहते हैं।</p>
           <p>हमारा उद्देश्य है कि आपको पढ़ाई पर ध्यान देने के लिए एक व्यवस्थित जगह मिले—जहाँ हर दिन आपकी मेहनत को आगे बढ़ने का अवसर मिले।</p>
           <a href="#about-preview" className="ss-button ss-button-dark">हमारे बारे में जानें <ArrowRight size={17} /></a>
           <div className="ss-intro-signature"><span className="ss-sign-line" /><span>एकाग्रता <i>•</i> अनुशासन <i>•</i> सफलता</span></div>
@@ -145,9 +149,9 @@ export default function Home() {
 
       {/* 6. GALLERY — asymmetric photo mosaic */}
       <section id="gallery-preview" className="ss-section ss-gallery-section">
-        <div className="ss-gallery-header"><div><span className="ss-overline">A GLIMPSE INSIDE</span><h2>हमारी लाइब्रेरी की <em>झलक।</em></h2></div><a href="#facilities-preview" className="ss-round-link">पूरी गैलरी <ArrowUpRight size={18} /></a></div>
+        <div className="ss-gallery-header"><div><span className="ss-overline">A GLIMPSE INSIDE</span><h2>हमारी लाइब्रेरी की <em>झलक।</em></h2></div><a href="#gallery-preview" className="ss-round-link">पूरी गैलरी <ArrowUpRight size={18} /></a></div>
         <div className="ss-gallery-grid">
-          {gallery.map((item, index) => <a href="#facilities-preview" className={`ss-gallery-item ${item.size}`} key={item.title}>
+          {gallery.map((item, index) => <a href="#gallery-preview" className={`ss-gallery-item ${item.size}`} key={item.title}>
             <img src={item.image} alt={item.title} loading="lazy" />
             <div className="ss-gallery-overlay"><span>0{index + 1} / SPACE</span><h3>{item.title}</h3><p>{item.caption}</p><span className="ss-gallery-arrow"><ArrowUpRight size={18} /></span></div>
           </a>)}
@@ -164,10 +168,10 @@ export default function Home() {
 
       {/* Footer intentionally has no phone number; details belong on Contact/About pages */}
       <footer id="contact-preview" className="ss-footer">
-        <a className="ss-brand ss-footer-brand" href={import.meta.env.BASE_URL}><span className="ss-brand-mark"><BookOpen size={26} /></span><span className="ss-brand-copy"><strong>श्री श्याम लाइब्रेरी</strong><small>A PLACE FOR FOCUSED MINDS</small></span></a>
+        <a className="ss-brand ss-footer-brand" href={import.meta.env.BASE_URL} aria-label="श्री लाइब्रेरी होम"><span className="ss-brand-lockup"><span className="ss-brand-emblem"><span className="ss-brand-shri">श्री</span><Sparkles className="ss-brand-ai" size={13} aria-hidden="true" /></span><span className="ss-brand-words"><strong><span>श्री</span> लाइब्रेरी</strong><small>A PLACE FOR FOCUSED MINDS · DEVOTION × AI</small></span></span></a>
         <p>एकाग्रता से तैयारी, तैयारी से सफलता।</p>
         <nav><a href="#about-preview">About Us</a><a href="#facilities-preview">Facilities</a><a href="#/register">Membership</a><a href="#contact-preview">Contact</a></nav>
-        <small className="ss-copyright">© {new Date().getFullYear()} श्री श्याम लाइब्रेरी. All rights reserved.</small>
+        <small className="ss-copyright">© {new Date().getFullYear()} श्री लाइब्रेरी. All rights reserved.</small>
       </footer>
     </main>
   );
