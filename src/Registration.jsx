@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { ArrowLeft, BookOpen, CheckCircle2, Printer, ShieldCheck } from 'lucide-react';
 import { isSupabaseConfigured, supabase } from './lib/supabase.js';
 import './Booking.css';
+import { LIBRARY_NAME, LIBRARY_TAGLINE } from './libraryConfig.js';
 
 const blankForm = { full_name:'', father_name:'', date_of_birth:'', mobile:'', alternate_mobile:'', address:'', emergency_contact:'', id_type:'Aadhaar Card', joining_date:new Date().toISOString().slice(0,10), seat_no:'' };
 const demoSeats = Array.from({ length: 50 }, (_, i) => ({ seat_no: i + 1, status: 'available' }));
@@ -47,7 +48,7 @@ export default function Registration({ onHome, onAdmin }) {
   }
 
   return <main className="booking-page">
-    <header className="booking-topbar"><button type="button" className="booking-back" onClick={onHome}><ArrowLeft size={17}/> होमपेज</button><a className="booking-brand" href={import.meta.env.BASE_URL}><span className="booking-brand-icon"><BookOpen size={23}/></span><span><strong>श्री श्याम लाइब्रेरी</strong><small>MEMBERSHIP REGISTRATION</small></span></a><button type="button" className="booking-admin-link" onClick={onAdmin}>एडमिन लॉगिन</button></header>
+    <header className="booking-topbar"><button type="button" className="booking-back" onClick={onHome}><ArrowLeft size={17}/> होमपेज</button><a className="booking-brand" href={import.meta.env.BASE_URL}><span className="booking-brand-icon"><BookOpen size={23}/></span><span><strong>{LIBRARY_NAME}</strong><small>MEMBERSHIP REGISTRATION</small></span></a><button type="button" className="booking-admin-link" onClick={onAdmin}>एडमिन लॉगिन</button></header>
     <section className="booking-hero"><span className="booking-kicker">YOUR SPACE. YOUR GOALS.</span><h1>अपनी पढ़ाई की जगह<br/><em>आज ही चुनें।</em></h1><p>रजिस्ट्रेशन फॉर्म भरें और उपलब्ध 50 सीटों में से अपनी पसंद की सीट चुनें।</p><div className="booking-stats"><div><strong>{loadingSeats ? '—' : available}</strong><span>उपलब्ध सीटें</span></div><div><strong>50</strong><span>कुल सीटें</span></div><div><strong><ShieldCheck size={22}/></strong><span>निजी रिकॉर्ड सुरक्षित</span></div></div></section>
     {!isSupabaseConfigured && <div className="booking-config-note"><strong>सेटअप बाकी है</strong><p>यह पेज तैयार है, लेकिन ऑनलाइन बुकिंग तभी रिकॉर्ड होगी जब Supabase डेटाबेस बनाया जाए और GitHub Actions में उसके public URL तथा anon key जोड़े जाएँ। अभी फ़ॉर्म सबमिट करने पर कोई डेटा सेव नहीं होता।</p></div>}
     <form className="booking-form" onSubmit={submit}>
@@ -71,10 +72,37 @@ export default function Registration({ onHome, onAdmin }) {
       {error && <div className="booking-error" role="alert">{error}</div>}
       {message && <div className="booking-success" role="status"><CheckCircle2 size={20}/><span>{message}{receipt && <small> आवेदन संदर्भ: {receipt.id.slice(0,8).toUpperCase()} · सीट {receipt.seat_no}</small>}</span></div>}
       <div className="booking-terms"><label className="booking-consent"><input type="checkbox" required/> <span>मैं पुष्टि करता/करती हूँ कि दी गई जानकारी सही है और लाइब्रेरी के नियमों का पालन करूँगा/करूँगी। *</span></label></div>
-      <div className="booking-actions"><button className="booking-submit" type="submit" disabled={submitting || loadingSeats || Boolean(receipt)}>{submitting ? 'जमा हो रहा है…' : receipt ? 'रजिस्ट्रेशन जमा हो गया' : 'रजिस्ट्रेशन जमा करें'}</button><button className="booking-print" type="button" onClick={() => window.print()}><Printer size={17}/> फॉर्म प्रिंट करें</button></div>
+      <div className="booking-actions"><button className="booking-submit" type="submit" disabled={submitting || loadingSeats || Boolean(receipt)}>{submitting ? 'जमा हो रहा है…' : receipt ? 'रजिस्ट्रेशन जमा हो गया' : 'रजिस्ट्रेशन जमा करें'}</button><button className="booking-print" type="button" onClick={() => window.print()}><Printer size={17}/> फॉर्म + ID कार्ड प्रिंट करें</button></div>
       <div className="booking-signatures"><div>आवेदक के हस्ताक्षर</div><div>लाइब्रेरी प्रतिनिधि के हस्ताक्षर</div><div>रसीद / शुल्क विवरण</div></div>
       <p className="booking-privacy">आपकी जानकारी केवल लाइब्रेरी रजिस्ट्रेशन/प्रबंधन के लिए है। वेबसाइट पर पहचान-पत्र की फोटो या पूरा आधार नंबर जमा न करें।</p>
     </form>
-    <footer className="booking-footer"><span>© {new Date().getFullYear()} श्री श्याम लाइब्रेरी</span><button type="button" onClick={onHome}>होमपेज पर वापस जाएँ</button></footer>
+    <section className="membership-print-docs" aria-label="प्रिंट होने वाला सदस्यता फॉर्म और आईडी कार्ड">
+      <article className="membership-print-form">
+        <header className="mpf-header">
+          <div className="mpf-brand-mark"><BookOpen size={28}/></div>
+          <div className="mpf-brand-copy"><h1>{LIBRARY_NAME}</h1><p>{LIBRARY_TAGLINE}</p><span>MEMBERSHIP REGISTRATION FORM</span></div>
+          <div className="mpf-photo-box"><span>पासपोर्ट साइज<br/>फोटो</span></div>
+        </header>
+        <div className="mpf-meta"><span>रजिस्ट्रेशन नं.: <b>{receipt ? receipt.id.slice(0,8).toUpperCase() : '________________'}</b></span><span>दिनांक: <b>{form.joining_date || '________________'}</b></span></div>
+        <h2 className="mpf-section-title">सदस्य की व्यक्तिगत जानकारी</h2>
+        <div className="mpf-details">
+          <div><span>पूरा नाम</span><b>{form.full_name || ' '}</b></div><div><span>पिता / अभिभावक का नाम</span><b>{form.father_name || ' '}</b></div>
+          <div><span>जन्मतिथि</span><b>{form.date_of_birth || ' '}</b></div><div><span>मोबाइल नंबर</span><b>{form.mobile || ' '}</b></div>
+          <div><span>वैकल्पिक मोबाइल</span><b>{form.alternate_mobile || ' '}</b></div><div><span>आपातकालीन संपर्क</span><b>{form.emergency_contact || ' '}</b></div>
+          <div className="mpf-wide"><span>पता</span><b>{form.address || ' '}</b></div>
+          <div><span>पहचान-पत्र</span><b>{form.id_type || ' '}</b></div><div><span>जॉइनिंग की तारीख</span><b>{form.joining_date || ' '}</b></div>
+          <div><span>आवंटित सीट नंबर</span><b>{form.seat_no ? `सीट ${form.seat_no}` : '________________'}</b></div><div><span>सदस्यता स्थिति</span><b>{receipt ? 'आवेदन प्राप्त / सत्यापन बाकी' : '________________'}</b></div>
+        </div>
+        <div className="mpf-declaration">मैं पुष्टि करता/करती हूँ कि ऊपर दी गई जानकारी सही है और लाइब्रेरी के नियमों का पालन करूँगा/करूँगी।</div>
+        <div className="mpf-signatures"><div><span>सदस्य / विद्यार्थी के हस्ताक्षर</span><i></i></div><div><span>लाइब्रेरी अधिकृत हस्ताक्षर व मुहर</span><i></i></div></div>
+        <footer className="mpf-footer"><span>{LIBRARY_NAME}</span><span>कार्यालय उपयोग हेतु · मूल पहचान-पत्र देखकर सत्यापित करें</span></footer>
+      </article>
+      <article className="membership-id-card">
+        <header className="mic-header"><div className="mic-logo"><BookOpen size={22}/></div><div><h2>{LIBRARY_NAME}</h2><p>LIBRARY MEMBER ID CARD</p></div></header>
+        <div className="mic-body"><div className="mic-photo"><span>पासपोर्ट<br/>फोटो</span></div><div className="mic-member"><span className="mic-label">MEMBER NAME</span><h3>{form.full_name || 'सदस्य का नाम'}</h3><p><b>पिता / अभिभावक:</b> {form.father_name || '—'}</p><p><b>रजिस्ट्रेशन नं.:</b> {receipt ? receipt.id.slice(0,8).toUpperCase() : 'जमा करने के बाद जारी होगा'}</p><p><b>सीट नंबर:</b> {form.seat_no || 'आवंटन बाकी'}</p><p><b>जॉइनिंग:</b> {form.joining_date || '—'}</p></div></div>
+        <div className="mic-bottom"><div><span>सदस्य के हस्ताक्षर</span><i></i></div><div><span>अधिकृत हस्ताक्षर</span><i></i></div></div><footer>यह कार्ड {LIBRARY_NAME} की संपत्ति है। मिलने पर लाइब्रेरी में लौटाएँ।</footer>
+      </article>
+    </section>
+    <footer className="booking-footer"><span>© {new Date().getFullYear()} {LIBRARY_NAME}</span><button type="button" onClick={onHome}>होमपेज पर वापस जाएँ</button></footer>
   </main>;
 }
