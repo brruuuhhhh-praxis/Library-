@@ -169,6 +169,18 @@ export default function Home() {
         <a className="ss-contact-location-link" href="https://maps.app.goo.gl/92QvGfjMJF5mAWTL7?g_st=ac" target="_blank" rel="noopener noreferrer" aria-label="Google Maps पर लाइब्रेरी की लोकेशन खोलें">
           <span aria-hidden="true">📍</span> लाइब्रेरी की लोकेशन देखें <ArrowUpRight size={16} />
         </a>
+                <div className="ss-footer-contact" aria-label="Contact Shri Library">
+          <a className="ss-footer-contact-card ss-footer-call" href="tel:+918306349753" aria-label="Call Shri Library at 8306349753">
+            <span className="ss-footer-contact-icon" aria-hidden="true">☎</span>
+            <span className="ss-footer-contact-copy"><small>CALL US</small><strong>8306349753</strong><em>कॉल करें</em></span>
+            <span className="ss-footer-contact-arrow" aria-hidden="true">↗</span>
+          </a>
+          <a className="ss-footer-contact-card ss-footer-whatsapp" href="https://wa.me/919664050399" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp Business 9664050399">
+            <span className="ss-footer-contact-icon ss-footer-whatsapp-icon" aria-hidden="true">◉</span>
+            <span className="ss-footer-contact-copy"><small>WHATSAPP BUSINESS</small><strong>9664050399</strong><em>WhatsApp पर मैसेज करें</em></span>
+            <span className="ss-footer-contact-arrow" aria-hidden="true">↗</span>
+          </a>
+        </div>
         <nav><a href="#about-preview">About Us</a><a href="#facilities-preview">Facilities</a><a href="#/register">Membership</a><a href="#contact-preview">Contact</a></nav>
         <small className="ss-copyright">© {new Date().getFullYear()} श्री लाइब्रेरी. All rights reserved.</small>
       </footer>

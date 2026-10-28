@@ -2880,3 +2880,105 @@ body .ss-home > header.ss-navbar .ss-menu-toggle{
 @media (max-width: 600px) {
   .ss-contact-location-link { margin: 12px auto 16px; padding: 11px 15px; font-size: 13px; }
 }
+
+/* Contact actions: phone and WhatsApp Business */
+.ss-home .ss-footer .ss-footer-contact {
+  width: min(100%, 760px);
+  margin: 22px auto 18px !important;
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px !important;
+}
+.ss-home .ss-footer .ss-footer-contact-card {
+  position: relative;
+  isolation: isolate;
+  display: flex !important;
+  align-items: center !important;
+  gap: 13px !important;
+  min-width: 0;
+  min-height: 96px;
+  padding: 17px 18px !important;
+  text-align: left !important;
+  text-decoration: none !important;
+  color: #fff7e8 !important;
+  border: 1px solid rgba(255, 208, 111, .38) !important;
+  border-radius: 19px !important;
+  background: linear-gradient(145deg, rgba(255,255,255,.105), rgba(255,255,255,.035)), linear-gradient(125deg, #171b25, #080b12 72%) !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.12), 0 12px 28px rgba(0,0,0,.24), 0 0 22px rgba(226,171,67,.07) !important;
+  transition: transform .22s ease, border-color .22s ease, box-shadow .22s ease;
+}
+.ss-home .ss-footer .ss-footer-contact-card:hover {
+  transform: translateY(-3px) !important;
+  border-color: rgba(255, 211, 126, .78) !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.16), 0 17px 32px rgba(0,0,0,.32), 0 0 24px rgba(226,171,67,.13) !important;
+}
+.ss-home .ss-footer .ss-footer-contact-icon {
+  flex: 0 0 43px;
+  width: 43px;
+  height: 43px;
+  display: grid;
+  place-items: center;
+  border-radius: 14px;
+  font-size: 25px;
+  color: #ffd783 !important;
+  background: rgba(255, 204, 105, .12) !important;
+  border: 1px solid rgba(255, 211, 126, .25);
+}
+.ss-home .ss-footer .ss-footer-whatsapp-icon {
+  color: #b9f5ce !important;
+  background: rgba(37, 211, 102, .12) !important;
+  border-color: rgba(90, 227, 143, .28);
+}
+.ss-home .ss-footer .ss-footer-contact-copy {
+  display: flex !important;
+  flex: 1 1 auto;
+  min-width: 0;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  gap: 3px !important;
+}
+.ss-home .ss-footer .ss-footer-contact-copy small {
+  color: rgba(255, 222, 163, .78) !important;
+  font-size: 9px !important;
+  line-height: 1.4;
+  letter-spacing: .13em;
+  font-weight: 800;
+}
+.ss-home .ss-footer .ss-footer-contact-copy strong {
+  color: #fff8e9 !important;
+  font-size: clamp(16px, 2vw, 20px) !important;
+  line-height: 1.2;
+  font-weight: 800;
+  letter-spacing: .025em;
+}
+.ss-home .ss-footer .ss-footer-contact-copy em {
+  color: rgba(255, 248, 233, .68) !important;
+  font-size: 11px !important;
+  line-height: 1.45;
+  font-style: normal;
+}
+.ss-home .ss-footer .ss-footer-contact-arrow {
+  flex: 0 0 auto;
+  align-self: flex-start;
+  color: #ffd783 !important;
+  font-size: 19px;
+  line-height: 1;
+}
+@media (max-width: 560px) {
+  .ss-home .ss-footer .ss-footer-contact {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 10px !important;
+    margin: 18px auto 14px !important;
+  }
+  .ss-home .ss-footer .ss-footer-contact-card {
+    min-height: 82px;
+    padding: 14px 15px !important;
+    border-radius: 16px !important;
+  }
+  .ss-home .ss-footer .ss-footer-contact-icon {
+    flex-basis: 39px;
+    width: 39px;
+    height: 39px;
+    border-radius: 12px;
+  }
+}
