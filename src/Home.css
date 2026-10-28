@@ -2982,3 +2982,82 @@ body .ss-home > header.ss-navbar .ss-menu-toggle{
     border-radius: 12px;
   }
 }
+
+/* English address card — ss-footer-address-en */
+.ss-home .ss-footer .ss-footer-address-en {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  width: min(100%, 760px);
+  box-sizing: border-box;
+  margin: 20px auto 18px;
+  padding: 19px 21px;
+  text-align: left;
+  border: 1px solid rgba(255, 208, 111, .34);
+  border-radius: 20px;
+  background: linear-gradient(145deg, rgba(255,255,255,.09), rgba(255,255,255,.025)), linear-gradient(125deg, rgba(25,29,39,.96), rgba(7,10,16,.96));
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.10), 0 12px 28px rgba(0,0,0,.22);
+}
+.ss-home .ss-footer .ss-footer-address-pin {
+  display: grid;
+  place-items: center;
+  flex: 0 0 42px;
+  width: 42px;
+  height: 42px;
+  border: 1px solid rgba(255,211,126,.25);
+  border-radius: 14px;
+  background: rgba(255,204,105,.11);
+  font-size: 21px;
+}
+.ss-home .ss-footer .ss-footer-address-copy {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 5px;
+}
+.ss-home .ss-footer .ss-footer-address-kicker {
+  color: rgba(255,222,163,.78);
+  font-size: 9px;
+  line-height: 1.4;
+  letter-spacing: .15em;
+  font-weight: 800;
+}
+.ss-home .ss-footer .ss-footer-address-copy strong {
+  color: #fff7e8;
+  font-size: 17px;
+  line-height: 1.35;
+  font-weight: 800;
+}
+.ss-home .ss-footer .ss-footer-address-copy p {
+  margin: 0;
+  color: rgba(255,248,233,.84);
+  font-size: 13px;
+  line-height: 1.7;
+  overflow-wrap: anywhere;
+}
+.ss-home .ss-footer .ss-footer-address-copy small {
+  color: #ffd783;
+  font-size: 11px;
+  line-height: 1.55;
+}
+@media (max-width: 560px) {
+  .ss-home .ss-footer .ss-footer-address-en {
+    gap: 11px;
+    margin: 17px auto 14px;
+    padding: 15px 14px;
+    border-radius: 17px;
+  }
+  .ss-home .ss-footer .ss-footer-address-pin {
+    flex-basis: 36px;
+    width: 36px;
+    height: 36px;
+    border-radius: 12px;
+    font-size: 18px;
+  }
+  .ss-home .ss-footer .ss-footer-address-copy strong { font-size: 15px; }
+  .ss-home .ss-footer .ss-footer-address-copy p { font-size: 12px; }
+}
+

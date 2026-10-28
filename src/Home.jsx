@@ -169,7 +169,18 @@ export default function Home() {
         <a className="ss-contact-location-link" href="https://maps.app.goo.gl/92QvGfjMJF5mAWTL7?g_st=ac" target="_blank" rel="noopener noreferrer" aria-label="Google Maps पर लाइब्रेरी की लोकेशन खोलें">
           <span aria-hidden="true">📍</span> लाइब्रेरी की लोकेशन देखें <ArrowUpRight size={16} />
         </a>
-                <div className="ss-footer-contact" aria-label="Contact Shri Library">
+
+        <section className="ss-footer-address-en" aria-label="Library address in English">
+          <div className="ss-footer-address-pin" aria-hidden="true">📍</div>
+          <div className="ss-footer-address-copy">
+            <span className="ss-footer-address-kicker">VISIT US</span>
+            <strong>Shri Shyam Library</strong>
+            <p>Ward No. 3, Gurudwara Road, Bishnoi Mohalla, Suratgarh, Rajasthan – 335804</p>
+            <small><span aria-hidden="true">⌖</span> Landmark: 100 metres from Paras Hyundai</small>
+          </div>
+        </section>
+
+        <div className="ss-footer-contact" aria-label="Contact Shri Library">
           <a className="ss-footer-contact-card ss-footer-call" href="tel:+918306349753" aria-label="Call Shri Library at 8306349753">
             <span className="ss-footer-contact-icon" aria-hidden="true">☎</span>
             <span className="ss-footer-contact-copy"><small>CALL US</small><strong>8306349753</strong><em>कॉल करें</em></span>
