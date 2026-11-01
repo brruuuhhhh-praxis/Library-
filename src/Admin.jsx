@@ -92,6 +92,40 @@ export default function Admin({ onHome, onRegister }) {
   }
 
 
+  async function registrationAction(record, action) {
+    if (!supabase || !record?.id) return;
+    const labels = {
+      confirm: 'इस आवेदन को Confirm करके सदस्य सक्रिय करना है?',
+      reject: 'इस pending आवेदन को Reject करना है? सीट खाली हो जाएगी।',
+      cancel: 'इस सक्रिय सदस्यता को Cancel करना है?'
+    };
+    if (!window.confirm(labels[action])) return;
+
+    const rpcNames = {
+      confirm: 'admin_confirm_library_registration',
+      reject: 'admin_reject_library_registration',
+      cancel: 'admin_cancel_library_membership'
+    };
+    setLoading(true);
+    setError('');
+    try {
+      const { error: actionError } = await supabase.rpc(rpcNames[action], {
+        p_registration_id: record.id
+      });
+      if (actionError) {
+        console.error('Admin registration action failed:', actionError);
+        setError(actionError.message || 'कार्रवाई नहीं हो सकी। एडमिन अनुमति और migration जाँचें।');
+        return;
+      }
+      await loadData();
+    } catch {
+      setError('नेटवर्क समस्या के कारण कार्रवाई नहीं हो सकी। कृपया फिर प्रयास करें।');
+    } finally {
+      setLoading(false);
+    }
+  }
+
+
   const filtered = useMemo(() => {
     const q = query.toLowerCase().trim();
     if (!q) return registrations;
@@ -108,7 +142,7 @@ export default function Admin({ onHome, onRegister }) {
       <div className="admin-summary"><article><span>कुल सीटें</span><strong>{seats.length}</strong></article><article><span>खाली सीटें</span><strong>{seats.filter(s=>s.status==='available').length}</strong></article><article><span>बुक्ड सीटें</span><strong>{seats.filter(s=>s.status==='booked').length}</strong></article><article><span>रजिस्ट्रेशन रिकॉर्ड</span><strong>{registrations.length}</strong></article></div>
       <div className="admin-panel"><div className="admin-panel-head"><div><h3>सीट मैनेजमेंट</h3><p>बुक्ड सीट को खाली करने पर उसका active/pending रजिस्ट्रेशन cancelled होगा।</p></div></div><div className="admin-seat-grid">{seats.map(seat=><button key={seat.seat_no} type="button" onClick={()=>changeSeat(seat)} className={`admin-seat ${seat.status==='available'?'is-available':'is-booked'}`} disabled={loading}><strong>{String(seat.seat_no).padStart(2,'0')}</strong><small>{seat.status==='available'?'खाली · बुक करें':'बुक्ड · खाली करें'}</small></button>)}</div></div>
       <div className="admin-panel"><div className="admin-panel-head"><div><h3>रजिस्ट्रेशन रिकॉर्ड</h3><p>रिकॉर्ड चुनकर आवेदन को प्रिंट किया जा सकता है।</p></div><label className="admin-search"><Search size={17}/><input value={query} onChange={e=>setQuery(e.target.value)} placeholder="नाम, मोबाइल या सीट खोजें"/></label></div>
-        {loading ? <div className="booking-empty-state">रिकॉर्ड लोड हो रहे हैं…</div> : filtered.length===0 ? <div className="booking-empty-state">कोई रिकॉर्ड नहीं मिला।</div> : <div className="admin-record-list">{filtered.map(r=><article className="admin-record" key={r.id}><div className="admin-record-main"><div><strong>{r.full_name}</strong><span>पिता/अभिभावक: {r.father_name}</span><span>मोबाइल: {r.mobile}</span><span>सीट #{r.seat_no} · {r.status==='active'?'सक्रिय':r.status==='cancelled'?'रद्द':'लंबित'}</span></div><span className={`admin-status ${r.status}`}>{r.status==='active'?'ACTIVE':r.status==='cancelled'?'CANCELLED':'PENDING'}</span></div><details><summary>पूरा विवरण देखें</summary><div className="admin-record-details"><span>जन्मतिथि: {r.date_of_birth || '—'}</span><span>वैकल्पिक मोबाइल: {r.alternate_mobile || '—'}</span><span>आपातकालीन संपर्क: {r.emergency_contact || '—'}</span><span>पता: {r.address}</span><span>पहचान-पत्र प्रकार: {r.id_type}</span><span>जॉइनिंग तारीख: {r.joining_date || '—'}</span><span>आवेदन: {new Date(r.created_at).toLocaleString('en-IN')}</span></div></details><button className="booking-print admin-record-print" type="button" onClick={()=>{setPrintRecord(r);setTimeout(()=>window.print(),150);}}>आवेदन प्रिंट करें</button></article>)}</div>}
+        {loading ? <div className="booking-empty-state">रिकॉर्ड लोड हो रहे हैं…</div> : filtered.length===0 ? <div className="booking-empty-state">कोई रिकॉर्ड नहीं मिला।</div> : <div className="admin-record-list">{filtered.map(r=><article className="admin-record" key={r.id}><div className="admin-record-main"><div><strong>{r.full_name}</strong><span>पिता/अभिभावक: {r.father_name}</span><span>मोबाइल: {r.mobile}</span><span>सीट #{r.seat_no} · {r.status==='active'?'सक्रिय':r.status==='cancelled'?'रद्द':'लंबित'}</span></div><span className={`admin-status ${r.status}`}>{r.status==='active'?'ACTIVE':r.status==='cancelled'?'CANCELLED':'PENDING'}</span></div><details><summary>पूरा विवरण देखें</summary><div className="admin-record-details"><span>जन्मतिथि: {r.date_of_birth || '—'}</span><span>वैकल्पिक मोबाइल: {r.alternate_mobile || '—'}</span><span>आपातकालीन संपर्क: {r.emergency_contact || '—'}</span><span>पता: {r.address}</span><span>पहचान-पत्र प्रकार: {r.id_type}</span><span>जॉइनिंग तारीख: {r.joining_date || '—'}</span><span>आवेदन: {new Date(r.created_at).toLocaleString('en-IN')}</span></div></details><div className="admin-record-actions">{r.status === 'pending' && <><button className="booking-submit admin-action-confirm" type="button" disabled={loading} onClick={() => registrationAction(r, 'confirm')}>✓ Confirm</button><button className="booking-print admin-action-reject" type="button" disabled={loading} onClick={() => registrationAction(r, 'reject')}>✕ Reject</button></>}{r.status === 'active' && <button className="booking-print admin-action-reject" type="button" disabled={loading} onClick={() => registrationAction(r, 'cancel')}>Membership Cancel करें</button>}<button className="booking-print admin-record-print" type="button" onClick={()=>{setPrintRecord(r);setTimeout(()=>window.print(),150);}}>आवेदन प्रिंट करें</button></div></article>)}</div>}
       </div>
     </section>}
     {error && !session && isSupabaseConfigured && <div className="booking-error admin-login-error">{error}</div>}
