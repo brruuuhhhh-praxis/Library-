@@ -7,6 +7,8 @@ import App from './App.jsx'
 import './theme-premium.css';
 import './site-unified-theme.css';
 
+import './site-polish.css';
+
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <App />

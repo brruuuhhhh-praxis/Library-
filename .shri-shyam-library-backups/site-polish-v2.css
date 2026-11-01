@@ -1,0 +1,433 @@
+/* SHREE JI LIBRARY — PREMIUM UI POLISH */
+
+:root {
+  --polish-navy: #0b1b2b;
+  --polish-navy-light: #17334a;
+  --polish-gold: #c6a15a;
+  --polish-gold-light: #f0d99f;
+  --polish-ivory: #f6f3eb;
+}
+
+/* CONTACT PAGE — unified premium navy and gold */
+.ss-home.ss-page-contact > .ss-footer {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: stretch !important;
+  gap: 0 !important;
+  min-height: calc(100vh - 72px);
+  padding: 35px 18px 24px !important;
+  background:
+    radial-gradient(ellipse at 12% 2%, rgba(198,161,90,.16), transparent 31%),
+    linear-gradient(145deg, #0b1b2b, #142a40 58%, #081522) !important;
+  color: var(--polish-ivory) !important;
+}
+
+.ss-home.ss-page-contact .ss-contact-panel {
+  width: min(760px, 100%) !important;
+  margin: 24px auto 28px !important;
+  padding: clamp(17px, 4vw, 28px) !important;
+  gap: 15px !important;
+  border: 1px solid rgba(225,190,120,.58) !important;
+  border-radius: 24px !important;
+  background:
+    radial-gradient(ellipse at 92% 0%, rgba(198,161,90,.15), transparent 38%),
+    linear-gradient(145deg, #173047, #081522) !important;
+  box-shadow: 0 22px 55px rgba(0,0,0,.30),
+              inset 0 1px 0 rgba(255,255,255,.09) !important;
+  color: #f6f3eb !important;
+}
+
+.ss-home.ss-page-contact .ss-contact-panel-heading h2 {
+  color: #fff8e8 !important;
+  font-size: clamp(27px, 5vw, 34px) !important;
+}
+
+.ss-home.ss-page-contact .ss-contact-panel-heading p {
+  color: #c5d0d9 !important;
+  line-height: 1.7 !important;
+}
+
+.ss-home.ss-page-contact .ss-contact-panel-kicker {
+  color: var(--polish-gold-light) !important;
+}
+
+.ss-home.ss-page-contact .ss-contact-panel > .ss-contact-location-link {
+  align-self: stretch !important;
+  width: 100% !important;
+  min-height: 54px !important;
+  border: 1px solid var(--polish-gold) !important;
+  border-radius: 15px !important;
+  background: linear-gradient(135deg, #203d57, #10273c) !important;
+  color: var(--polish-gold-light) !important;
+  font-weight: 800 !important;
+}
+
+.ss-home.ss-page-contact .ss-contact-panel > .ss-footer-address-en {
+  border: 1px solid rgba(225,190,120,.48) !important;
+  border-radius: 19px !important;
+  background: linear-gradient(145deg, #1c3042, #091420) !important;
+  color: #fff8e8 !important;
+}
+
+.ss-home.ss-page-contact .ss-contact-panel .ss-footer-address-copy p {
+  color: #eef1f3 !important;
+  line-height: 1.75 !important;
+}
+
+.ss-home.ss-page-contact .ss-contact-panel .ss-footer-address-copy small {
+  color: var(--polish-gold-light) !important;
+}
+
+.ss-home.ss-page-contact .ss-contact-panel .ss-footer-contact-card {
+  border: 1px solid rgba(225,190,120,.42) !important;
+  border-radius: 17px !important;
+  min-height: 88px !important;
+}
+
+.ss-home.ss-page-contact > .ss-footer > .ss-footer-brand,
+.ss-home.ss-page-contact > .ss-footer > p,
+.ss-home.ss-page-contact > .ss-footer > .ss-contact-panel,
+.ss-home.ss-page-contact > .ss-footer > .ss-developer-credit,
+.ss-home.ss-page-contact > .ss-footer > nav,
+.ss-home.ss-page-contact > .ss-footer > .ss-copyright {
+  width: min(760px, 100%) !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+.ss-home.ss-page-contact > .ss-footer > p {
+  margin-top: 12px !important;
+  color: #d9e1e8 !important;
+  line-height: 1.7;
+}
+
+.ss-home.ss-page-contact .ss-footer > nav {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  justify-content: center !important;
+  gap: 10px 20px !important;
+  margin-top: 18px !important;
+  padding: 15px 8px !important;
+  border-top: 1px solid rgba(240,217,159,.22) !important;
+  border-bottom: 1px solid rgba(240,217,159,.22) !important;
+}
+
+.ss-home.ss-page-contact .ss-footer > nav a {
+  color: #e8edf1 !important;
+  min-height: 36px;
+  display: inline-flex;
+  align-items: center;
+}
+
+.ss-home.ss-page-contact .ss-footer > nav a:hover {
+  color: var(--polish-gold-light) !important;
+}
+
+.ss-home.ss-page-contact .ss-developer-credit {
+  border-color: rgba(225,190,120,.45) !important;
+  background: linear-gradient(135deg, #142c42, #091725) !important;
+}
+
+.ss-home.ss-page-contact .ss-copyright {
+  color: #aebbc6 !important;
+  text-align: center;
+  line-height: 1.6;
+}
+
+/* FACILITIES — restrained cream, navy and gold cards */
+.ss-home .ss-facilities-section .ss-facility-card.ss-facility-icon-tile {
+  min-width: 0;
+  min-height: 205px;
+  padding: 20px 17px 17px !important;
+  gap: 10px !important;
+  border: 1px solid rgba(198,161,90,.48) !important;
+  border-radius: 20px !important;
+  background: linear-gradient(145deg, #fffdf8, #f2eee5) !important;
+  color: var(--polish-navy) !important;
+  box-shadow: 0 10px 26px rgba(11,27,43,.075) !important;
+  transition: transform .22s ease, box-shadow .22s ease;
+}
+
+.ss-home .ss-facilities-section .ss-facility-card.ss-facility-icon-tile:hover {
+  transform: translateY(-4px) !important;
+  border-color: var(--polish-gold) !important;
+  box-shadow: 0 16px 32px rgba(11,27,43,.12) !important;
+}
+
+.ss-home .ss-facility-icon-tile .ss-facility-number {
+  color: #9a7434 !important;
+  font-weight: 850 !important;
+}
+
+.ss-home .ss-facility-icon-tile .ss-facility-icon-art {
+  width: 68px !important;
+  height: 68px !important;
+  flex: 0 0 68px !important;
+  display: grid !important;
+  place-items: center !important;
+  align-self: center !important;
+  border: 1px solid rgba(230,195,116,.78) !important;
+  border-radius: 50% !important;
+  background: linear-gradient(145deg, #1b3a54, #091a2a) !important;
+  color: var(--polish-gold-light) !important;
+  box-shadow: 0 7px 18px rgba(11,27,43,.18) !important;
+}
+
+.ss-home .ss-facility-icon-tile .ss-facility-english-copy {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 5px !important;
+  width: 100%;
+  min-width: 0;
+  text-align: left;
+}
+
+.ss-home .ss-facility-icon-tile .ss-facility-english-copy strong {
+  color: #12283b !important;
+  font-size: 13px !important;
+  line-height: 1.5 !important;
+}
+
+.ss-home .ss-facility-icon-tile .ss-facility-english-copy small {
+  color: #647381 !important;
+  font-size: 11px !important;
+  line-height: 1.55 !important;
+}
+
+/* MOBILE — headline visibility, card spacing and touch-friendly layout */
+@media (max-width: 760px), (pointer: coarse) {
+  .ss-home .ss-hero {
+    min-height: max(620px, 80svh) !important;
+  }
+
+  .ss-home .ss-hero .ss-hero-signature-quote {
+    top: 24px !important;
+    left: 18px !important;
+    width: min(280px, 72vw) !important;
+    max-width: 280px !important;
+    font-size: clamp(36px, 10vw, 52px) !important;
+    line-height: 1.16 !important;
+  }
+
+  .ss-home .ss-hero .ss-hero-minimal-actions {
+    top: 44% !important;
+  }
+
+  .ss-home .ss-hero .ss-hero-minimal-actions .ss-button {
+    min-height: 48px !important;
+    padding: 12px 17px !important;
+    font-size: 13px !important;
+  }
+
+  .ss-home .ss-facilities-section {
+    padding: 58px 18px 64px !important;
+  }
+
+  .ss-home .ss-facilities-section .ss-facility-icon-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    grid-auto-rows: minmax(190px, auto) !important;
+    gap: 11px !important;
+  }
+
+  .ss-home .ss-facilities-section .ss-facility-card.ss-facility-icon-tile {
+    min-height: 190px !important;
+    padding: 17px 12px 14px !important;
+  }
+
+  .ss-home .ss-facility-icon-tile .ss-facility-icon-art {
+    width: 58px !important;
+    height: 58px !important;
+    flex-basis: 58px !important;
+  }
+
+  .ss-home .ss-facility-icon-tile .ss-facility-icon-art svg {
+    width: 31px;
+    height: 31px;
+  }
+
+  .ss-home .ss-facility-icon-tile .ss-facility-english-copy strong {
+    font-size: 12px !important;
+  }
+
+  .ss-home .ss-facility-icon-tile .ss-facility-english-copy small {
+    font-size: 10.5px !important;
+  }
+
+  .ss-home.ss-page-contact > .ss-footer {
+    padding: 28px 14px 20px !important;
+  }
+
+  .ss-home.ss-page-contact .ss-contact-panel {
+    margin-top: 20px !important;
+    margin-bottom: 22px !important;
+  }
+
+  .ss-home.ss-page-contact .ss-contact-panel .ss-footer-contact {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+
+  .ss-home.ss-page-contact .ss-contact-panel .ss-footer-contact-card {
+    min-height: 82px !important;
+    padding: 13px 14px !important;
+  }
+}
+
+@media (max-width: 360px) {
+  .ss-home .ss-facilities-section .ss-facility-icon-grid {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ss-home .ss-facility-card.ss-facility-icon-tile {
+    transition: none !important;
+  }
+}
+
+/* MOBILE READABILITY POLISH V2 */
+
+/* Header */
+@media (max-width: 760px), (pointer: coarse) {
+  html body #root .ss-home > .ss-navbar {
+    min-height: 82px !important;
+    height: auto !important;
+    padding: 9px 15px !important;
+  }
+
+  html body #root .ss-home .ss-brand-emblem {
+    width: 49px !important;
+    height: 49px !important;
+    flex-basis: 49px !important;
+  }
+
+  html body #root .ss-home .ss-brand-words strong {
+    font-size: 18px !important;
+  }
+
+  /* Hero headline */
+  html body #root .ss-home .ss-hero-signature-quote {
+    top: 24px !important;
+    left: 20px !important;
+    width: min(440px, 68vw) !important;
+    max-width: 440px !important;
+    font-size: clamp(40px, 8.8vw, 56px) !important;
+    line-height: 1.17 !important;
+    text-shadow: 0 3px 15px #000 !important;
+  }
+
+  /* Bring registration CTA closer to headline */
+  html body #root .ss-home .ss-hero-minimal-actions {
+    top: clamp(220px, 22svh, 300px) !important;
+    left: 20px !important;
+  }
+
+  html body #root .ss-home .ss-hero-minimal-actions .ss-button {
+    min-height: 52px !important;
+    padding: 13px 21px !important;
+    font-size: 15px !important;
+  }
+
+  /* Facilities section */
+  html body #root .ss-home .ss-facilities-section {
+    padding: 58px 18px 65px !important;
+  }
+
+  html body #root .ss-home .ss-facilities-section h2 {
+    font-size: clamp(27px, 6vw, 35px) !important;
+    line-height: 1.5 !important;
+  }
+
+  html body #root .ss-home .ss-section-heading p {
+    font-size: 14px !important;
+    line-height: 1.85 !important;
+  }
+
+  /* Preserve glossy colours; improve icon and text visibility */
+  html body #root .ss-home .ss-facility-icon-art {
+    width: 70px !important;
+    height: 70px !important;
+    flex-basis: 70px !important;
+  }
+
+  html body #root .ss-home .ss-facility-icon-art svg {
+    width: 38px !important;
+    height: 38px !important;
+  }
+
+  html body #root .ss-home .ss-facility-english-copy strong {
+    font-size: 14px !important;
+    line-height: 1.5 !important;
+  }
+
+  html body #root .ss-home .ss-facility-english-copy small {
+    font-size: 12px !important;
+    line-height: 1.6 !important;
+  }
+
+  html body #root .ss-home .ss-facility-number {
+    font-size: 11px !important;
+  }
+
+  /* Current Affairs */
+  html body #root .ca-page .ca-hero h1 {
+    font-size: clamp(32px, 8vw, 43px) !important;
+    line-height: 1.4 !important;
+  }
+
+  html body #root .ca-page .ca-hero-copy > p {
+    font-size: 14px !important;
+    line-height: 1.8 !important;
+  }
+
+  html body #root .ca-page .ca-story-main h3 {
+    font-size: 16px !important;
+    line-height: 1.65 !important;
+  }
+
+  html body #root .ca-page .ca-story-main > p {
+    font-size: 14px !important;
+    line-height: 1.8 !important;
+  }
+
+  html body #root .site-route-tabs a {
+    font-size: 12px !important;
+    padding: 11px 12px !important;
+  }
+
+  /* Registration form */
+  html body #root .booking-page .booking-fields label {
+    font-size: 14px !important;
+    line-height: 1.6 !important;
+  }
+
+  html body #root .booking-page .booking-fields input,
+  html body #root .booking-page .booking-fields select,
+  html body #root .booking-page .booking-fields textarea {
+    min-height: 49px;
+    font-size: 15px !important;
+  }
+
+  html body #root .booking-page .booking-seat-grid {
+    grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
+    gap: 9px !important;
+  }
+
+  html body #root .booking-page .booking-seat {
+    min-height: 58px !important;
+    font-size: 14px !important;
+  }
+
+  /* Contact */
+  html body #root .ss-page-contact .ss-contact-panel-heading h2 {
+    font-size: 30px !important;
+  }
+
+  html body #root .ss-page-contact .ss-contact-panel-heading p {
+    font-size: 15px !important;
+  }
+
+  html body #root .ss-page-contact .ss-footer-address-copy p {
+    font-size: 14px !important;
+  }
+}
+

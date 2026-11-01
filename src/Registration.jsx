@@ -1,17 +1,18 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { ArrowLeft, BookOpen, CheckCircle2, Printer, ShieldCheck } from 'lucide-react';
 import { isSupabaseConfigured, supabase } from './lib/supabase.js';
+import { getISTDate } from './lib/dateUtils.js';
 import './Booking.css';
 import { LIBRARY_NAME, LIBRARY_TAGLINE } from './libraryConfig.js';
 import LibraryBrand from './LibraryBrand.jsx';
 
-const blankForm = { full_name:'', father_name:'', date_of_birth:'', mobile:'', alternate_mobile:'', address:'', emergency_contact:'', id_type:'Aadhaar Card', joining_date:new Date().toISOString().slice(0,10), seat_no:'' };
-const demoSeats = Array.from({ length: 50 }, (_, i) => ({ seat_no: i + 1, status: 'available' }));
+const blankForm = { full_name:'', father_name:'', date_of_birth:'', mobile:'', alternate_mobile:'', address:'', emergency_contact:'', id_type:'Aadhaar Card', joining_date:getISTDate(), seat_no:'' };
 
 export default function Registration({ onHome, onAdmin }) {
   const [form, setForm] = useState(blankForm);
-  const [seats, setSeats] = useState(demoSeats);
+  const [seats, setSeats] = useState([]);
   const [loadingSeats, setLoadingSeats] = useState(isSupabaseConfigured);
+  const [seatLoadError, setSeatLoadError] = useState('');
   const [submitting, setSubmitting] = useState(false);
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
@@ -19,12 +20,35 @@ export default function Registration({ onHome, onAdmin }) {
   const available = useMemo(() => seats.filter(s => s.status === 'available').length, [seats]);
 
   async function loadSeats() {
-    if (!isSupabaseConfigured) { setLoadingSeats(false); return; }
+    if (!isSupabaseConfigured || !supabase) {
+      setSeats([]);
+      setSeatLoadError('ऑनलाइन सीट सूची उपलब्ध नहीं है। डेटाबेस सेटअप होने पर सीटें दिखाई देंगी।');
+      setLoadingSeats(false);
+      return;
+    }
     setLoadingSeats(true);
-    const { data, error: queryError } = await supabase.from('library_seats').select('seat_no,status').order('seat_no');
-    if (queryError) setError('सीटों का डेटा नहीं मिल सका। Supabase में schema.sql चलाएँ और configuration जाँचें।');
-    else if (data) setSeats(data);
-    setLoadingSeats(false);
+    setSeatLoadError('');
+    try {
+      const { data, error: queryError } = await supabase
+        .from('library_seats')
+        .select('seat_no,status')
+        .order('seat_no');
+      if (queryError) throw queryError;
+      const nextSeats = Array.isArray(data) ? data : [];
+      setSeats(nextSeats);
+      setForm((current) => {
+        if (!current.seat_no) return current;
+        const stillAvailable = nextSeats.some((seat) =>
+          String(seat.seat_no) === String(current.seat_no) && seat.status === 'available'
+        );
+        return stillAvailable ? current : { ...current, seat_no: '' };
+      });
+    } catch {
+      setSeats([]);
+      setSeatLoadError('सीटों की असली स्थिति लोड नहीं हो सकी। कृपया पेज रिफ्रेश करें या लाइब्रेरी से संपर्क करें।');
+    } finally {
+      setLoadingSeats(false);
+    }
   }
   useEffect(() => { loadSeats(); }, []);
 
@@ -32,21 +56,30 @@ export default function Registration({ onHome, onAdmin }) {
 
   async function submit(e) {
     e.preventDefault(); setError(''); setMessage('');
-    if (!isSupabaseConfigured) { setError('ऑनलाइन बुकिंग चालू करने के लिए पहले Supabase सेटअप और GitHub Actions secrets जोड़ना ज़रूरी है। अभी आपकी जानकारी जमा नहीं हुई है।'); return; }
-    
+    if (!isSupabaseConfigured || !supabase) { setError('ऑनलाइन बुकिंग अभी चालू नहीं है। अभी आपकी जानकारी जमा नहीं हुई है।'); return; }
+    if (loadingSeats || seatLoadError) { setError('सीटों की स्थिति सत्यापित नहीं हो सकी। पहले सीट सूची रिफ्रेश करें।'); return; }
     if (!form.seat_no) { setError('कृपया उपलब्ध सीट चुनें।'); return; }
+    const selectedSeat = seats.find((seat) => String(seat.seat_no) === String(form.seat_no));
+    if (!selectedSeat || selectedSeat.status !== 'available') { setError('यह सीट अब उपलब्ध नहीं है। सीट सूची रिफ्रेश करके दूसरी सीट चुनें।'); await loadSeats(); return; }
     setSubmitting(true);
-    const submittedId = crypto.randomUUID();
-    const payload = { id: submittedId, full_name: form.full_name.trim(), father_name: form.father_name.trim(), date_of_birth: form.date_of_birth, mobile: form.mobile.trim(), alternate_mobile: form.alternate_mobile.trim() || null, address: form.address.trim(), emergency_contact: form.emergency_contact.trim(), id_type: form.id_type, joining_date: form.joining_date, seat_no: Number(form.seat_no), status: 'pending' };
-    // Do not SELECT the new row here: public visitors must not have read access to PII records.
-    const { error: insertError } = await supabase.from('library_registrations').insert(payload);
-    setSubmitting(false);
-    if (insertError) {
-      setError(insertError.code === '23505' || /seat|duplicate|unique/i.test(insertError.message) ? 'माफ़ कीजिए, यह सीट अभी किसी और ने बुक कर ली है। कृपया दूसरी उपलब्ध सीट चुनें।' : 'रजिस्ट्रेशन जमा नहीं हो पाया। कृपया जानकारी जाँचकर फिर प्रयास करें।');
-      await loadSeats(); return;
+    try {
+      const submittedId = crypto.randomUUID();
+      const payload = { id: submittedId, full_name: form.full_name.trim(), father_name: form.father_name.trim(), date_of_birth: form.date_of_birth, mobile: form.mobile.trim(), alternate_mobile: form.alternate_mobile.trim() || null, address: form.address.trim(), emergency_contact: form.emergency_contact.trim(), id_type: form.id_type, joining_date: form.joining_date, seat_no: Number(form.seat_no), status: 'pending' };
+      // Do not SELECT the new row here: public visitors must not have read access to PII records.
+      const { error: insertError } = await supabase.from('library_registrations').insert(payload);
+      if (insertError) {
+        setError(insertError.code === '23505' || /seat|duplicate|unique/i.test(insertError.message) ? 'माफ़ कीजिए, यह सीट अभी किसी और ने बुक कर ली है। कृपया दूसरी उपलब्ध सीट चुनें।' : 'रजिस्ट्रेशन जमा नहीं हो पाया। कृपया जानकारी जाँचकर फिर प्रयास करें।');
+        await loadSeats();
+        return;
+      }
+      setReceipt({ id: submittedId, registration_no: `SS-${getISTDate().slice(0,4)}-${submittedId.replaceAll('-', '').slice(0,8).toUpperCase()}`, seat_no: payload.seat_no });
+      setMessage('रजिस्ट्रेशन सफलतापूर्वक जमा हो गया। Registration Number जारी हो गया है। आपकी चुनी हुई सीट का नंबर फॉर्म और ID Card पर दिखेगा।');
+      await loadSeats();
+    } catch {
+      setError('नेटवर्क समस्या के कारण रजिस्ट्रेशन की पुष्टि नहीं हो सकी। दोबारा प्रयास करने से पहले लाइब्रेरी से संपर्क करके स्थिति जाँच लें।');
+    } finally {
+      setSubmitting(false);
     }
-    setReceipt({ id: submittedId, registration_no: `SS-${new Date().getFullYear()}-${submittedId.replaceAll('-', '').slice(0,8).toUpperCase()}`, seat_no: payload.seat_no }); setMessage('रजिस्ट्रेशन सफलतापूर्वक जमा हो गया। Registration Number जारी हो गया है। आपकी चुनी हुई सीट का नंबर फॉर्म और ID Card पर दिखेगा।');
-    await loadSeats();
   }
 
   return <main className="booking-page">
@@ -58,7 +91,7 @@ export default function Registration({ onHome, onAdmin }) {
       <div className="booking-fields">
         <label>पूरा नाम *<input name="full_name" value={form.full_name} onChange={update} required minLength="2" maxLength="100" autoComplete="name" placeholder="अपना पूरा नाम लिखें"/></label>
         <label>पिता / अभिभावक का नाम *<input name="father_name" value={form.father_name} onChange={update} required minLength="2" maxLength="100" placeholder="पिता या अभिभावक का नाम"/></label>
-        <label>जन्मतिथि *<input name="date_of_birth" type="date" value={form.date_of_birth} onChange={update} required max={new Date().toISOString().slice(0,10)}/></label>
+        <label>जन्मतिथि *<input name="date_of_birth" type="date" value={form.date_of_birth} onChange={update} required max={getISTDate()}/></label>
         <label>मोबाइल नंबर *<input name="mobile" type="tel" inputMode="numeric" pattern="[0-9+() -]{10,16}" value={form.mobile} onChange={update} required maxLength="16" autoComplete="tel" placeholder="10 अंकों का मोबाइल नंबर"/></label>
         <label>वैकल्पिक मोबाइल नंबर<input name="alternate_mobile" type="tel" inputMode="tel" value={form.alternate_mobile} onChange={update} maxLength="16" placeholder="यदि उपलब्ध हो"/></label>
         <label>आपातकालीन संपर्क नंबर *<input name="emergency_contact" type="tel" inputMode="tel" pattern="[0-9+() -]{10,16}" value={form.emergency_contact} onChange={update} required maxLength="16" placeholder="परिवार का संपर्क नंबर"/></label>
@@ -67,8 +100,8 @@ export default function Registration({ onHome, onAdmin }) {
         <label>लाइब्रेरी जॉइन करने की तारीख *<input name="joining_date" type="date" value={form.joining_date} onChange={update} required/></label>
       </div>
       <div className="booking-id-note"><ShieldCheck size={22}/><div><strong>पहचान-पत्र की फोटोकॉपी ऑनलाइन अपलोड नहीं करनी है।</strong><p>आधार कार्ड या किसी अन्य मान्य पहचान-पत्र की फोटोकॉपी लाइब्रेरी में रजिस्ट्रेशन फॉर्म और निर्धारित फीस जमा करते समय स्वयं उपलब्ध कराएँ। इस ऑनलाइन फॉर्म में पूरा आधार नंबर न लिखें। यह लाइब्रेरी का रजिस्ट्रेशन फॉर्म है, पुलिस सत्यापन प्रमाणपत्र नहीं; यदि सत्यापन आवश्यक हो तो संबंधित आधिकारिक प्रक्रिया अपनाएँ।</p></div></div>
-      <div className="booking-seat-head"><div><span className="booking-kicker">STEP 02 / CHOOSE YOUR DESK</span><h2>अपनी सीट चुनें</h2><p>हरा = उपलब्ध · ग्रे = बुक्ड</p></div><div className="booking-seat-legend"><span><i className="seat-dot available"/> उपलब्ध</span><span><i className="seat-dot booked"/> बुक्ड</span></div></div>
-      {loadingSeats ? <div className="booking-empty-state">सीटों की स्थिति लोड हो रही है…</div> : <div className="booking-seat-grid">{seats.map(seat => <button type="button" key={seat.seat_no} className={`booking-seat ${seat.status === 'available' ? 'is-available' : 'is-booked'} ${String(form.seat_no) === String(seat.seat_no) ? 'is-selected' : ''}`} disabled={seat.status !== 'available'} onClick={() => {setForm(p => ({...p, seat_no:String(seat.seat_no)}));setError('');}} aria-pressed={String(form.seat_no) === String(seat.seat_no)} title={seat.status === 'available' ? `सीट ${seat.seat_no} चुनें` : `सीट ${seat.seat_no} बुक्ड है`}><strong>{String(seat.seat_no).padStart(2,'0')}</strong><small>{seat.status === 'available' ? 'खाली' : 'बुक्ड'}</small></button>)}</div>}
+      <div className="booking-seat-head"><div><span className="booking-kicker">STEP 02 / CHOOSE YOUR DESK</span><h2>अपनी सीट चुनें</h2><p>हरा = उपलब्ध · ग्रे = बुक्ड</p></div><div className="booking-seat-legend"><span><i className="seat-dot available"/> उपलब्ध</span><span><i className="seat-dot booked"/> बुक्ड</span>{seatLoadError && <button type="button" className="booking-print" onClick={loadSeats} disabled={loadingSeats}>फिर प्रयास करें</button>}</div></div>
+      {loadingSeats ? <div className="booking-empty-state">सीटों की स्थिति लोड हो रही है…</div> : seatLoadError ? <div className="booking-empty-state" role="alert">{seatLoadError}</div> : seats.length === 0 ? <div className="booking-empty-state">अभी सीट सूची उपलब्ध नहीं है। कृपया लाइब्रेरी से संपर्क करें।</div> : <div className="booking-seat-grid">{seats.map(seat => <button type="button" key={seat.seat_no} className={`booking-seat ${seat.status === 'available' ? 'is-available' : 'is-booked'} ${String(form.seat_no) === String(seat.seat_no) ? 'is-selected' : ''}`} disabled={seat.status !== 'available'} onClick={() => {setForm(p => ({...p, seat_no:String(seat.seat_no)}));setError('');}} aria-pressed={String(form.seat_no) === String(seat.seat_no)} title={seat.status === 'available' ? `सीट ${seat.seat_no} चुनें` : `सीट ${seat.seat_no} बुक्ड है`}><strong>{String(seat.seat_no).padStart(2,'0')}</strong><small>{seat.status === 'available' ? 'खाली' : 'बुक्ड'}</small></button>)}</div>}
       <input type="hidden" name="seat_no" value={form.seat_no}/>
       {form.seat_no && <p className="booking-selected-seat">चुनी गई सीट: <strong>#{form.seat_no}</strong></p>}
       {error && <div className="booking-error" role="alert">{error}</div>}

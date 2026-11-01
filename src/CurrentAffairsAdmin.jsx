@@ -1,18 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { ArrowLeft, LogIn, LogOut, Save, RefreshCw, Newspaper } from 'lucide-react';
 import { isSupabaseConfigured, supabase } from './lib/supabase.js';
+import { getISTDate, shiftISODate } from './lib/dateUtils.js';
 
-const todayIST = () => {
-  const p = new Intl.DateTimeFormat('en-CA', {
-    timeZone: 'Asia/Kolkata', year: 'numeric', month: '2-digit', day: '2-digit'
-  }).formatToParts(new Date());
-  const o = Object.fromEntries(p.map(x => [x.type, x.value]));
-  return `${o.year}-${o.month}-${o.day}`;
-};
+const todayIST = () => getISTDate();
 
 const blank = () => ({
   edition_date: todayIST(),
-  event_date: new Date(Date.now() - 86400000).toISOString().slice(0, 10),
+  event_date: shiftISODate(todayIST(), -1),
   category: 'national',
   headline: '',
   one_liner: '',
@@ -70,6 +65,9 @@ export default function CurrentAffairsAdmin({ onHome }) {
     supabase.auth.getSession().then(({data}) => {
       setSession(data.session);
       setChecking(false);
+    }).catch(() => {
+      setError('लॉगिन स्थिति जाँची नहीं जा सकी। इंटरनेट कनेक्शन जाँचें।');
+      setChecking(false);
     });
     const {data: listener} = supabase.auth.onAuthStateChange((_event, next) => {
       setSession(next);
@@ -82,27 +80,38 @@ export default function CurrentAffairsAdmin({ onHome }) {
   }, [session]);
 
   async function loadItems() {
+    if (!supabase) return;
     setError('');
     setBusy(true);
-    const {data, error: err} = await supabase
-      .from('current_affairs')
-      .select('id,edition_date,event_date,category,headline,one_liner,source_name,source_url,priority,status,created_at')
-      .order('edition_date', {ascending:false})
-      .order('created_at', {ascending:false})
-      .limit(100);
-    if (err) setError('खबरों की सूची नहीं खुली। एडमिन अनुमति और current_affairs RLS policy जाँचें। ' + err.message);
-    else setItems(data || []);
-    setBusy(false);
+    try {
+      const {data, error: err} = await supabase
+        .from('current_affairs')
+        .select('id,edition_date,event_date,category,headline,one_liner,source_name,source_url,priority,status,created_at,quiz_questions')
+        .order('edition_date', {ascending:false})
+        .order('created_at', {ascending:false})
+        .limit(100);
+      if (err) setError('खबरों की सूची नहीं खुली। एडमिन अनुमति और current_affairs RLS policy जाँचें।');
+      else setItems(data || []);
+    } catch {
+      setError('नेटवर्क समस्या के कारण खबरों की सूची लोड नहीं हो सकी।');
+    } finally {
+      setBusy(false);
+    }
   }
 
   async function login(e) {
     e.preventDefault();
     setBusy(true); setError('');
-    const {error: err} = await supabase.auth.signInWithPassword({
-      email: email.trim(), password
-    });
-    if (err) setError('लॉगिन विफल: ईमेल/पासवर्ड जाँचें। ' + err.message);
-    setBusy(false);
+    try {
+      const {error: err} = await supabase.auth.signInWithPassword({
+        email: email.trim(), password
+      });
+      if (err) setError('लॉगिन विफल: ईमेल/पासवर्ड जाँचें।');
+    } catch {
+      setError('नेटवर्क समस्या के कारण लॉगिन नहीं हो सका।');
+    } finally {
+      setBusy(false);
+    }
   }
 
   function update(key, value) {
@@ -112,7 +121,7 @@ export default function CurrentAffairsAdmin({ onHome }) {
   function editItem(item) {
     setForm({
       ...item,
-      quiz_text: '[]',
+      quiz_text: JSON.stringify(Array.isArray(item.quiz_questions) ? item.quiz_questions : [], null, 2),
       status: item.status || 'draft'
     });
     setNotice('एडिटिंग के लिए खबर भरी गई है। नीचे बदलाव करके सेव करें।');
@@ -123,9 +132,11 @@ export default function CurrentAffairsAdmin({ onHome }) {
     e.preventDefault();
     setError(''); setNotice('');
 
-    if (!form.headline.trim() || !form.one_liner.trim() ||
-        !form.source_name.trim() || !form.source_url.trim()) {
-      setError('हेडलाइन, वन-लाइनर, स्रोत का नाम और स्रोत लिंक भरना जरूरी है।');
+    if (form.headline.trim().length < 5 || form.headline.trim().length > 220 ||
+        form.one_liner.trim().length < 10 || form.one_liner.trim().length > 700 ||
+        form.source_name.trim().length < 2 || form.source_name.trim().length > 100 ||
+        !form.source_url.trim()) {
+      setError('हेडलाइन 5–220, वन-लाइनर 10–700 और स्रोत का नाम 2–100 अक्षरों में होना चाहिए।');
       return;
     }
     let source;
@@ -142,9 +153,12 @@ export default function CurrentAffairsAdmin({ onHome }) {
       quiz = JSON.parse(form.quiz_text || '[]');
       if (!Array.isArray(quiz)) throw new Error('क्विज़ JSON एक array होना चाहिए।');
       for (const q of quiz) {
-        if (typeof q.question !== 'string' || !Array.isArray(q.options) ||
-            q.options.length < 2 || !Number.isInteger(q.answer_index) ||
-            q.answer_index < 0 || q.answer_index >= q.options.length) {
+        if (typeof q.question !== 'string' || !q.question.trim() ||
+            !Array.isArray(q.options) || q.options.length < 2 ||
+            !q.options.every((option) => typeof option === 'string' && option.trim()) ||
+            !Number.isInteger(q.answer_index) || q.answer_index < 0 ||
+            q.answer_index >= q.options.length ||
+            (q.explanation !== undefined && typeof q.explanation !== 'string')) {
           throw new Error('हर प्रश्न में question, options और सही answer_index जरूरी हैं।');
         }
       }
@@ -154,36 +168,39 @@ export default function CurrentAffairsAdmin({ onHome }) {
     }
 
     setBusy(true);
-    const payload = {
-      edition_date: form.edition_date,
-      event_date: form.event_date,
-      category: form.category,
-      headline: form.headline.trim(),
-      one_liner: form.one_liner.trim(),
-      source_name: form.source_name.trim(),
-      source_url: source.href,
-      priority: Number(form.priority) || 100,
-      quiz_questions: quiz,
-      status,
-      published_at: status === 'published' ? new Date().toISOString() : null
-    };
+    try {
+      const payload = {
+        edition_date: form.edition_date,
+        event_date: form.event_date,
+        category: form.category,
+        headline: form.headline.trim(),
+        one_liner: form.one_liner.trim(),
+        source_name: form.source_name.trim(),
+        source_url: source.href,
+        priority: Number(form.priority) || 100,
+        quiz_questions: quiz,
+        status,
+        published_at: status === 'published' ? new Date().toISOString() : null
+      };
 
-    let result;
-    if (form.id) {
-      result = await supabase.from('current_affairs').update(payload).eq('id', form.id).select('id').single();
-    } else {
-      result = await supabase.from('current_affairs').insert(payload).select('id').single();
+      const result = form.id
+        ? await supabase.from('current_affairs').update(payload).eq('id', form.id).select('id').single()
+        : await supabase.from('current_affairs').insert(payload).select('id').single();
+
+      if (result.error) {
+        setError('सेव नहीं हुआ। एडमिन अनुमति और Supabase migration जाँचें।');
+      } else {
+        setNotice(status === 'published'
+          ? 'खबर प्रकाशित हो गई। सही एडिशन तारीख चुनने पर वेबसाइट पर दिखेगी।'
+          : 'खबर Draft में सेव हो गई।');
+        setForm(blank());
+        await loadItems();
+      }
+    } catch {
+      setError('नेटवर्क समस्या के कारण खबर सेव नहीं हो सकी।');
+    } finally {
+      setBusy(false);
     }
-    if (result.error) {
-      setError('सेव नहीं हुआ। आपका अकाउंट library_admins में अधिकृत होना चाहिए। विवरण: ' + result.error.message);
-    } else {
-      setNotice(status === 'published'
-        ? 'खबर प्रकाशित हो गई। सही एडिशन तारीख चुनने पर वेबसाइट पर दिखेगी।'
-        : 'खबर Draft में सेव हो गई।');
-      setForm(blank());
-      await loadItems();
-    }
-    setBusy(false);
   }
 
   async function removeItem(item) {
@@ -228,7 +245,7 @@ export default function CurrentAffairsAdmin({ onHome }) {
           <h2>{form.id ? 'खबर एडिट करें' : 'नई खबर जोड़ें'}</h2>
           <div className="ca-grid">
             <label>एडिशन की तारीख
-              <input type="date" value={form.edition_date} onChange={e=>update('edition_date',e.target.value)} required/>
+              <input type="date" value={form.edition_date} max={todayIST()} onChange={e=>update('edition_date',e.target.value)} required/>
             </label>
             <label>घटना की तारीख
               <input type="date" value={form.event_date} onChange={e=>update('event_date',e.target.value)} required/>
@@ -244,16 +261,16 @@ export default function CurrentAffairsAdmin({ onHome }) {
               <input type="number" value={form.priority} onChange={e=>update('priority',e.target.value)} min="1" max="9999"/>
             </label>
             <label className="ca-wide">हेडलाइन
-              <input value={form.headline} onChange={e=>update('headline',e.target.value)} maxLength="300" required placeholder="खबर का स्पष्ट शीर्षक"/>
+              <input value={form.headline} onChange={e=>update('headline',e.target.value)} minLength="5" maxLength="220" required placeholder="खबर का स्पष्ट शीर्षक"/>
             </label>
             <label className="ca-wide">हिंदी वन-लाइनर / परीक्षा उपयोगी तथ्य
-              <textarea value={form.one_liner} onChange={e=>update('one_liner',e.target.value)} maxLength="3000" required placeholder="क्या हुआ, क्यों महत्वपूर्ण है और परीक्षा के लिए मुख्य तथ्य…"/>
+              <textarea value={form.one_liner} onChange={e=>update('one_liner',e.target.value)} minLength="10" maxLength="700" required placeholder="क्या हुआ, क्यों महत्वपूर्ण है और परीक्षा के लिए मुख्य तथ्य…"/>
             </label>
             <label>स्रोत का नाम
-              <input value={form.source_name} onChange={e=>update('source_name',e.target.value)} required placeholder="जैसे PIB, RBI, राजस्थान सरकार"/>
+              <input value={form.source_name} onChange={e=>update('source_name',e.target.value)} minLength="2" maxLength="100" required placeholder="जैसे PIB, RBI, राजस्थान सरकार"/>
             </label>
             <label>स्रोत URL
-              <input type="url" value={form.source_url} onChange={e=>update('source_url',e.target.value)} required placeholder="https://…"/>
+              <input type="url" value={form.source_url} onChange={e=>update('source_url',e.target.value)} maxLength="2048" required placeholder="https://…"/>
             </label>
             <label className="ca-wide">क्विज़ प्रश्न (JSON array; नहीं हों तो [] रहने दें)
               <textarea value={form.quiz_text} onChange={e=>update('quiz_text',e.target.value)} spellCheck="false"/>

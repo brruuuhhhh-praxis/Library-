@@ -1,0 +1,364 @@
+#!/usr/bin/env python3
+"""Refresh Shri Shyam Library with a modern midnight-navy + royal-blue visual system.
+Run from ~/shri-shyam-library: python apply_theme_refresh.py
+Writes/replaces only src/theme-premium.css and adds its import to src/main.jsx if needed.
+Backs up touched files; never edits App.jsx, routing, or data logic.
+"""
+from __future__ import annotations
+import datetime as dt
+import re
+import shutil
+import sys
+from pathlib import Path
+
+CSS = r'''/* SHRI SHYAM LIBRARY — Modern premium theme refresh v2
+   Palette: midnight navy, royal blue, white, cool mist. No green/gold tint family. */
+:root {
+  --lux-night: #101828;
+  --lux-night-2: #17243b;
+  --lux-blue: #315efb;
+  --lux-blue-dark: #2448d8;
+  --lux-blue-light: #edf2ff;
+  --lux-cyan: #1fa8c9;
+  --lux-canvas: #f5f7fb;
+  --lux-paper: #ffffff;
+  --lux-ink: #172033;
+  --lux-muted: #68758b;
+  --lux-line: #e2e7f0;
+  --lux-shadow: 0 16px 42px rgba(22, 38, 72, .09);
+  --lux-shadow-blue: 0 10px 26px rgba(49, 94, 251, .22);
+}
+html { background: var(--lux-canvas); scroll-behavior: smooth; }
+body { background: var(--lux-canvas); color: var(--lux-ink); }
+button, a, input, select, textarea { -webkit-tap-highlight-color: transparent; }
+:where(a, button, input, select, textarea):focus-visible { outline: 3px solid rgba(49,94,251,.36); outline-offset: 3px; }
+
+/* HOME PAGE — precise, calm and consistent */
+.ss-home {
+  --ss-navy: var(--lux-night);
+  --ss-navy2: var(--lux-night-2);
+  --ss-ink: var(--lux-ink);
+  --ss-gold: var(--lux-blue);
+  --ss-goldlight: #9eb4ff;
+  --ss-cream: var(--lux-canvas);
+  --ss-paper: var(--lux-paper);
+  --ss-muted: var(--lux-muted);
+  --ss-line: var(--lux-line);
+  background: var(--lux-canvas);
+  color: var(--lux-ink);
+}
+.ss-navbar {
+  background: rgba(16,24,40,.97);
+  border-bottom: 1px solid rgba(255,255,255,.09);
+  box-shadow: 0 8px 28px rgba(8,18,37,.18);
+}
+.ss-brand-mark { color: #aebfff; border: 1px solid rgba(147,169,255,.55); background: rgba(49,94,251,.15); box-shadow: none; }
+.ss-brand-copy strong { color: #fff; }
+.ss-brand-copy small { color: #b5c0d4; }
+.ss-nav-links { color: #e2e8f5; }
+.ss-nav-links>a:not(.ss-nav-cta):hover, .ss-nav-links>a.active { color: #aebfff; }
+.ss-nav-links>a.active:after { background: var(--lux-blue); }
+.ss-hero { background: var(--lux-night); }
+.ss-hero-shade {
+  background: linear-gradient(90deg, rgba(12,20,36,.99) 0%, rgba(16,24,40,.95) 34%, rgba(16,24,40,.78) 56%, rgba(16,24,40,.25) 100%),
+              linear-gradient(0deg, rgba(12,20,36,.7), transparent 45%);
+}
+.ss-hero:before { background: linear-gradient(var(--lux-blue), transparent 85%); }
+.ss-eyebrow, .ss-hero-kicker { color: #b8c7ff; }
+.ss-eyebrow span, .ss-hero-bottomline i { background: var(--lux-blue); }
+.ss-hero h1 em, .ss-section h2 em, .ss-intro-copy h2 em, .ss-gallery-header h2 em, .ss-closing-cta h2 em { color: #aebfff; }
+.ss-hero-description { color: #d7dfec; }
+.ss-exam-pills span { border-color: rgba(255,255,255,.2); background: rgba(255,255,255,.075); }
+.ss-hero-note { border-color: rgba(145,165,255,.5); }
+.ss-hero-note svg, .ss-hero-note b { color: #b8c7ff; }
+.ss-capacity-wrap { background: var(--lux-canvas); }
+.ss-capacity-card { background: var(--lux-paper); border: 1px solid var(--lux-line); border-top: 3px solid var(--lux-blue); box-shadow: var(--lux-shadow); }
+.ss-capacity-intro>span:nth-child(2), .ss-capacity-item>strong { color: var(--lux-night); }
+.ss-live-dot { background: #16a779; box-shadow: 0 0 0 4px rgba(22,167,121,.12); }
+.ss-capacity-item>svg { color: var(--lux-blue); }
+.ss-capacity-link { color: var(--lux-blue-dark) !important; }
+.ss-facilities-section { background: linear-gradient(180deg, #f5f7fb, #eef2f9); }
+.ss-overline { color: #315efb; }
+.ss-section h2, .ss-intro-copy h2, .ss-gallery-header h2, .ss-closing-cta h2 { color: var(--lux-night); }
+.ss-section-heading p, .ss-intro-copy>p { color: #627087; }
+.ss-text-link { color: var(--lux-blue-dark) !important; border-bottom-color: rgba(49,94,251,.35); }
+.ss-facility-feature { background: radial-gradient(circle at 90% 10%, #344d82 0, transparent 34%), linear-gradient(145deg, #17243b, #0e1728 84%); box-shadow: 0 18px 42px rgba(13,25,46,.18); }
+.ss-feature-top span, .ss-feature-top svg { color: #b9c8ff; }
+.ss-feature-icon { border-color: rgba(150,171,255,.55); color: #c4d0ff; background: rgba(49,94,251,.15); }
+/* Replace the old rainbow of pastel cards with one curated white card family. */
+.ss-home .ss-facility-card[class*="tint-"] {
+  background: linear-gradient(150deg, #fff 0%, #f8faff 100%) !important;
+  color: #1d2b45 !important;
+  border: 1px solid #e1e7f2 !important;
+  border-radius: 18px;
+  box-shadow: 0 8px 24px rgba(24,40,75,.045);
+}
+.ss-home .ss-facility-card[class*="tint-"] .ss-facility-card-top svg { background: #edf2ff; color: var(--lux-blue); }
+.ss-facility-card p { color: #718097 !important; }
+.ss-facility-footnote { border-top-color: var(--lux-line); color: #6c7890; }
+.ss-facility-footnote>svg { color: #169b72; }
+.ss-facility-footnote a { color: var(--lux-blue-dark) !important; }
+.ss-intro-section { background: #fff; }
+.ss-intro-photo-wrap:before { border-color: var(--lux-blue); }
+.ss-photo-label { background: #fff; border-color: var(--lux-line); box-shadow: var(--lux-shadow); }
+.ss-label-mark { background: var(--lux-night); color: #fff; }
+.ss-photo-label b { color: var(--lux-night); }
+.ss-gold-rule { background: var(--lux-blue); }
+.ss-gold-rule:after { background: var(--lux-night); }
+.ss-intro-signature { color: #315efb; }
+.ss-sign-line { background: #315efb; }
+.ss-gallery-section { background: #101828; }
+.ss-gallery-section .ss-overline { color: #9eb4ff; }
+.ss-round-link { border-color: rgba(158,180,255,.55); color: #c3d0ff !important; }
+.ss-gallery-item { background: #1b2a44; }
+.ss-gallery-overlay>span:first-child, .ss-gallery-arrow { color: #c3d0ff; }
+.ss-gallery-item:hover .ss-gallery-arrow { background: var(--lux-blue); color: #fff; }
+.ss-gallery-caption svg { color: #9eb4ff; }
+.ss-closing-cta { background: radial-gradient(circle at 84% 20%, #263d6d 0, transparent 37%), linear-gradient(115deg, #101828, #1b2b48); }
+.ss-closing-cta .ss-overline { color: #aebfff; }
+.ss-closing-cta h2 { color: #fff; }
+.ss-closing-cta h2 em { color: #aebfff; }
+.ss-closing-cta p { color: #d0d8e7; }
+.ss-cta-orbit { border-color: rgba(158,180,255,.16); }
+.ss-footer { background: #0b1220; border-top-color: rgba(158,180,255,.2); }
+.ss-footer-brand .ss-brand-copy strong { color: #fff; }
+.ss-footer>p { color: #d3dbea; }
+.ss-footer>nav a:hover { color: #aebfff; }
+
+/* Buttons — separate primary/secondary hierarchy, not flat generic pills. */
+.ss-home .ss-button,
+.ss-home .ss-nav-cta,
+.ss-home .ss-ca-preview-cta,
+.ca-page .ca-primary-button,
+.booking-page .booking-submit {
+  appearance: none;
+  position: relative;
+  isolation: isolate;
+  min-height: 50px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 11px;
+  padding: 0 22px;
+  border: 1px solid rgba(255,255,255,.24) !important;
+  border-radius: 13px !important;
+  background: linear-gradient(135deg, #416cff 0%, #315efb 52%, #2448d8 100%) !important;
+  color: #fff !important;
+  font-family: 'DM Sans','Noto Sans Devanagari',sans-serif;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: .005em;
+  line-height: 1.2;
+  text-decoration: none;
+  box-shadow: 0 9px 20px rgba(49,94,251,.23), inset 0 1px 0 rgba(255,255,255,.25);
+  transition: transform .18s ease, box-shadow .18s ease, background .18s ease, filter .18s ease;
+  cursor: pointer;
+}
+.ss-home .ss-button svg,
+.ss-home .ss-nav-cta svg,
+.ss-home .ss-ca-preview-cta svg,
+.ca-page .ca-primary-button svg,
+.booking-page .booking-submit svg { flex-shrink: 0; }
+.ss-home .ss-button:hover,
+.ss-home .ss-nav-cta:hover,
+.ss-home .ss-ca-preview-cta:hover,
+.ca-page .ca-primary-button:hover,
+.booking-page .booking-submit:hover {
+  transform: translateY(-2px);
+  background: linear-gradient(135deg, #527aff 0%, #315efb 52%, #2448d8 100%) !important;
+  box-shadow: 0 14px 28px rgba(49,94,251,.3), inset 0 1px 0 rgba(255,255,255,.3);
+  filter: none;
+}
+.ss-home .ss-button:active, .ss-home .ss-nav-cta:active, .ss-home .ss-ca-preview-cta:active,
+.ca-page .ca-primary-button:active, .booking-page .booking-submit:active { transform: translateY(0) scale(.985); box-shadow: 0 5px 12px rgba(49,94,251,.2); }
+.ss-home .ss-nav-cta { min-height: 44px; padding: 0 17px; border-radius: 11px !important; font-size: 12px; white-space: nowrap; }
+.ss-home .ss-button-outline {
+  background: rgba(255,255,255,.045) !important;
+  border: 1px solid rgba(255,255,255,.48) !important;
+  color: #fff !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.08);
+}
+.ss-home .ss-button-outline:hover { background: rgba(255,255,255,.12) !important; border-color: #b9c8ff !important; box-shadow: 0 10px 20px rgba(0,0,0,.15); }
+.ss-home .ss-button-dark { background: linear-gradient(135deg,#17243b,#101828) !important; border-color: rgba(49,94,251,.75) !important; }
+.ss-home .ss-button-dark:hover { background: linear-gradient(135deg,#25395f,#101828) !important; }
+.ss-home .ss-nav-cta { color: #fff !important; }
+.ss-home .ss-ca-preview-cta { white-space: nowrap; }
+.ss-home .ss-ca-preview {
+  background: radial-gradient(circle at 88% 0, #293f77 0, transparent 37%), linear-gradient(120deg, #17243b, #101828) !important;
+  border: 1px solid rgba(158,180,255,.22);
+  box-shadow: 0 18px 42px rgba(16,24,40,.16);
+}
+.ss-home .ss-ca-preview-kicker { color: #b9c8ff; }
+.ss-home .ss-ca-preview h2 em { color: #b9c8ff; }
+.ss-home .ss-ca-preview-tags span { border-color: rgba(255,255,255,.2); color: #e3eaff; }
+
+/* Current Affairs */
+.ca-page {
+  --ca-ink: var(--lux-ink);
+  --ca-muted: var(--lux-muted);
+  --ca-gold: var(--lux-blue);
+  --ca-gold-dark: var(--lux-blue-dark);
+  --ca-paper: var(--lux-canvas);
+  --ca-line: var(--lux-line);
+  background: var(--lux-canvas);
+  color: var(--lux-ink);
+}
+.ca-topbar { border-bottom-color: var(--lux-line); }
+.ca-brand-mark { background: var(--lux-blue); color: #fff; border-radius: 13px; }
+.ca-brand b { color: var(--lux-night); }
+.ca-brand small { color: #77839a; }
+.ca-back-link, .ca-footer a { color: #3155cf; }
+.ca-back-link:hover, .ca-footer a:hover { color: #1938aa; }
+.ca-kicker, .ca-section-tag { color: #3155cf; }
+.ca-kicker span { background: var(--lux-blue); }
+.ca-hero h1 { color: var(--lux-night); }
+.ca-hero h1 em { color: var(--lux-blue); }
+.ca-hero-copy>p { color: #64728a; }
+.ca-trust-row span { color: #50617b; }
+.ca-trust-row svg { color: var(--lux-blue); }
+.ca-hero-stamp { background: linear-gradient(145deg,#fff,#f2f5fc); border-color: #dce4f3; box-shadow: var(--lux-shadow); }
+.ca-hero-stamp svg, .ca-hero-stamp>span { color: var(--lux-blue); }
+.ca-hero-stamp b { color: var(--lux-night); }
+.ca-edition-bar, .ca-story-card, .ca-category-tabs button, .ca-search, .ca-status { border-color: var(--lux-line); background: #fff; }
+.ca-edition-bar input, .ca-search { background: #fff; border-color: #dce3ee; }
+.ca-category-tabs button { color: #56647b; box-shadow: 0 3px 12px rgba(22,38,72,.025); }
+.ca-category-tabs button:hover { border-color: #9db1ff; background: #f8faff; }
+.ca-category-tabs button.is-active { background: linear-gradient(135deg,#315efb,#2448d8) !important; color: #fff !important; border-color: #315efb !important; box-shadow: var(--lux-shadow-blue); }
+.ca-list-heading h2, .ca-quiz-intro h2 { color: var(--lux-night); }
+.ca-search { color: #7b879d; }
+.ca-search input { color: var(--lux-ink); }
+.ca-status { color: #68758b; border-color: #d7dfed; background: rgba(255,255,255,.75); }
+.ca-status-error { border-color: #f0c4c4; color: #a13545; }
+.ca-empty-icon { background: var(--lux-blue-light); color: var(--lux-blue); }
+.ca-story-card { border-color: var(--lux-line); box-shadow: 0 4px 16px rgba(22,38,72,.025); }
+.ca-story-card:hover { border-color: #aebfff; box-shadow: 0 11px 26px rgba(36,72,216,.08); }
+.ca-story-number { color: var(--lux-blue); border-right-color: var(--lux-line); }
+.ca-story-meta span { background: #edf2ff; color: #3155cf; }
+.ca-story-card h3 { color: #1b2840; }
+.ca-story-card p { color: #5f6c83; }
+.ca-source-link { color: #3155cf !important; }
+.ca-quiz-panel { background: linear-gradient(145deg,#17243b,#101828) !important; border: 1px solid rgba(158,180,255,.25) !important; box-shadow: 0 18px 42px rgba(16,24,40,.16); }
+.ca-quiz-panel .ca-quiz-intro h2 { color: #fff; }
+.ca-quiz-panel .ca-quiz-intro p, .ca-quiz-progress, .ca-quiz-footnote { color: #d0d9e9; }
+.ca-options button { border-color: rgba(255,255,255,.19); background: rgba(255,255,255,.06); color: #f5f7ff; border-radius: 12px; transition: border-color .18s, background .18s, transform .18s; }
+.ca-options button:hover:not(:disabled) { border-color: #aebfff; background: rgba(49,94,251,.18); transform: translateY(-1px); }
+.ca-options button>span { background: rgba(49,94,251,.23); color: #c8d4ff; }
+.ca-options button.is-selected { border-color: #aebfff; background: rgba(49,94,251,.28); }
+.ca-options button.is-correct { border-color: #55c99c; background: rgba(26,156,110,.18); }
+.ca-options button.is-wrong { border-color: #ff9a9a; background: rgba(214,70,90,.18); }
+.ca-explanation { border-left-color: #7f9aff; background: rgba(255,255,255,.08); }
+.ca-explanation b { color: #c7d2ff; }
+.ca-explanation p { color: #e0e7f3; }
+.ca-explanation a { color: #b9c8ff; }
+.ca-primary-button { min-height: 47px !important; }
+.ca-footer { border-top-color: var(--lux-line); }
+.ca-footer span { color: #77839a; }
+
+/* Registration and admin */
+.booking-page {
+  --bp-ink: var(--lux-ink);
+  --bp-navy: var(--lux-night);
+  --bp-teal: var(--lux-night-2);
+  --bp-gold: var(--lux-blue);
+  --bp-goldlight: #b9c8ff;
+  --bp-bg: var(--lux-canvas);
+  --bp-white: #fff;
+  --bp-muted: var(--lux-muted);
+  --bp-line: var(--lux-line);
+  --bp-green: #13845d;
+  background: var(--lux-canvas);
+  color: var(--lux-ink);
+}
+.booking-topbar { background: var(--lux-night); border-bottom-color: rgba(158,180,255,.2); }
+.booking-brand-icon { border-color: rgba(158,180,255,.5); color: #b9c8ff; }
+.booking-brand strong { color: #fff; }
+.booking-brand small { color: #b5c0d4; }
+.booking-back, .booking-admin-link { color: #e0e7f5; }
+.booking-back:hover, .booking-admin-link:hover { color: #b9c8ff; }
+.booking-hero { background: radial-gradient(ellipse at 50% -20%, #2a4277 0%, transparent 59%), linear-gradient(135deg, #101828, #1d2d4b); }
+.booking-kicker { color: #b9c8ff; }
+.booking-hero h1 { color: #fff; }
+.booking-hero h1 em { color: #b9c8ff; }
+.booking-hero>p { color: #d2dbed; }
+.booking-stats { border-color: rgba(158,180,255,.25); background: rgba(255,255,255,.055); }
+.booking-stats strong { color: #c8d4ff; }
+.booking-stats span { color: #d7dfef; }
+.booking-form, .admin-login, .admin-summary article, .admin-panel, .admin-record { background: #fff; border-color: var(--lux-line); }
+.booking-form { box-shadow: var(--lux-shadow); }
+.booking-form h2, .booking-seat-head h2 { color: var(--lux-night); }
+.booking-fields label, .admin-login label { color: #34415a; }
+.booking-fields input, .booking-fields textarea, .booking-fields select, .admin-login input { background: #fbfcff; border-color: #dce3ef; color: var(--lux-ink); }
+.booking-fields input:focus, .booking-fields textarea:focus, .booking-fields select:focus, .admin-login input:focus { border-color: var(--lux-blue); box-shadow: 0 0 0 3px rgba(49,94,251,.12); }
+.booking-id-note { background: #eef3ff; border-color: #d8e2ff; color: #263c78; }
+.booking-id-note>svg { color: var(--lux-blue); }
+.booking-id-note p { color: #58698e; }
+.booking-seat.is-available { background: #f1f8f4; border-color: #d1e8da; color: #14764f; }
+.booking-seat.is-booked { background: #f0f2f6; border-color: #e1e5ed; color: #8690a1; }
+.booking-seat.is-selected { background: linear-gradient(135deg,#315efb,#2448d8); border-color: #315efb; color: #fff; box-shadow: 0 0 0 3px rgba(49,94,251,.17); }
+.booking-selected-seat, .admin-summary strong { color: var(--lux-blue-dark); }
+.booking-submit { min-height: 51px !important; }
+.booking-print { border-color: #dce3ef; background: #fff; color: #293956; border-radius: 12px; transition: all .18s ease; }
+.booking-print:hover { border-color: #aebfff; background: #f5f7ff; color: #2448d8; transform: translateY(-2px); box-shadow: 0 9px 20px rgba(49,94,251,.09); }
+.booking-footer { border-top-color: var(--lux-line); color: #738098; }
+.booking-footer button { color: #3155cf; }
+.admin-login { box-shadow: var(--lux-shadow); }
+.admin-lock { background: #edf2ff; color: var(--lux-blue); }
+.admin-toolbar h2, .admin-panel h3, .admin-record-main strong { color: var(--lux-night); }
+.admin-summary article { box-shadow: 0 5px 18px rgba(22,38,72,.035); }
+.admin-seat.is-available { background: #f1f8f4; color: #14764f; border-color: #d1e8da; }
+.admin-seat.is-booked { background: #f1f2f6; color: #94656b; border-color: #e3e5ec; }
+.admin-status { background: #fff3d9; color: #8b6119 !important; }
+.admin-status.active { background: #e4f6ed; color: #146c48 !important; }
+.admin-status.cancelled { background: #fff0ef; color: #a13545 !important; }
+
+/* Mobile: full-width CTAs without oversized padding */
+@media (max-width: 760px) {
+  .ss-nav-links { background: #101828; border-color: rgba(158,180,255,.24); }
+  .ss-capacity-card, .booking-form, .admin-login, .admin-panel { border-radius: 16px; }
+  .ss-home .ss-button, .ss-home .ss-ca-preview-cta, .ca-page .ca-primary-button, .booking-page .booking-submit { min-height: 49px; }
+  .ss-home .ss-hero-actions { align-items: stretch; }
+  .ss-home .ss-hero-actions .ss-button { flex: 1 1 auto; }
+  .ss-home .ss-ca-preview-cta { width: 100%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; }
+}
+'''
+
+def main() -> int:
+    root = Path.cwd()
+    src = root / 'src'
+    main_path = src / 'main.jsx'
+    app_path = src / 'App.jsx'
+    css_path = src / 'theme-premium.css'
+    if not main_path.is_file() or not app_path.is_file():
+        print('ERROR: Run from ~/shri-shyam-library (project root). No files changed.')
+        return 2
+    stamp = dt.datetime.now().strftime('%Y%m%d-%H%M%S')
+    backup_dir = Path.home() / '.shri-shyam-library-backups' / f'theme-refresh-{stamp}'
+    backup_dir.mkdir(parents=True, exist_ok=True)
+    shutil.copy2(main_path, backup_dir / 'main.jsx')
+    if css_path.exists():
+        shutil.copy2(css_path, backup_dir / 'theme-premium.css')
+    main_text = main_path.read_text(encoding='utf-8')
+    if "theme-premium.css" not in main_text:
+        marker = re.search(r'(?m)^createRoot\(', main_text)
+        if not marker:
+            print('ERROR: Could not find createRoot() in src/main.jsx. No files changed.')
+            return 3
+        main_text = main_text[:marker.start()] + "import './theme-premium.css';\n\n" + main_text[marker.start():]
+    try:
+        css_path.write_text(CSS, encoding='utf-8')
+        main_path.write_text(main_text, encoding='utf-8')
+    except Exception as exc:
+        print(f'ERROR writing theme: {exc}. Backup: {backup_dir}')
+        return 4
+    print('SUCCESS: refreshed the theme with midnight navy + royal blue + cool white.')
+    print('Updated only src/theme-premium.css and (if needed) the import in src/main.jsx.')
+    print('src/App.jsx, pages, routes and database logic were left untouched.')
+    print(f'Backup created at: {backup_dir}')
+    print('Next run: npm run build')
+    return 0
+
+if __name__ == '__main__':
+    sys.exit(main())

@@ -1,0 +1,1 @@
+Shri Library liquid/fire feature backgrounds + aurora footer patch. Run from ~/shri-shyam-library. Extract ZIP then python apply_liquid_aurora_reference.py. Changes only Home.css; script backs it up first. Build with npm run build and git diff --check before any commit.

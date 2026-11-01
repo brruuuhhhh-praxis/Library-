@@ -20,7 +20,9 @@ export default function Admin({ onHome, onRegister }) {
 
   useEffect(() => {
     if (!supabase) { setChecking(false); return; }
-    supabase.auth.getSession().then(({ data }) => { setSession(data.session); setChecking(false); });
+    supabase.auth.getSession()
+      .then(({ data }) => { setSession(data.session); setChecking(false); })
+      .catch(() => { setError('लॉगिन स्थिति जाँची नहीं जा सकी। इंटरनेट कनेक्शन जाँचें।'); setChecking(false); });
     const { data: listener } = supabase.auth.onAuthStateChange((_event, nextSession) => setSession(nextSession));
     return () => listener.subscription.unsubscribe();
   }, []);
@@ -29,38 +31,66 @@ export default function Admin({ onHome, onRegister }) {
   async function loadData() {
     if (!supabase) return;
     setLoading(true); setError('');
-    const [seatRes, regRes] = await Promise.all([
-      supabase.from('library_seats').select('seat_no,status').order('seat_no'),
-      supabase.from('library_registrations').select('id,full_name,father_name,date_of_birth,mobile,alternate_mobile,address,emergency_contact,id_type,joining_date,seat_no,status,created_at').order('created_at', { ascending: false }).limit(500)
-    ]);
-    if (seatRes.error || regRes.error) setError('डेटा नहीं खुला। सुनिश्चित करें कि आपने अपना Supabase यूज़र library_admins में जोड़ा है और schema.sql लागू है।');
-    else { setSeats(seatRes.data || []); setRegistrations(regRes.data || []); }
-    setLoading(false);
+    try {
+      const [seatRes, regRes] = await Promise.all([
+        supabase.from('library_seats').select('seat_no,status').order('seat_no'),
+        supabase.from('library_registrations').select('id,full_name,father_name,date_of_birth,mobile,alternate_mobile,address,emergency_contact,id_type,joining_date,seat_no,status,created_at').order('created_at', { ascending: false }).limit(500)
+      ]);
+      if (seatRes.error || regRes.error) {
+        setSeats([]);
+        setRegistrations([]);
+        setError('डेटा नहीं खुला। एडमिन अनुमति और Supabase schema/policies जाँचें।');
+      } else {
+        setSeats(seatRes.data || []);
+        setRegistrations(regRes.data || []);
+      }
+    } catch {
+      setSeats([]);
+      setRegistrations([]);
+      setError('नेटवर्क समस्या के कारण एडमिन डेटा लोड नहीं हो सका।');
+    } finally {
+      setLoading(false);
+    }
   }
 
   async function login(e) {
     e.preventDefault(); setLoginBusy(true); setError('');
-    const { error: authError } = await supabase.auth.signInWithPassword({ email: email.trim(), password });
-    setLoginBusy(false);
-    if (authError) setError('लॉगिन नहीं हुआ। ईमेल/पासवर्ड जाँचें और पुष्टि करें कि यह यूज़र एडमिन के रूप में अनुमति-प्राप्त है।');
+    try {
+      const { error: authError } = await supabase.auth.signInWithPassword({ email: email.trim(), password });
+      if (authError) setError('लॉगिन नहीं हुआ। ईमेल/पासवर्ड जाँचें और पुष्टि करें कि यह यूज़र एडमिन के रूप में अनुमति-प्राप्त है।');
+    } catch {
+      setError('नेटवर्क समस्या के कारण लॉगिन नहीं हो सका।');
+    } finally {
+      setLoginBusy(false);
+    }
   }
 
   async function changeSeat(seat) {
     if (!supabase) return;
     setError('');
-    if (seat.status === 'booked') {
-      const ok = window.confirm(`सीट ${seat.seat_no} को खाली करने पर इस सीट का मौजूदा pending/active रजिस्ट्रेशन cancelled हो जाएगा। जारी रखें?`);
+    const nextStatus = seat.status === 'booked' ? 'available' : 'booked';
+    if (nextStatus === 'available') {
+      const ok = window.confirm(`सीट ${seat.seat_no} खाली करने पर इसका pending/active रजिस्ट्रेशन cancelled हो जाएगा। जारी रखें?`);
       if (!ok) return;
-      const { error: cancelError } = await supabase.from('library_registrations').update({ status: 'cancelled' }).eq('seat_no', seat.seat_no).in('status', ['pending','active']);
-      if (cancelError) { setError('रजिस्ट्रेशन अपडेट नहीं हुआ। एडमिन अनुमति जाँचें।'); return; }
-      const { error: seatError } = await supabase.from('library_seats').update({ status: 'available' }).eq('seat_no', seat.seat_no);
-      if (seatError) { setError('सीट का स्टेटस अपडेट नहीं हुआ।'); return; }
-    } else {
-      const { error: seatError } = await supabase.from('library_seats').update({ status: 'booked' }).eq('seat_no', seat.seat_no);
-      if (seatError) { setError('सीट का स्टेटस अपडेट नहीं हुआ।'); return; }
     }
-    await loadData();
+    setLoading(true);
+    try {
+      const { error: updateError } = await supabase.rpc('admin_set_library_seat_status', {
+        p_seat_no: seat.seat_no,
+        p_status: nextStatus,
+      });
+      if (updateError) {
+        setError('सीट अपडेट नहीं हुई। Supabase में नवीनतम atomic-seat migration चलाएँ और एडमिन अनुमति जाँचें।');
+        return;
+      }
+      await loadData();
+    } catch {
+      setError('नेटवर्क समस्या के कारण सीट अपडेट नहीं हो सकी। कृपया फिर प्रयास करें।');
+    } finally {
+      setLoading(false);
+    }
   }
+
 
   const filtered = useMemo(() => {
     const q = query.toLowerCase().trim();
@@ -75,7 +105,7 @@ export default function Admin({ onHome, onRegister }) {
     {!isSupabaseConfigured ? <div className="booking-config-note"><strong>Supabase सेटअप आवश्यक</strong><p>पहले Supabase प्रोजेक्ट बनाकर GitHub Actions secrets सेट करें। इस एडमिन पैनल को लोकल स्टोरेज से चलाना सुरक्षित नहीं होगा।</p></div> : !session ? <form className="admin-login" onSubmit={login}><span className="admin-lock"><ShieldCheck size={28}/></span><h2>एडमिन लॉगिन</h2><p>यह क्षेत्र केवल अधिकृत लाइब्रेरी एडमिन के लिए है।</p><label>ईमेल<input type="email" value={email} onChange={e=>setEmail(e.target.value)} autoComplete="username" required/></label><label>पासवर्ड<input type="password" value={password} onChange={e=>setPassword(e.target.value)} autoComplete="current-password" required/></label>{error && <div className="booking-error">{error}</div>}<button className="booking-submit" type="submit" disabled={loginBusy}>{loginBusy ? 'लॉगिन हो रहा है…' : 'सुरक्षित लॉगिन'}</button></form> : <section className="admin-dashboard">
       <div className="admin-toolbar"><div><h2>डैशबोर्ड</h2><p>रिकॉर्ड केवल आपके अधिकृत एडमिन लॉगिन से दिखाई देते हैं।</p></div><div className="admin-toolbar-actions"><button className="booking-print" type="button" onClick={loadData}><RefreshCw size={16}/> रिफ्रेश</button><button className="booking-print" type="button" onClick={()=>supabase.auth.signOut()}><LogOut size={16}/> लॉगआउट</button></div></div>
       {error && <div className="booking-error">{error}</div>}
-      <div className="admin-summary"><article><span>कुल सीटें</span><strong>{seats.length || 50}</strong></article><article><span>खाली सीटें</span><strong>{seats.filter(s=>s.status==='available').length}</strong></article><article><span>बुक्ड सीटें</span><strong>{seats.filter(s=>s.status==='booked').length}</strong></article><article><span>रजिस्ट्रेशन रिकॉर्ड</span><strong>{registrations.length}</strong></article></div>
+      <div className="admin-summary"><article><span>कुल सीटें</span><strong>{seats.length}</strong></article><article><span>खाली सीटें</span><strong>{seats.filter(s=>s.status==='available').length}</strong></article><article><span>बुक्ड सीटें</span><strong>{seats.filter(s=>s.status==='booked').length}</strong></article><article><span>रजिस्ट्रेशन रिकॉर्ड</span><strong>{registrations.length}</strong></article></div>
       <div className="admin-panel"><div className="admin-panel-head"><div><h3>सीट मैनेजमेंट</h3><p>बुक्ड सीट को खाली करने पर उसका active/pending रजिस्ट्रेशन cancelled होगा।</p></div></div><div className="admin-seat-grid">{seats.map(seat=><button key={seat.seat_no} type="button" onClick={()=>changeSeat(seat)} className={`admin-seat ${seat.status==='available'?'is-available':'is-booked'}`} disabled={loading}><strong>{String(seat.seat_no).padStart(2,'0')}</strong><small>{seat.status==='available'?'खाली · बुक करें':'बुक्ड · खाली करें'}</small></button>)}</div></div>
       <div className="admin-panel"><div className="admin-panel-head"><div><h3>रजिस्ट्रेशन रिकॉर्ड</h3><p>रिकॉर्ड चुनकर आवेदन को प्रिंट किया जा सकता है।</p></div><label className="admin-search"><Search size={17}/><input value={query} onChange={e=>setQuery(e.target.value)} placeholder="नाम, मोबाइल या सीट खोजें"/></label></div>
         {loading ? <div className="booking-empty-state">रिकॉर्ड लोड हो रहे हैं…</div> : filtered.length===0 ? <div className="booking-empty-state">कोई रिकॉर्ड नहीं मिला।</div> : <div className="admin-record-list">{filtered.map(r=><article className="admin-record" key={r.id}><div className="admin-record-main"><div><strong>{r.full_name}</strong><span>पिता/अभिभावक: {r.father_name}</span><span>मोबाइल: {r.mobile}</span><span>सीट #{r.seat_no} · {r.status==='active'?'सक्रिय':r.status==='cancelled'?'रद्द':'लंबित'}</span></div><span className={`admin-status ${r.status}`}>{r.status==='active'?'ACTIVE':r.status==='cancelled'?'CANCELLED':'PENDING'}</span></div><details><summary>पूरा विवरण देखें</summary><div className="admin-record-details"><span>जन्मतिथि: {r.date_of_birth || '—'}</span><span>वैकल्पिक मोबाइल: {r.alternate_mobile || '—'}</span><span>आपातकालीन संपर्क: {r.emergency_contact || '—'}</span><span>पता: {r.address}</span><span>पहचान-पत्र प्रकार: {r.id_type}</span><span>जॉइनिंग तारीख: {r.joining_date || '—'}</span><span>आवेदन: {new Date(r.created_at).toLocaleString('en-IN')}</span></div></details><button className="booking-print admin-record-print" type="button" onClick={()=>{setPrintRecord(r);setTimeout(()=>window.print(),150);}}>आवेदन प्रिंट करें</button></article>)}</div>}
