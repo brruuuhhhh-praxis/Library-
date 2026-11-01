@@ -25,14 +25,33 @@ TIMEOUT = 25
 USER_AGENT = "ShriShyamLibrary-CurrentAffairsBot/1.0 (+https://github.com/brruuuhhhh-praxis/Library-)"
 GEMINI_MODEL = os.getenv("GEMINI_MODEL", "gemini-3.6-flash")
 
-# Reliable, public feeds. Rajasthan's west/east PIB regional feeds are included
-# alongside the official Rajasthan DIPR site scraper below.
+# RSS discovery sources. Every story is date-filtered, deduplicated and AI-screened.
+# Official sources are listed first; publisher feeds add breadth but are not treated as
+# proof by themselves. The published entry always keeps the original article URL.
 FEEDS = [
+    # National: official policy, central-bank and reputable national reporting.
     {"url": "https://www.pib.gov.in/RssMain.aspx?ModId=6&Lang=2&Regid=3", "name": "PIB / भारत सरकार", "category": "national"},
+    {"url": "https://www.rbi.org.in/pressreleases_rss.xml", "name": "भारतीय रिज़र्व बैंक (RBI)", "category": "national"},
+    {"url": "https://www.thehindu.com/news/national/feeder/default.rss", "name": "The Hindu / National", "category": "national"},
+    {"url": "https://indianexpress.com/section/india/feed/", "name": "The Indian Express / India", "category": "national"},
+    {"url": "https://indianexpress.com/section/explained/feed/", "name": "The Indian Express / Explained", "category": "national"},
+    {"url": "https://www.hindustantimes.com/feeds/rss/india-news/rssfeed.xml", "name": "Hindustan Times / India", "category": "national"},
+    {"url": "https://www.business-standard.com/rss/latest.rss", "name": "Business Standard", "category": "national"},
+
+    # International: multilateral and established global-news desks.
     {"url": "https://news.un.org/feed/subscribe/en/news/all/rss.xml", "name": "UN News", "category": "international"},
     {"url": "https://feeds.bbci.co.uk/news/world/rss.xml", "name": "BBC News World", "category": "international"},
+    {"url": "https://www.thehindu.com/news/international/feeder/default.rss", "name": "The Hindu / International", "category": "international"},
+    {"url": "https://indianexpress.com/section/world/feed/", "name": "The Indian Express / World", "category": "international"},
+    {"url": "https://www.aljazeera.com/xml/rss/all.xml", "name": "Al Jazeera", "category": "international"},
+
+    # Rajasthan: government releases plus state/city reporting.
     {"url": "https://www.pib.gov.in/RssMain.aspx?ModId=6&Lang=2&Regid=17", "name": "PIB पश्चिमी राजस्थान क्षेत्र", "category": "rajasthan"},
     {"url": "https://www.pib.gov.in/RssMain.aspx?ModId=6&Lang=2&Regid=18", "name": "PIB पूर्वी राजस्थान क्षेत्र", "category": "rajasthan"},
+    {"url": "https://api.livehindustan.com/feeds/rss/rajasthan/rssfeed.xml", "name": "हिन्दुस्तान / राजस्थान", "category": "rajasthan"},
+    {"url": "https://api.livehindustan.com/feeds/rss/rajasthan/jaipur/rssfeed.xml", "name": "हिन्दुस्तान / जयपुर", "category": "rajasthan"},
+    {"url": "https://api.livehindustan.com/feeds/rss/rajasthan/jodhpur/rssfeed.xml", "name": "हिन्दुस्तान / जोधपुर", "category": "rajasthan"},
+    {"url": "https://www.hindustantimes.com/feeds/rss/cities/jaipur-news/rssfeed.xml", "name": "Hindustan Times / Jaipur", "category": "rajasthan"},
 ]
 
 
@@ -302,7 +321,7 @@ def generate_stories(candidates: list[dict], api_key: str) -> list[dict]:
     prompt = f'''तुम "श्री श्याम लाइब्रेरी" के UPSC, RPSC और RSSB करंट-अफेयर्स संपादक हो। केवल नीचे दिए गए मूल स्रोतों के आधार पर परीक्षा-उपयोगी, स्पष्ट हिंदी सामग्री बनाओ।
 
 संपादकीय कसौटी:
-- कुल अधिकतम 30 खबरें चुनो। लक्ष्य: national अधिकतम 15, rajasthan अधिकतम 10 और international अधिकतम 5। ये अधिकतम/लक्ष्य हैं, अनिवार्य कोटा नहीं। किसी श्रेणी में योग्य खबरें कम हों तो कम ही दो; संख्या पूरी करने के लिए खबर मत गढ़ना।
+- दैनिक प्रकाशन लक्ष्य 30 खबरें है: national 15, rajasthan 10 और international 5। स्रोतों में पर्याप्त, अलग और सत्यापन-योग्य खबरें उपलब्ध हों तो हर श्रेणी का पूरा quota भरो। कुल/श्रेणी सीमा से अधिक खबरें न चुनो। किसी श्रेणी में योग्य खबरें कम हों तो कमी रहने दो—खबर, आँकड़ा या MCQ कभी मत गढ़ो; log में quota shortfall दर्ज होगा।
 - राष्ट्रीय: संविधान/राजव्यवस्था, कानून/न्यायपालिका, अर्थव्यवस्था/बैंकिंग/मुद्रास्फीति/रोजगार, सरकारी नीति/योजना, बजट/रिपोर्ट/आँकड़े, पर्यावरण/आपदा, विज्ञान/तकनीक/अंतरिक्ष, रक्षा/सुरक्षा, स्वास्थ्य/शिक्षा/प्रशासन जैसे परीक्षा-संबंधी बदलाव।
 - राजस्थान: राज्य की नीति/योजना, बजट/अर्थव्यवस्था, पानी/सिंचाई/कृषि, प्रशासन, शिक्षा/स्वास्थ्य, पर्यावरण/वन्यजीव, महत्वपूर्ण परियोजना, राजस्थान-विशिष्ट आँकड़े/रिपोर्ट और परीक्षोपयोगी विरासत/भूगोल। खबर का राजस्थान से स्पष्ट संबंध होना चाहिए।
 - अंतरराष्ट्रीय: भारत के संबंध, कूटनीति/समझौते, युद्ध/सुरक्षा, वैश्विक अर्थव्यवस्था, जलवायु/पर्यावरण, विज्ञान/तकनीक, महत्वपूर्ण अंतरराष्ट्रीय संगठन/रिपोर्ट।
@@ -412,9 +431,13 @@ def generate_stories(candidates: list[dict], api_key: str) -> list[dict]:
         category_counts[category] += 1
 
     verified.sort(key=lambda item: item["priority"])
+    targets = {"national": 15, "rajasthan": 10, "international": 5}
     log("AI-filtered stories: " + ", ".join(
-        f"{cat}={category_counts[cat]}" for cat in ("national", "rajasthan", "international")
+        f"{cat}={category_counts[cat]}/{targets[cat]}" for cat in ("national", "rajasthan", "international")
     ))
+    for category, target in targets.items():
+        if category_counts[category] < target:
+            log(f"WARN quota shortfall {category}: {category_counts[category]}/{target}; no unsupported stories were added.")
     return verified
 
 
