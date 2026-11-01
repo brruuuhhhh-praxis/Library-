@@ -3188,3 +3188,21 @@ body .ss-home > header.ss-navbar .ss-menu-toggle{
     padding: 13px 14px;
   }
 }
+
+
+/* HERO SLOGAN — PREMIUM CURSIVE TYPOGRAPHY */
+.ss-home .ss-hero .ss-hero-signature-quote {
+  font-family: "Dancing Script", "Brush Script MT", cursive !important;
+  font-size: clamp(46px, 5.5vw, 72px) !important;
+  font-weight: 700 !important;
+  line-height: 1.2 !important;
+  letter-spacing: 0.2px !important;
+  text-wrap: balance;
+}
+
+@media (max-width: 760px) {
+  .ss-home .ss-hero .ss-hero-signature-quote {
+    font-size: clamp(40px, 10.5vw, 54px) !important;
+    line-height: 1.2 !important;
+  }
+}
