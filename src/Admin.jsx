@@ -117,7 +117,19 @@ export default function Admin({ onHome, onRegister }) {
         setError(actionError.message || 'कार्रवाई नहीं हो सकी। एडमिन अनुमति और migration जाँचें।');
         return;
       }
+      let whatsappWarning = '';
+      if (action === 'confirm') {
+        const registrationNo = `SS-${String(record.created_at || new Date().toISOString()).slice(0, 4)}-${String(record.id).replaceAll('-', '').slice(0, 8).toUpperCase()}`;
+        const { error: whatsappError } = await supabase.functions.invoke('send-seat-confirmation', {
+          body: { registration_id: record.id, registration_no: registrationNo },
+        });
+        if (whatsappError) {
+          console.error('Seat confirmation WhatsApp notification failed:', whatsappError);
+          whatsappWarning = 'सदस्यता Confirm हो गई, लेकिन WhatsApp संदेश नहीं भेजा जा सका। WhatsApp Cloud API secrets और approved template जाँचें।';
+        }
+      }
       await loadData();
+      if (whatsappWarning) setError(whatsappWarning);
     } catch {
       setError('नेटवर्क समस्या के कारण कार्रवाई नहीं हो सकी। कृपया फिर प्रयास करें।');
     } finally {

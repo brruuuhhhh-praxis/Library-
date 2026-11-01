@@ -93,3 +93,16 @@
 .ca-topbar{width:100%;max-width:1320px;padding-left:clamp(18px,4vw,54px);padding-right:clamp(18px,4vw,54px);gap:22px}
 .ca-brand{min-width:0}.ca-brand .library-brand{max-width:100%}
 @media(max-width:760px){.ca-topbar{padding:14px 15px;gap:10px}.ca-brand .library-brand{gap:6px}.ca-brand .library-brand__caption{font-size:5px}}
+
+/* Current Affairs temporary launch state */
+.ca-coming-soon{max-width:850px;min-height:58vh;margin:0 auto;padding:70px 28px 84px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.ca-coming-icon{width:76px;height:76px;border-radius:24px;display:grid;place-items:center;background:linear-gradient(145deg,#203a33,#314e43);color:#e7bd73;box-shadow:0 16px 34px #203a3324;margin-bottom:23px}
+.ca-coming-kicker{display:inline-flex;align-items:center;gap:7px;color:#9a7436;font-size:10px;font-weight:900;letter-spacing:.17em}
+.ca-coming-soon h1{font-size:clamp(34px,6vw,58px);line-height:1.45;letter-spacing:-.04em;margin:16px 0;color:#203a33}
+.ca-coming-soon h1 em{font-style:normal;color:#a77b36}
+.ca-coming-soon>p{max-width:620px;color:#5c6862;font-size:15px;line-height:2;margin:0}
+.ca-coming-note{display:flex;align-items:center;justify-content:center;gap:10px;max-width:620px;margin-top:24px;padding:14px 18px;border:1px solid #e4d7bd;border-radius:13px;background:#fffdf8;color:#52615a;font-size:12px;line-height:1.8}
+.ca-coming-note svg{flex-shrink:0;color:#a77b36}
+.ca-coming-home{display:inline-flex;align-items:center;gap:9px;margin-top:28px;padding:13px 18px;border-radius:11px;background:#203a33;color:#fff;text-decoration:none;font-size:12px;font-weight:800}
+.ca-coming-home svg{transform:rotate(180deg)}
+@media(max-width:700px){.ca-coming-soon{min-height:62vh;padding:48px 20px 60px}.ca-coming-soon>p{font-size:13px}.ca-coming-note{align-items:flex-start;text-align:left}}
