@@ -27,30 +27,29 @@ const gallery = [
   { title: 'Comfortable Study Space', caption: 'आरामदायक अध्ययन व्यवस्था', image: 'https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=900&q=85', size: '' },
 ];
 
-export default function Home() {
+export default function Home({ page = 'home' }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const closeMenu = () => setMenuOpen(false);
 
   return (
-    <main className="ss-home">
+    <main className={`ss-home ss-page-${page}`}>
       {/* 1. NAVBAR — dark, compact and editorial */}
       <header className="ss-navbar">
-        <a className="ss-brand" href={import.meta.env.BASE_URL} aria-label="श्री लाइब्रेरी होम" onClick={closeMenu}>
-          <span className="ss-brand-lockup" aria-label="श्री लाइब्रेरी">
+        <a className="ss-brand" href={import.meta.env.BASE_URL} aria-label="श्री जी लाइब्रेरी होम" onClick={closeMenu}>
+          <span className="ss-brand-lockup" aria-label="श्री जी लाइब्रेरी">
             <span className="ss-brand-emblem"><span className="ss-brand-shri">श्री</span><Sparkles className="ss-brand-ai" size={13} aria-hidden="true" /></span>
-            <span className="ss-brand-words"><strong><span>श्री</span> लाइब्रेरी</strong><small>A PLACE FOR FOCUSED MINDS · DEVOTION × AI</small></span>
+            <span className="ss-brand-words"><strong><span>श्री जी</span> लाइब्रेरी</strong><small>A PLACE FOR FOCUSED MINDS · DEVOTION × AI</small></span>
           </span>
         </a>
         <button className="ss-menu-toggle" onClick={() => setMenuOpen(!menuOpen)} aria-label={menuOpen ? 'Close menu' : 'Open menu'}>
           {menuOpen ? <X size={23} /> : <Menu size={23} />}
         </button>
         <nav className={`ss-nav-links ${menuOpen ? 'is-open' : ''}`}>
-          <a className="active" href={import.meta.env.BASE_URL} onClick={closeMenu}>Home</a>
-          <a href="#about-preview" onClick={closeMenu}>About Us</a>
-          <a href="#facilities-preview" onClick={closeMenu}>Facilities</a>
+          <a className={page === 'home' ? 'active' : ''} href="#/" onClick={closeMenu}>Home</a>
+          <a className={page === 'about' ? 'active' : ''} href="#/about" onClick={closeMenu}>About Us</a>
           <a href="#/current-affairs" onClick={closeMenu}>Current Affairs</a>
           <a href="#/register" onClick={closeMenu}>Membership</a>
-          <a href="#contact-preview" onClick={closeMenu}>Contact</a>
+          <a className={page === 'contact' ? 'active' : ''} href="#/contact" onClick={closeMenu}>Contact Us</a>
           <a className="ss-nav-cta" href="#/register" onClick={closeMenu}>रजिस्ट्रेशन शुरू करें <ArrowRight size={16} /></a>
         </nav>
       </header>
@@ -133,10 +132,10 @@ export default function Home() {
           <div className="ss-photo-index">01 <span>/</span> STUDY SPACE</div>
         </div>
         <div className="ss-intro-copy">
-          <span className="ss-overline">WELCOME TO SHRI SHYAM</span>
+          <span className="ss-overline">WELCOME TO SHREE JI</span>
           <h2>सपने बड़े हों,<br /><em>तो तैयारी भी खास हो।</em></h2>
           <div className="ss-gold-rule" />
-          <p>श्री लाइब्रेरी उन विद्यार्थियों के लिए एक अध्ययन स्थल है, जो अपने लक्ष्य के प्रति गंभीर हैं और नियमित पढ़ाई के लिए शांत व सुविधाजनक माहौल चाहते हैं।</p>
+          <p>श्री जी लाइब्रेरी उन विद्यार्थियों के लिए एक अध्ययन स्थल है, जो अपने लक्ष्य के प्रति गंभीर हैं और नियमित पढ़ाई के लिए शांत व सुविधाजनक माहौल चाहते हैं।</p>
           <p>हमारा उद्देश्य है कि आपको पढ़ाई पर ध्यान देने के लिए एक व्यवस्थित जगह मिले—जहाँ हर दिन आपकी मेहनत को आगे बढ़ने का अवसर मिले।</p>
           <a href="#about-preview" className="ss-button ss-button-dark">हमारे बारे में जानें <ArrowRight size={17} /></a>
           <div className="ss-intro-signature"><span className="ss-sign-line" /><span>एकाग्रता <i>•</i> अनुशासन <i>•</i> सफलता</span></div>
@@ -164,7 +163,7 @@ export default function Home() {
 
       {/* Footer intentionally has no phone number; details belong on Contact/About pages */}
       <footer id="contact-preview" className="ss-footer">
-        <a className="ss-brand ss-footer-brand" href={import.meta.env.BASE_URL} aria-label="श्री लाइब्रेरी होम"><span className="ss-brand-lockup"><span className="ss-brand-emblem"><span className="ss-brand-shri">श्री</span><Sparkles className="ss-brand-ai" size={13} aria-hidden="true" /></span><span className="ss-brand-words"><strong><span>श्री</span> लाइब्रेरी</strong><small>A PLACE FOR FOCUSED MINDS · DEVOTION × AI</small></span></span></a>
+        <a className="ss-brand ss-footer-brand" href={import.meta.env.BASE_URL} aria-label="श्री जी लाइब्रेरी होम"><span className="ss-brand-lockup"><span className="ss-brand-emblem"><span className="ss-brand-shri">श्री</span><Sparkles className="ss-brand-ai" size={13} aria-hidden="true" /></span><span className="ss-brand-words"><strong><span>श्री जी</span> लाइब्रेरी</strong><small>A PLACE FOR FOCUSED MINDS · DEVOTION × AI</small></span></span></a>
         <p>एकाग्रता से तैयारी, तैयारी से सफलता।</p>
         <section className="ss-contact-panel" aria-labelledby="ss-contact-panel-title">
           <header className="ss-contact-panel-heading">
@@ -180,7 +179,7 @@ export default function Home() {
           <div className="ss-footer-address-pin" aria-hidden="true">📍</div>
           <div className="ss-footer-address-copy">
             <span className="ss-footer-address-kicker">VISIT US</span>
-            <strong>Shri Shyam Library</strong>
+            <strong>SHREE JI LIBRARY</strong>
             <p>Ward No. 3, Gurudwara Road, Bishnoi Mohalla, Suratgarh, Rajasthan – 335804</p>
             <small><span aria-hidden="true">⌖</span> Landmark: 100 metres from Paras Hyundai</small>
           </div>
@@ -199,8 +198,13 @@ export default function Home() {
           </a>
         </div>
         </section>
-        <nav><a href="#about-preview">About Us</a><a href="#facilities-preview">Facilities</a><a href="#/register">Membership</a><a href="#contact-preview">Contact</a></nav>
-        <small className="ss-copyright">© {new Date().getFullYear()} श्री लाइब्रेरी. All rights reserved.</small>
+        <section className="ss-developer-credit" aria-label="Website developer and copyright">
+          <span className="ss-developer-kicker">DIGITAL CRAFT &amp; CREDITS</span>
+          <p>Website designed &amp; developed by <strong>Sartaj Soni</strong>.</p>
+          <small>© {new Date().getFullYear()} SHREE JI LIBRARY. All rights reserved.</small>
+        </section>
+        <nav><a href="#/">Home</a><a href="#/about">About Us</a><a href="#/register">Membership</a><a href="#/current-affairs">Current Affairs</a><a href="#/contact">Contact Us</a></nav>
+        <small className="ss-copyright">© {new Date().getFullYear()} श्री जी लाइब्रेरी. All rights reserved.</small>
       </footer>
     </main>
   );

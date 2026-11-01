@@ -196,7 +196,7 @@ export default function CurrentAffairsAdmin({ onHome }) {
   return <main className="ca-admin">
     <style>{css}</style>
     <header>
-      <strong>श्री श्याम लाइब्रेरी · CA ADMIN</strong>
+      <strong>श्री जी लाइब्रेरी · CA ADMIN</strong>
       <div style={{display:'flex',gap:8,flexWrap:'wrap'}}>
         <button className="ca-secondary" onClick={onHome}><ArrowLeft size={15}/> होम</button>
         {session && <button className="ca-secondary" onClick={() => supabase.auth.signOut()}><LogOut size={15}/> लॉगआउट</button>}
@@ -300,6 +300,6 @@ export default function CurrentAffairsAdmin({ onHome }) {
         </section>
       </>}
     </div>
-    <footer style={{textAlign:'center',color:'#66756c',padding:12}}>श्री श्याम लाइब्रेरी · सुरक्षित Current Affairs Publishing</footer>
+    <footer style={{textAlign:'center',color:'#66756c',padding:12}}>श्री जी लाइब्रेरी · सुरक्षित Current Affairs Publishing</footer>
   </main>;
 }

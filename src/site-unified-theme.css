@@ -1,0 +1,612 @@
+/* SHRI LIBRARY — UNIFIED NAVY & GOLD DESIGN SYSTEM */
+:root {
+  --site-navy: #0B1B2B;
+  --site-navy-2: #142A40;
+  --site-gold: #C6A15A;
+  --site-gold-light: #EBD49B;
+  --site-ivory: #F6F3EB;
+  --site-paper: #FFFDF8;
+  --site-ink: #17283B;
+  --site-muted: #637184;
+  --site-line: #E6DECE;
+  --site-shadow: 0 14px 36px rgba(11,27,43,.09);
+}
+
+html, body {
+  background: var(--site-ivory);
+  color: var(--site-ink);
+}
+
+body {
+  font-family: Inter, 'Noto Sans Devanagari', sans-serif;
+}
+
+:where(a, button, input, select, textarea):focus-visible {
+  outline: 3px solid var(--site-gold) !important;
+  outline-offset: 3px;
+}
+
+/* HOMEPAGE */
+.ss-home {
+  --ss-navy: var(--site-navy);
+  --ss-navy2: var(--site-navy-2);
+  --ss-gold: var(--site-gold);
+  --ss-goldlight: var(--site-gold-light);
+  --ss-cream: var(--site-ivory);
+  --ss-paper: var(--site-paper);
+  --ss-ink: var(--site-ink);
+  --ss-muted: var(--site-muted);
+  --ss-line: var(--site-line);
+  background: var(--site-ivory) !important;
+  color: var(--site-ink);
+}
+
+.ss-navbar {
+  background: linear-gradient(110deg, var(--site-navy), var(--site-navy-2)) !important;
+  border-bottom: 1px solid #C6A15A80 !important;
+}
+
+.ss-brand-words strong,
+.ss-brand-shri {
+  color: var(--site-gold-light) !important;
+}
+
+.ss-brand-words small {
+  color: #D5DCE3 !important;
+}
+
+.ss-nav-links {
+  color: #F4F0E7 !important;
+}
+
+.ss-nav-links > a:not(.ss-nav-cta):hover,
+.ss-nav-links > a.active {
+  color: var(--site-gold-light) !important;
+}
+
+.ss-hero {
+  background: var(--site-navy) !important;
+}
+
+.ss-hero-shade {
+  background: linear-gradient(
+    90deg,
+    #071522 0%,
+    #0B1B2BEE 37%,
+    #0B1B2BAA 68%,
+    #0B1B2B38 100%
+  ), linear-gradient(0deg, #071522AA, transparent 55%) !important;
+}
+
+.ss-hero-signature-quote {
+  color: var(--site-gold-light) !important;
+}
+
+.ss-home .ss-button-gold,
+.ss-home .ss-nav-cta,
+.ss-home .ss-ca-preview-cta {
+  background: linear-gradient(135deg, #EBD49B, #C6A15A) !important;
+  border: 1px solid var(--site-gold-light) !important;
+  color: var(--site-navy) !important;
+}
+
+.ss-capacity-wrap {
+  background: var(--site-ivory) !important;
+}
+
+.ss-capacity-card {
+  background: var(--site-paper) !important;
+  border: 1px solid var(--site-gold) !important;
+  border-top: 3px solid var(--site-gold) !important;
+  box-shadow: var(--site-shadow) !important;
+}
+
+.ss-capacity-item strong,
+.ss-capacity-intro > span:nth-child(2) {
+  color: var(--site-navy) !important;
+}
+
+.ss-capacity-item span,
+.ss-capacity-intro small {
+  color: var(--site-muted) !important;
+}
+
+.ss-facilities-section {
+  background: var(--site-ivory) !important;
+}
+
+.ss-section h2,
+.ss-intro-copy h2,
+.ss-gallery-header h2,
+.ss-closing-cta h2 {
+  color: var(--site-navy) !important;
+}
+
+.ss-overline,
+.ss-intro-signature,
+.ss-gold-rule {
+  color: var(--site-gold) !important;
+}
+
+.ss-home .ss-facility-card[class*="tint-"] {
+  background: var(--site-paper) !important;
+  color: var(--site-ink) !important;
+  border: 1px solid #C6A15A70 !important;
+  box-shadow: 0 9px 25px rgba(11,27,43,.07) !important;
+}
+
+.ss-home .ss-facility-card .ss-facility-card-top svg,
+.ss-home .ss-facility-icon-art {
+  color: var(--site-gold) !important;
+}
+
+.ss-home .ss-facility-card strong {
+  color: var(--site-navy) !important;
+}
+
+.ss-home .ss-facility-card small,
+.ss-home .ss-facility-card p {
+  color: var(--site-muted) !important;
+}
+
+.ss-intro-section {
+  background: var(--site-paper) !important;
+}
+
+.ss-gallery-section,
+.ss-closing-cta,
+.ss-footer {
+  background: linear-gradient(130deg, var(--site-navy), var(--site-navy-2)) !important;
+  color: #F7F3EA !important;
+}
+
+.ss-gallery-section h2,
+.ss-closing-cta h2,
+.ss-footer p {
+  color: #F7F3EA !important;
+}
+
+.ss-gallery-section h2 em,
+.ss-closing-cta h2 em {
+  color: var(--site-gold-light) !important;
+}
+
+.ss-gallery-item {
+  border: 1px solid #C6A15A66 !important;
+}
+
+.ss-footer nav a,
+.ss-footer .ss-copyright {
+  color: #E5E8EC !important;
+}
+
+.ss-contact-panel,
+.ss-footer-address-en,
+.ss-footer-contact-card {
+  border-color: #C6A15A80 !important;
+}
+
+/* MEMBERSHIP REGISTRATION AND LIBRARY ADMIN */
+.booking-page {
+  --bp-ink: var(--site-ink);
+  --bp-navy: var(--site-navy);
+  --bp-teal: var(--site-navy-2);
+  --bp-gold: var(--site-gold);
+  --bp-goldlight: var(--site-gold-light);
+  --bp-bg: var(--site-ivory);
+  --bp-white: var(--site-paper);
+  --bp-muted: var(--site-muted);
+  --bp-line: var(--site-line);
+  background: var(--site-ivory) !important;
+  color: var(--site-ink) !important;
+}
+
+.booking-topbar {
+  background: var(--site-navy) !important;
+  border-bottom: 1px solid #C6A15A80 !important;
+}
+
+.booking-brand strong,
+.booking-brand-icon {
+  color: var(--site-gold-light) !important;
+}
+
+.booking-hero,
+.admin-hero {
+  background: linear-gradient(130deg, var(--site-navy), var(--site-navy-2)) !important;
+  color: white !important;
+}
+
+.booking-kicker {
+  color: var(--site-gold) !important;
+}
+
+.booking-hero h1 em {
+  color: var(--site-gold-light) !important;
+}
+
+.booking-form,
+.admin-panel,
+.admin-dashboard {
+  background: var(--site-paper) !important;
+  border: 1px solid #C6A15A66 !important;
+  box-shadow: var(--site-shadow) !important;
+}
+
+.booking-form h2,
+.booking-seat-head h2,
+.admin-panel h2 {
+  color: var(--site-navy) !important;
+}
+
+.booking-fields label,
+.admin-login label {
+  color: var(--site-ink) !important;
+}
+
+.booking-fields input,
+.booking-fields textarea,
+.booking-fields select,
+.admin-login input,
+.admin-search input {
+  background: #FAF8F2 !important;
+  border: 1px solid #C9B98F !important;
+  color: var(--site-ink) !important;
+}
+
+.booking-fields input:focus,
+.booking-fields textarea:focus,
+.booking-fields select:focus,
+.admin-login input:focus {
+  border-color: var(--site-gold) !important;
+  box-shadow: 0 0 0 3px #C6A15A30 !important;
+}
+
+.booking-submit,
+.booking-print,
+.admin-toolbar button,
+.admin-actions button {
+  background: var(--site-navy) !important;
+  border: 1px solid var(--site-gold) !important;
+  color: var(--site-gold-light) !important;
+}
+
+.booking-submit:hover,
+.booking-print:hover {
+  background: var(--site-navy-2) !important;
+}
+
+.admin-toolbar,
+.admin-panel-head {
+  border-color: var(--site-line) !important;
+}
+
+.admin-record {
+  background: var(--site-paper) !important;
+  border: 1px solid #C6A15A66 !important;
+  color: var(--site-ink) !important;
+}
+
+.booking-footer {
+  background: var(--site-navy) !important;
+  color: #F7F3EA !important;
+}
+
+/* CURRENT AFFAIRS — SAME NAVY AND GOLD PALETTE */
+.ca-page {
+  --ca-ink: var(--site-ink);
+  --ca-muted: var(--site-muted);
+  --ca-gold: var(--site-gold);
+  --ca-gold-dark: #8D6A2D;
+  --ca-paper: var(--site-ivory);
+  --ca-line: var(--site-line);
+  background: var(--site-ivory) !important;
+  color: var(--site-ink) !important;
+}
+
+.ca-topbar {
+  background: var(--site-navy) !important;
+  border-bottom: 1px solid #C6A15A80 !important;
+}
+
+.ca-brand,
+.ca-brand b {
+  color: #FFFFFF !important;
+}
+
+.ca-brand small {
+  color: #D5DCE3 !important;
+}
+
+.ca-brand-mark {
+  background: var(--site-navy-2) !important;
+  color: var(--site-gold-light) !important;
+  border: 1px solid var(--site-gold) !important;
+}
+
+.ca-back-link,
+.ca-footer a {
+  color: var(--site-gold-light) !important;
+}
+
+.ca-hero {
+  background: linear-gradient(130deg, var(--site-navy), var(--site-navy-2)) !important;
+  border: 1px solid #C6A15A70 !important;
+  border-radius: 20px;
+}
+
+.ca-kicker,
+.ca-trust-row,
+.ca-trust-row span {
+  color: var(--site-gold-light) !important;
+}
+
+.ca-hero h1 {
+  color: #FFFFFF !important;
+}
+
+.ca-hero h1 em {
+  color: var(--site-gold-light) !important;
+}
+
+.ca-hero-copy > p {
+  color: #E0E6EC !important;
+}
+
+.ca-hero-stamp {
+  background: var(--site-paper) !important;
+  border: 1px solid var(--site-gold) !important;
+  color: var(--site-navy) !important;
+}
+
+.ca-hero-stamp b,
+.ca-hero-stamp svg {
+  color: var(--site-navy) !important;
+}
+
+.ca-edition-bar,
+.ca-story-card {
+  background: var(--site-paper) !important;
+  border: 1px solid #C6A15A70 !important;
+  color: var(--site-ink) !important;
+}
+
+.ca-edition-bar input,
+.ca-search {
+  background: #FAF8F2 !important;
+  border: 1px solid #C9B98F !important;
+  color: var(--site-ink) !important;
+}
+
+.ca-category-tabs button {
+  background: var(--site-paper) !important;
+  border: 1px solid #C6A15A70 !important;
+  color: var(--site-ink) !important;
+}
+
+.ca-category-tabs button.is-active {
+  background: var(--site-navy) !important;
+  border-color: var(--site-gold) !important;
+  color: var(--site-gold-light) !important;
+}
+
+.ca-list-heading h2,
+.ca-quiz-intro h2,
+.ca-story-main h3 {
+  color: var(--site-navy) !important;
+}
+
+.ca-story-main > p,
+.ca-date-note {
+  color: var(--site-muted) !important;
+}
+
+.ca-story-number {
+  color: var(--site-gold-dark) !important;
+}
+
+.ca-source-link {
+  color: var(--site-gold-dark) !important;
+}
+
+.ca-quiz-panel {
+  background: linear-gradient(135deg, var(--site-navy), var(--site-navy-2)) !important;
+  border: 1px solid var(--site-gold) !important;
+  color: #FFFFFF !important;
+}
+
+.ca-quiz-panel h2,
+.ca-quiz-panel h3,
+.ca-quiz-panel p {
+  color: #F5F0E6 !important;
+}
+
+.ca-options button {
+  background: var(--site-paper) !important;
+  border: 1px solid #C6A15A70 !important;
+  color: var(--site-ink) !important;
+}
+
+.ca-options button.is-selected {
+  background: #F2E6C8 !important;
+  border-color: var(--site-gold) !important;
+  color: var(--site-navy) !important;
+}
+
+.ca-options button.is-correct {
+  border-color: #398569 !important;
+}
+
+.ca-explanation {
+  border-left-color: var(--site-gold) !important;
+}
+
+.ca-primary-button {
+  background: linear-gradient(135deg, var(--site-gold-light), var(--site-gold)) !important;
+  color: var(--site-navy) !important;
+}
+
+.ca-footer {
+  border-color: var(--site-line) !important;
+}
+
+.ca-footer span {
+  color: var(--site-muted) !important;
+}
+
+/* HOME PAGE CURRENT AFFAIRS PREVIEW */
+.ss-ca-preview {
+  background: linear-gradient(125deg, var(--site-navy), var(--site-navy-2)) !important;
+  border-top: 1px solid #C6A15A80 !important;
+  border-bottom: 1px solid #C6A15A80 !important;
+}
+
+.ss-ca-preview h2 em,
+.ss-ca-preview-kicker {
+  color: var(--site-gold-light) !important;
+}
+
+.ss-ca-preview-cta {
+  background: linear-gradient(135deg, var(--site-gold-light), var(--site-gold)) !important;
+  color: var(--site-navy) !important;
+}
+
+/* CURRENT AFFAIRS ADMIN — inline styles use stronger selectors */
+.ca-admin {
+  background: var(--site-ivory) !important;
+  color: var(--site-ink) !important;
+}
+
+.ca-admin header,
+.ca-admin .ca-hero {
+  background: linear-gradient(125deg, var(--site-navy), var(--site-navy-2)) !important;
+  color: #FFFFFF !important;
+  border-bottom: 1px solid #C6A15A80 !important;
+}
+
+.ca-admin .ca-btn {
+  background: var(--site-navy) !important;
+  color: var(--site-gold-light) !important;
+  border: 1px solid var(--site-gold) !important;
+}
+
+.ca-admin .ca-secondary {
+  background: #EEE8DA !important;
+  color: var(--site-navy) !important;
+  border: 1px solid #C6A15A70 !important;
+}
+
+.ca-admin .ca-card,
+.ca-admin .ca-item {
+  background: var(--site-paper) !important;
+  color: var(--site-ink) !important;
+  border: 1px solid #C6A15A66 !important;
+  box-shadow: var(--site-shadow) !important;
+}
+
+.ca-admin input,
+.ca-admin textarea,
+.ca-admin select {
+  background: #FAF8F2 !important;
+  color: var(--site-ink) !important;
+  border: 1px solid #C9B98F !important;
+}
+
+.ca-admin h1,
+.ca-admin h2,
+.ca-admin h3 {
+  color: var(--site-navy) !important;
+}
+
+.ca-admin header h1,
+.ca-admin header h2,
+.ca-admin .ca-hero h1,
+.ca-admin .ca-hero h2 {
+  color: #FFFFFF !important;
+}
+
+.ca-admin .ca-pill {
+  background: #EEE8DA !important;
+  color: var(--site-navy) !important;
+}
+
+.ca-admin .ca-pill.live {
+  background: #E3F2E7 !important;
+  color: #236345 !important;
+}
+
+@media (max-width: 700px) {
+  .ss-navbar {
+    min-height: 72px;
+  }
+
+  .booking-form,
+  .admin-panel,
+  .admin-dashboard {
+    border-radius: 14px !important;
+  }
+
+  .ca-hero {
+    border-radius: 14px !important;
+  }
+}
+
+
+/* SHREE JI LIBRARY — SEPARATE PAGE VIEWS */
+/* Home: show only navigation and hero */
+.ss-home.ss-page-home > .ss-hero-followup-cards,
+.ss-home.ss-page-home > .ss-facilities-section,
+.ss-home.ss-page-home > .ss-intro-section,
+.ss-home.ss-page-home > .ss-gallery-section,
+.ss-home.ss-page-home > .ss-closing-cta,
+.ss-home.ss-page-home > .ss-footer {
+  display: none !important;
+}
+
+/* About: introduction, facilities and gallery */
+.ss-home.ss-page-about > .ss-hero,
+.ss-home.ss-page-about > .ss-hero-followup-cards,
+.ss-home.ss-page-about > .ss-closing-cta,
+.ss-home.ss-page-about > .ss-footer {
+  display: none !important;
+}
+
+/* Contact: show contact panel and credits only */
+.ss-home.ss-page-contact > .ss-hero,
+.ss-home.ss-page-contact > .ss-hero-followup-cards,
+.ss-home.ss-page-contact > .ss-facilities-section,
+.ss-home.ss-page-contact > .ss-intro-section,
+.ss-home.ss-page-contact > .ss-gallery-section,
+.ss-home.ss-page-contact > .ss-closing-cta {
+  display: none !important;
+}
+
+.ss-developer-credit {
+  margin: 26px 0 18px;
+  padding: 20px 18px;
+  border: 1px solid var(--site-gold);
+  border-radius: 13px;
+  background: linear-gradient(135deg, #0B1B2B, #142A40);
+  color: #F6F3EB;
+  text-align: center;
+}
+.ss-developer-kicker {
+  display: block;
+  margin-bottom: 9px;
+  color: #EBD49B;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+.ss-developer-credit p {
+  margin: 0 0 7px;
+  color: #F6F3EB;
+  font-size: 14px;
+}
+.ss-developer-credit strong {
+  color: #EBD49B;
+}
+.ss-developer-credit small {
+  color: #D5DCE3;
+  font-size: 11px;
+}

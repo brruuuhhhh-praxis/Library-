@@ -123,7 +123,7 @@ export default function CurrentAffairs({ onHome }) {
   return (
     <main className="ca-page">
       <header className="ca-topbar">
-        <a className="ca-brand" href="#/" onClick={onHome} aria-label="श्री लाइब्रेरी होम">
+        <a className="ca-brand" href="#/" onClick={onHome} aria-label="श्री जी लाइब्रेरी होम">
           <LibraryBrand variant="compact-light" tagline="A PLACE FOR FOCUSED MINDS" caption="DAILY CURRENT AFFAIRS" />
         </a>
         <a className="ca-back-link" href="#/" onClick={onHome}><ArrowLeft size={17} /> होम पेज</a>
@@ -211,7 +211,7 @@ export default function CurrentAffairs({ onHome }) {
         </section>
       </section>
 
-      <footer className="ca-footer"><a href="#/" onClick={onHome}><ArrowLeft size={15} /> श्री लाइब्रेरी पर वापस जाएँ</a><span>© {new Date().getFullYear()} श्री लाइब्रेरी · ज्ञान रोज़, तैयारी रोज़</span></footer>
+      <footer className="ca-footer"><a href="#/" onClick={onHome}><ArrowLeft size={15} /> श्री जी लाइब्रेरी पर वापस जाएँ</a><span>© {new Date().getFullYear()} श्री जी लाइब्रेरी · ज्ञान रोज़, तैयारी रोज़</span></footer>
     </main>
   );
 }
