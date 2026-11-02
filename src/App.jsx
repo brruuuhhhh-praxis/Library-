@@ -1,6 +1,6 @@
 import React, { lazy, Suspense, useEffect, useState } from 'react';
 import Home from './Home.jsx';
-import SiteTabs from './SiteTabs.jsx';
+import SiteHeader from './SiteHeader.jsx';
 const Registration = lazy(() => import('./Registration.jsx'));
 const Admin = lazy(() => import('./Admin.jsx'));
 const CurrentAffairs = lazy(() => import('./CurrentAffairs.jsx'));
@@ -29,11 +29,11 @@ export default function App() {
     return () => window.removeEventListener('hashchange', update);
   }, []);
   const home = () => { window.location.hash = '/'; window.scrollTo({ top: 0, behavior: 'smooth' }); };
-  if (route === '/register') return <><SiteTabs active="membership" /><Suspense fallback={<RouteLoading />}><Registration onHome={home} onAdmin={() => { window.location.hash = '/admin'; }} /></Suspense></>;
-  if (route === '/admin') return <><SiteTabs /><Suspense fallback={<RouteLoading />}><Admin onHome={home} onRegister={() => { window.location.hash = '/register'; }} /></Suspense></>;
-  if (route === '/current-affairs') return <><SiteTabs active="current-affairs" /><Suspense fallback={<RouteLoading />}><CurrentAffairs onHome={home} /></Suspense></>;
-  if (route === '/ca-admin') return <><SiteTabs active="current-affairs" /><Suspense fallback={<RouteLoading />}><CurrentAffairsAdmin onHome={home} /></Suspense></>;
-  if (route === '/about') return <Home page="about" />;
-  if (route === '/contact') return <Home page="contact" />;
-  return <Home page="home" />;
+  if (route === '/register') return <><SiteHeader page="membership" /><Suspense fallback={<RouteLoading />}><Registration onHome={home} onAdmin={() => { window.location.hash = '/admin'; }} /></Suspense></>;
+  if (route === '/admin') return <><SiteHeader page="admin" /><Suspense fallback={<RouteLoading />}><Admin onHome={home} onRegister={() => { window.location.hash = '/register'; }} /></Suspense></>;
+  if (route === '/current-affairs') return <><SiteHeader page="current-affairs" /><Suspense fallback={<RouteLoading />}><CurrentAffairs onHome={home} /></Suspense></>;
+  if (route === '/ca-admin') return <><SiteHeader page="current-affairs" /><Suspense fallback={<RouteLoading />}><CurrentAffairsAdmin onHome={home} /></Suspense></>;
+  if (route === '/about') return <><SiteHeader page="about" /><Home page="about" /></>;
+  if (route === '/contact') return <><SiteHeader page="contact" /><Home page="contact" /></>;
+  return <><SiteHeader page="home" /><Home page="home" /></>;
 }

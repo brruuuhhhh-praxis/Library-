@@ -1,17 +1,11 @@
 import React from 'react';
 import { ArrowLeft, CalendarDays, Clock3, Newspaper } from 'lucide-react';
 import './CurrentAffairs.css';
-import LibraryBrand from './LibraryBrand.jsx';
 
 export default function CurrentAffairs({ onHome }) {
   return (
     <main className="ca-page">
-      <header className="ca-topbar">
-        <a className="ca-brand" href="#/" onClick={onHome} aria-label="श्री श्याम लाइब्रेरी होम">
-          <LibraryBrand variant="compact-light" tagline="A PLACE FOR FOCUSED MINDS" caption="DAILY CURRENT AFFAIRS" />
-        </a>
-        <a className="ca-back-link" href="#/" onClick={onHome}><ArrowLeft size={17} /> होम पेज</a>
-      </header>
+      
       <section className="ca-coming-soon">
         <div className="ca-coming-icon"><Newspaper size={32} /></div>
         <span className="ca-coming-kicker"><Clock3 size={14} /> COMING SOON</span>

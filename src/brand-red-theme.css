@@ -1,0 +1,1350 @@
+/* SHRI JI LIBRARY — Unified Black, White & Red Brand */
+
+:root {
+  --brand-black: #0b0b0d;
+  --brand-black-soft: #171719;
+  --brand-white: #ffffff;
+  --brand-white-soft: #f7f7f8;
+  --brand-red: #d71920;
+  --brand-red-dark: #a90f17;
+  --brand-red-light: #ffe8e9;
+  --brand-text: #19191b;
+  --brand-muted: #66666c;
+  --brand-border: #e3e3e6;
+
+  --ss-navy: #0b0b0d;
+  --ss-ink: #19191b;
+  --ss-cream: #ffffff;
+  --ss-gold: #d71920;
+  --ss-goldlight: #ff555b;
+}
+
+/* Main page */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--brand-white);
+  color: var(--brand-text);
+}
+
+.ss-home {
+  background: var(--brand-white);
+  color: var(--brand-text);
+}
+
+/* Unified homepage header */
+.ss-navbar {
+  background: var(--brand-black) !important;
+  color: var(--brand-white);
+  border-bottom: 2px solid var(--brand-red);
+  box-shadow: 0 6px 24px #0002;
+}
+
+.ss-brand-words strong,
+.ss-brand-words strong span {
+  color: var(--brand-white) !important;
+  text-shadow: none;
+}
+
+.ss-brand-words small {
+  color: #d6d6d9 !important;
+}
+
+.ss-brand-emblem {
+  background: var(--brand-black-soft) !important;
+  border-color: var(--brand-red) !important;
+}
+
+.ss-brand-shri {
+  background: none !important;
+  color: var(--brand-white) !important;
+  -webkit-text-fill-color: var(--brand-white) !important;
+  -webkit-text-stroke: 0 !important;
+  filter: none !important;
+  text-shadow: none !important;
+}
+
+.ss-brand-ai {
+  color: var(--brand-red) !important;
+}
+
+.ss-nav-links {
+  color: var(--brand-white);
+}
+
+.ss-nav-links > a:not(.ss-nav-cta):hover,
+.ss-nav-links > a.active {
+  color: #ff555b !important;
+}
+
+.ss-nav-links > a.active:after {
+  background: var(--brand-red) !important;
+}
+
+.ss-nav-cta,
+.ss-button-gold {
+  background: var(--brand-red) !important;
+  color: var(--brand-white) !important;
+  border: 1px solid var(--brand-red);
+  box-shadow: 0 6px 18px #d7192028;
+}
+
+.ss-nav-cta:hover,
+.ss-button-gold:hover {
+  background: var(--brand-red-dark) !important;
+}
+
+.ss-menu-toggle {
+  color: var(--brand-white) !important;
+  border-color: var(--brand-red) !important;
+}
+
+/* Hero remains cinematic; add a subtle red accent */
+.ss-hero {
+  background-color: var(--brand-black);
+}
+
+.ss-hero:before {
+  background: var(--brand-red) !important;
+}
+
+.ss-hero h1 em,
+.ss-section h2 em,
+.ss-intro-copy h2 em,
+.ss-gallery-header h2 em,
+.ss-closing-cta h2 em {
+  color: #ff555b !important;
+}
+
+.ss-eyebrow,
+.ss-hero-kicker,
+.ss-overline {
+  color: var(--brand-red) !important;
+}
+
+.ss-eyebrow span {
+  background: var(--brand-red) !important;
+}
+
+/* White content sections */
+.ss-section,
+.ss-facilities-section {
+  background: var(--brand-white) !important;
+  color: var(--brand-text);
+}
+
+.ss-section h2,
+.ss-intro-copy h2,
+.ss-gallery-header h2 {
+  color: var(--brand-black);
+}
+
+.ss-facility-feature,
+.ss-gallery-section,
+.ss-closing-cta {
+  background: var(--brand-black) !important;
+}
+
+.ss-facility-feature {
+  border-top: 3px solid var(--brand-red);
+}
+
+
+/* Preserve the original colours of all ten feature cards.
+   Their backgrounds and text colours remain controlled by Home.css tint-* classes. */
+.ss-facility-card {
+  border: 1px solid var(--brand-border) !important;
+}
+
+
+.ss-text-link,
+.ss-facility-footnote a {
+  color: var(--brand-red) !important;
+  border-color: var(--brand-red);
+}
+
+.ss-round-link {
+  color: var(--brand-white) !important;
+  border-color: var(--brand-red) !important;
+}
+
+.ss-footer {
+  background: var(--brand-black) !important;
+  color: var(--brand-white);
+  border-top: 2px solid var(--brand-red);
+}
+
+/* One navigation style across routed pages */
+.site-route-tabs {
+  background: var(--brand-black) !important;
+  border-bottom: 2px solid var(--brand-red) !important;
+}
+
+.site-route-tabs a {
+  color: var(--brand-white) !important;
+}
+
+.site-route-tabs a:hover,
+.site-route-tabs a.is-active {
+  background: #d7192020 !important;
+  color: #ff555b !important;
+}
+
+/* One shared logo appearance everywhere */
+.library-brand {
+  --lb-copy: #ffffff;
+  --lb-subtle: #d1d1d5;
+  --lb-gold: #ff555b;
+  color: var(--brand-white) !important;
+}
+
+.library-brand__emblem,
+.library-brand--compact-light .library-brand__emblem {
+  background: var(--brand-black-soft) !important;
+  border: 1px solid var(--brand-red) !important;
+  box-shadow: none !important;
+}
+
+.library-brand__shri {
+  background: none !important;
+  color: var(--brand-white) !important;
+  -webkit-text-fill-color: var(--brand-white) !important;
+  -webkit-text-stroke: 0 !important;
+  filter: none !important;
+  text-shadow: none !important;
+}
+
+.library-brand__name,
+.library-brand--compact-light .library-brand__name {
+  color: var(--brand-white) !important;
+  text-shadow: none !important;
+}
+
+.library-brand__tagline,
+.library-brand--compact-light .library-brand__tagline {
+  color: #e1e1e4 !important;
+}
+
+.library-brand__caption,
+.library-brand--compact-light .library-brand__caption {
+  color: #ff555b !important;
+}
+
+/* Current Affairs page */
+.ca-page {
+  --ca-ink: #19191b;
+  --ca-muted: #66666c;
+  --ca-gold: #d71920;
+  --ca-gold-dark: #a90f17;
+  --ca-paper: #ffffff;
+  --ca-line: #e3e3e6;
+  background: var(--brand-white) !important;
+  color: var(--brand-text) !important;
+}
+
+.ca-topbar {
+  background: var(--brand-black);
+  border-bottom: 2px solid var(--brand-red) !important;
+}
+
+.ca-brand {
+  color: var(--brand-white) !important;
+}
+
+.ca-brand small {
+  color: #d1d1d5 !important;
+}
+
+.ca-back-link,
+.ca-footer a {
+  color: var(--brand-red) !important;
+}
+
+.ca-hero-stamp,
+.ca-edition-bar,
+.ca-status,
+.ca-story-card,
+.ca-search {
+  background: var(--brand-white) !important;
+  border-color: var(--brand-border) !important;
+}
+
+.ca-hero-stamp svg,
+.ca-kicker,
+.ca-kicker span,
+.ca-trust-row svg,
+.ca-section-tag,
+.ca-edition-bar svg,
+.ca-source-link {
+  color: var(--brand-red) !important;
+}
+
+.ca-hero-stamp {
+  border-top: 3px solid var(--brand-red) !important;
+}
+
+.ca-hero h1 em {
+  color: var(--brand-red) !important;
+}
+
+.ca-category-tabs button.is-active,
+.ca-quiz-panel {
+  background: var(--brand-black) !important;
+  border-color: var(--brand-red) !important;
+}
+
+.ca-category-tabs button.is-active {
+  color: var(--brand-white) !important;
+}
+
+.ca-quiz-panel {
+  border-top: 3px solid var(--brand-red);
+}
+
+.ca-empty-icon {
+  background: var(--brand-red-light) !important;
+  color: var(--brand-red) !important;
+}
+
+.ca-status h3,
+.ca-story-card h3 {
+  color: var(--brand-black) !important;
+}
+
+/* Registration, Admin and form controls */
+input,
+select,
+textarea {
+  accent-color: var(--brand-red);
+}
+
+button {
+  accent-color: var(--brand-red);
+}
+
+button[type="submit"],
+input[type="submit"] {
+  background-color: var(--brand-red);
+  border-color: var(--brand-red);
+  color: var(--brand-white);
+}
+
+button[type="submit"]:hover,
+input[type="submit"]:hover {
+  background-color: var(--brand-red-dark);
+}
+
+/* Prevent logo and navigation overflow on small screens */
+.ss-brand,
+.library-brand {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.ss-brand-words,
+.library-brand__content {
+  min-width: 0;
+}
+
+.ss-brand-words strong,
+.library-brand__wordmark {
+  white-space: nowrap;
+}
+
+@media (max-width: 760px) {
+  .ss-navbar {
+    gap: 12px;
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  .ss-brand {
+    min-width: 0;
+  }
+
+  .ss-brand-words small {
+    letter-spacing: 0.5px;
+    font-size: 6px;
+  }
+
+  .ca-topbar {
+    padding: 16px;
+  }
+
+  .ca-hero {
+    padding: 38px 18px 30px;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 24px;
+  }
+
+  .ca-content-wrap {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}
+
+/* FINAL OVERRIDE: Current Affairs must match the main brand */
+html body .ca-page {
+  background: #ffffff !important;
+  color: #171719 !important;
+}
+
+html body .ca-page .ca-topbar {
+  max-width: none !important;
+  background: #0b0b0d !important;
+  color: #ffffff !important;
+  border-bottom: 2px solid #d71920 !important;
+}
+
+html body .ca-page .ca-brand,
+html body .ca-page .ca-brand b {
+  color: #ffffff !important;
+}
+
+html body .ca-page .ca-brand small {
+  color: #dddddf !important;
+}
+
+/* Remove the green-and-gold logo treatment */
+html body .ca-page .library-brand--compact-light .library-brand__emblem {
+  background: #171719 !important;
+  border: 1px solid #d71920 !important;
+  box-shadow: none !important;
+}
+
+html body .ca-page .library-brand--compact-light .library-brand__shri {
+  background: none !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  -webkit-text-stroke: 0 !important;
+  filter: none !important;
+  text-shadow: none !important;
+}
+
+html body .ca-page .library-brand--compact-light .library-brand__name {
+  color: #ffffff !important;
+  text-shadow: none !important;
+}
+
+html body .ca-page .library-brand--compact-light .library-brand__tagline {
+  color: #dddddf !important;
+}
+
+html body .ca-page .library-brand--compact-light .library-brand__caption {
+  color: #ff555b !important;
+}
+
+/* Current Affairs headings and accent colours */
+html body .ca-page .ca-hero h1,
+html body .ca-page .ca-list-heading h2,
+html body .ca-page .ca-quiz-intro h2,
+html body .ca-page .ca-status h3,
+html body .ca-page .ca-story-card h3 {
+  color: #171719 !important;
+}
+
+html body .ca-page .ca-hero h1 em,
+html body .ca-page .ca-kicker,
+html body .ca-page .ca-section-tag,
+html body .ca-page .ca-trust-row svg,
+html body .ca-page .ca-edition-bar svg,
+html body .ca-page .ca-source-link,
+html body .ca-page .ca-hero-stamp svg {
+  color: #d71920 !important;
+}
+
+html body .ca-page .ca-hero-stamp {
+  background: #ffffff !important;
+  border: 1px solid #e3e3e6 !important;
+  border-top: 3px solid #d71920 !important;
+  box-shadow: 0 8px 24px #0000000a !important;
+}
+
+html body .ca-page .ca-edition-bar,
+html body .ca-page .ca-status,
+html body .ca-page .ca-story-card,
+html body .ca-page .ca-search {
+  background: #ffffff !important;
+  border-color: #e3e3e6 !important;
+}
+
+html body .ca-page .ca-category-tabs button.is-active,
+html body .ca-page .ca-quiz-panel {
+  background: #0b0b0d !important;
+  border-color: #d71920 !important;
+}
+
+html body .ca-page .ca-category-tabs button.is-active {
+  color: #ffffff !important;
+}
+
+html body .ca-page .ca-quiz-panel {
+  border-top: 3px solid #d71920 !important;
+}
+
+html body .ca-page .ca-empty-icon {
+  background: #ffe8e9 !important;
+  color: #d71920 !important;
+}
+
+html body .ca-page .ca-footer {
+  border-top: 1px solid #e3e3e6 !important;
+  background: #ffffff !important;
+}
+
+html body .ca-page .ca-back-link,
+html body .ca-page .ca-footer a {
+  color: #d71920 !important;
+}
+
+
+/* Unified Current Affairs coming-soon page */
+html body .ca-page {
+  background: #ffffff !important;
+  color: #171719 !important;
+}
+
+html body .ca-coming-soon {
+  background: #ffffff !important;
+  color: #171719 !important;
+}
+
+html body .ca-coming-icon {
+  background: #0b0b0d !important;
+  color: #d71920 !important;
+  border: 1px solid #d71920 !important;
+  box-shadow: 0 8px 25px #00000018 !important;
+}
+
+html body .ca-coming-kicker {
+  color: #d71920 !important;
+}
+
+html body .ca-coming-soon h1 {
+  color: #171719 !important;
+}
+
+html body .ca-coming-soon h1 em {
+  color: #d71920 !important;
+}
+
+html body .ca-coming-soon p {
+  color: #55555b !important;
+}
+
+html body .ca-coming-note {
+  background: #ffffff !important;
+  color: #333338 !important;
+  border: 1px solid #dedee2 !important;
+}
+
+html body .ca-coming-note svg {
+  color: #d71920 !important;
+}
+
+html body .ca-coming-home {
+  background: #d71920 !important;
+  color: #ffffff !important;
+  border: 1px solid #d71920 !important;
+}
+
+html body .ca-footer {
+  background: #0b0b0d !important;
+  color: #ffffff !important;
+  border-top: 2px solid #d71920 !important;
+}
+
+html body .ca-footer a {
+  color: #ff555b !important;
+}
+
+html body .ca-footer span {
+  color: #dddddf !important;
+}
+
+
+
+/* FINAL BLACK WHITE RED SITE-WIDE PATCH */
+@media screen {
+
+  /* Common navigation */
+  html body .ss-navbar {
+    background: #0b0b0d !important;
+    color: #ffffff !important;
+    border-bottom: 2px solid #d71920 !important;
+  }
+
+  html body .ss-nav-links,
+  html body .ss-nav-links a {
+    color: #ffffff !important;
+  }
+
+  html body .ss-nav-links a.active,
+  html body .ss-nav-links a:hover {
+    color: #ff555b !important;
+  }
+
+  html body .ss-nav-cta,
+  html body .ss-button-gold {
+    background: #d71920 !important;
+    color: #ffffff !important;
+    border-color: #d71920 !important;
+  }
+
+  html body .ss-menu-toggle {
+    color: #ffffff !important;
+    border-color: #d71920 !important;
+  }
+
+  /* Homepage */
+  html body .ss-home {
+    background: #ffffff !important;
+    color: #19191b !important;
+  }
+
+  html body .ss-home .ss-hero,
+  html body .ss-home .ss-facility-feature,
+  html body .ss-home .ss-gallery-section,
+  html body .ss-home .ss-closing-cta,
+  html body .ss-home .ss-footer {
+    background-color: #0b0b0d !important;
+    color: #ffffff !important;
+  }
+
+  html body .ss-home .ss-hero-shade {
+    background:
+      linear-gradient(90deg, #050506f5 0%, #09090bea 48%, #09090b85 100%),
+      linear-gradient(0deg, #09090b 0%, transparent 60%) !important;
+  }
+
+  html body .ss-home .ss-eyebrow,
+  html body .ss-home .ss-hero-kicker,
+  html body .ss-home .ss-overline,
+  html body .ss-home .ss-feature-top span,
+  html body .ss-home .ss-feature-top svg,
+  html body .ss-home .ss-feature-icon,
+  html body .ss-home .ss-facility-feature > a {
+    color: #ff555b !important;
+  }
+
+  html body .ss-home .ss-feature-icon,
+  html body .ss-home .ss-facility-feature > a {
+    border-color: #d71920 !important;
+  }
+
+  html body .ss-home .ss-section,
+  html body .ss-home .ss-facilities-section,
+  html body .ss-home .ss-intro-section {
+    background: #ffffff !important;
+    color: #19191b !important;
+  }
+
+  html body .ss-home .ss-section h2,
+  html body .ss-home .ss-intro-copy h2,
+  html body .ss-home .ss-gallery-header h2 {
+    color: #0b0b0d !important;
+  }
+
+  html body .ss-home .ss-hero h1 em,
+  html body .ss-home .ss-section h2 em,
+  html body .ss-home .ss-intro-copy h2 em,
+  html body .ss-home .ss-gallery-header h2 em,
+  html body .ss-home .ss-closing-cta h2 em {
+    color: #ff555b !important;
+  }
+
+  html body .ss-home .ss-text-link,
+  html body .ss-home .ss-facility-footnote a,
+  html body .ss-home .ss-facility-footnote > svg {
+    color: #d71920 !important;
+    border-color: #d71920 !important;
+  }
+
+  html body .ss-home .ss-capacity-card {
+    background: #0b0b0d !important;
+    color: #ffffff !important;
+    border: 1px solid #d71920 !important;
+  }
+
+  html body .ss-home .ss-capacity-card svg {
+    color: #ff555b !important;
+  }
+
+  html body .ss-home .ss-photo-label {
+    background: #0b0b0d !important;
+    color: #ffffff !important;
+    border-color: #d71920 !important;
+  }
+
+  html body .ss-home .ss-gallery-arrow {
+    background: #d71920 !important;
+    color: #ffffff !important;
+    border-color: #d71920 !important;
+  }
+
+  html body .ss-home .ss-footer {
+    border-top: 2px solid #d71920 !important;
+  }
+
+  /* Current Affairs */
+  html body .ca-page,
+  html body .ca-coming-soon {
+    background: #ffffff !important;
+    color: #19191b !important;
+  }
+
+  html body .ca-page .ca-kicker,
+  html body .ca-page .ca-section-tag,
+  html body .ca-page .ca-source-link,
+  html body .ca-page .ca-back-link,
+  html body .ca-page .ca-coming-kicker,
+  html body .ca-page .ca-coming-soon h1 em {
+    color: #d71920 !important;
+  }
+
+  html body .ca-page .ca-footer {
+    background: #0b0b0d !important;
+    color: #ffffff !important;
+    border-top: 2px solid #d71920 !important;
+  }
+
+  /* Membership and Admin screen UI.
+     Print-specific membership document/card styles are intentionally untouched. */
+  html body .booking-page {
+    --bp-bg: #ffffff;
+    --bp-ink: #19191b;
+    --bp-muted: #66666c;
+    --bp-line: #e3e3e6;
+    background: #ffffff !important;
+    color: #19191b !important;
+  }
+
+  html body .booking-topbar,
+  html body .admin-toolbar {
+    background: #0b0b0d !important;
+    color: #ffffff !important;
+    border-bottom: 2px solid #d71920 !important;
+  }
+
+  html body .booking-hero,
+  html body .booking-form,
+  html body .booking-stats,
+  html body .booking-config-note,
+  html body .booking-id-note,
+  html body .booking-seat-legend,
+  html body .booking-selected-seat,
+  html body .admin-summary,
+  html body .admin-panel,
+  html body .admin-record,
+  html body .admin-login {
+    background: #ffffff !important;
+    color: #19191b !important;
+    border-color: #e3e3e6 !important;
+  }
+
+  html body .booking-kicker,
+  html body .booking-hero h1 em,
+  html body .booking-hero h1 span {
+    color: #d71920 !important;
+  }
+
+  html body .booking-submit,
+  html body .booking-print,
+  html body .booking-admin-link,
+  html body .admin-login button {
+    background: #d71920 !important;
+    color: #ffffff !important;
+    border-color: #d71920 !important;
+  }
+
+  html body .booking-seat.is-available {
+    background: #ffffff !important;
+    color: #19191b !important;
+    border-color: #d71920 !important;
+  }
+
+  html body .booking-seat.is-booked {
+    background: #eeeeef !important;
+    color: #77777d !important;
+    border-color: #dedee2 !important;
+  }
+
+  html body .booking-seat.is-selected {
+    background: #0b0b0d !important;
+    color: #ffffff !important;
+    border-color: #d71920 !important;
+  }
+
+  html body .seat-dot.available {
+    background: #d71920 !important;
+  }
+
+  html body .booking-success {
+    background: #ffffff !important;
+    color: #19191b !important;
+    border-color: #d71920 !important;
+  }
+
+  html body .booking-error {
+    background: #ffe8e9 !important;
+    color: #a90f17 !important;
+    border-color: #d71920 !important;
+  }
+
+  html body .admin-status {
+    border-color: #e3e3e6 !important;
+  }
+
+  html body button[type="submit"],
+  html body input[type="submit"] {
+    background: #d71920 !important;
+    color: #ffffff !important;
+    border-color: #d71920 !important;
+  }
+}
+
+
+/* SHREE JI — FINAL SINGLE BRAND SYSTEM V3 */
+@media screen {
+
+  :root {
+    --brand-black: #0b0b0d;
+    --brand-black-soft: #171719;
+    --brand-white: #ffffff;
+    --brand-white-soft: #f7f7f8;
+    --brand-red: #c8202f;
+    --brand-red-dark: #a51623;
+    --brand-red-light: #fff0f1;
+    --brand-text: #19191b;
+    --brand-muted: #66666c;
+    --brand-border: #e3e3e6;
+    --ss-navy: #0b0b0d;
+    --ss-ink: #19191b;
+    --ss-cream: #ffffff;
+    --ss-gold: #c8202f;
+    --ss-goldlight: #ef5965;
+  }
+
+  html, body, #root {
+    background: #ffffff !important;
+    color: #19191b !important;
+  }
+
+  /* ONE HEADER ON EVERY ROUTE */
+  html body .ss-navbar {
+    background: #0b0b0d !important;
+    color: #ffffff !important;
+    border-bottom: 2px solid #c8202f !important;
+    box-shadow: 0 6px 22px #0002 !important;
+  }
+
+  html body .ss-navbar .ss-brand-emblem {
+    background: #171719 !important;
+    border: 1px solid #c8202f !important;
+    box-shadow: none !important;
+  }
+
+  html body .ss-navbar .ss-brand-shri {
+    background: none !important;
+    color: #ffffff !important;
+    -webkit-text-fill-color: #ffffff !important;
+    -webkit-text-stroke: 0 !important;
+    text-shadow: none !important;
+    filter: none !important;
+  }
+
+  html body .ss-navbar .ss-brand-ai {
+    color: #ef5965 !important;
+  }
+
+  html body .ss-navbar .ss-brand-words strong,
+  html body .ss-navbar .ss-brand-words strong span {
+    color: #ffffff !important;
+    -webkit-text-fill-color: #ffffff !important;
+    text-shadow: none !important;
+  }
+
+  html body .ss-navbar .ss-brand-words small {
+    color: #d4d4d8 !important;
+  }
+
+  html body .ss-navbar .ss-nav-links,
+  html body .ss-navbar .ss-nav-links > a {
+    color: #ffffff !important;
+  }
+
+  html body .ss-navbar .ss-nav-links > a.active,
+  html body .ss-navbar .ss-nav-links > a:hover {
+    color: #ef5965 !important;
+  }
+
+  html body .ss-navbar .ss-nav-links > a.active::after {
+    background: #c8202f !important;
+  }
+
+  html body .ss-navbar .ss-nav-cta,
+  html body .ss-home .ss-button-gold,
+  html body .ss-home .ss-cta-button {
+    background: #c8202f !important;
+    color: #ffffff !important;
+    border: 1px solid #c8202f !important;
+    box-shadow: 0 6px 18px #c8202f25 !important;
+  }
+
+  html body .ss-navbar .ss-nav-cta:hover,
+  html body .ss-home .ss-button-gold:hover {
+    background: #a51623 !important;
+  }
+
+  html body .ss-navbar .ss-menu-toggle {
+    color: #ffffff !important;
+    border: 1px solid #c8202f !important;
+    background: #171719 !important;
+  }
+
+  @media (max-width: 760px) {
+    html body .ss-navbar .ss-nav-links {
+      background: #0b0b0d !important;
+      border: 1px solid #c8202f !important;
+    }
+  }
+
+  /* HOMEPAGE — black, white and red */
+  html body .ss-home {
+    background: #ffffff !important;
+    color: #19191b !important;
+  }
+
+  /* Keep the cinematic library image, but remove its dominant gold cast. */
+  html body .ss-home .ss-hero-image {
+    filter: grayscale(100%) contrast(1.08) !important;
+  }
+
+  html body .ss-home .ss-hero-shade {
+    background:
+      linear-gradient(90deg, #050506f2 0%, #09090be8 48%, #09090b80 100%),
+      linear-gradient(0deg, #09090b 0%, transparent 62%) !important;
+  }
+
+  html body .ss-home .ss-hero {
+    background: #0b0b0d !important;
+    color: #ffffff !important;
+  }
+
+  html body .ss-home .ss-hero-signature-quote {
+    color: #ffffff !important;
+    text-shadow: 0 2px 16px #0009 !important;
+  }
+
+  html body .ss-home .ss-hero h1 em,
+  html body .ss-home .ss-section h2 em,
+  html body .ss-home .ss-intro-copy h2 em,
+  html body .ss-home .ss-gallery-header h2 em,
+  html body .ss-home .ss-closing-cta h2 em {
+    color: #ef5965 !important;
+  }
+
+  html body .ss-home .ss-eyebrow,
+  html body .ss-home .ss-hero-kicker,
+  html body .ss-home .ss-overline {
+    color: #c8202f !important;
+  }
+
+  html body .ss-home .ss-eyebrow span {
+    background: #c8202f !important;
+  }
+
+  html body .ss-home .ss-section,
+  html body .ss-home .ss-facilities-section,
+  html body .ss-home .ss-intro-section {
+    background: #ffffff !important;
+    color: #19191b !important;
+  }
+
+  html body .ss-home .ss-section h2,
+  html body .ss-home .ss-intro-copy h2,
+  html body .ss-home .ss-gallery-header h2 {
+    color: #0b0b0d !important;
+  }
+
+  html body .ss-home .ss-gold-rule {
+    background: #c8202f !important;
+    border-color: #c8202f !important;
+  }
+
+  html body .ss-home .ss-photo-label {
+    background: #0b0b0d !important;
+    color: #ffffff !important;
+    border-color: #c8202f !important;
+  }
+
+  html body .ss-home .ss-label-mark {
+    color: #ef5965 !important;
+  }
+
+  html body .ss-home .ss-intro-signature,
+  html body .ss-home .ss-intro-signature i {
+    color: #c8202f !important;
+  }
+
+  html body .ss-home .ss-text-link,
+  html body .ss-home .ss-facility-footnote a {
+    color: #c8202f !important;
+    border-color: #c8202f !important;
+  }
+
+  html body .ss-home .ss-capacity-card {
+    background: #0b0b0d !important;
+    color: #ffffff !important;
+    border: 1px solid #c8202f !important;
+  }
+
+  html body .ss-home .ss-capacity-card svg,
+  html body .ss-home .ss-live-dot {
+    color: #ef5965 !important;
+  }
+
+  html body .ss-home .ss-facility-feature,
+  html body .ss-home .ss-gallery-section,
+  html body .ss-home .ss-closing-cta {
+    background: #0b0b0d !important;
+    color: #ffffff !important;
+  }
+
+  html body .ss-home .ss-feature-top span,
+  html body .ss-home .ss-feature-top svg,
+  html body .ss-home .ss-feature-icon,
+  html body .ss-home .ss-facility-feature > a {
+    color: #ef5965 !important;
+    border-color: #c8202f !important;
+  }
+
+  html body .ss-home .ss-gallery-arrow {
+    background: #c8202f !important;
+    color: #ffffff !important;
+    border-color: #c8202f !important;
+  }
+
+  /*
+    IMPORTANT:
+    Do not set backgrounds, text colours or gradients on .ss-facility-card.
+    The ten tint-* feature cards retain their individual existing colours.
+  */
+
+  /* CONTACT FOOTER — remove old blue gradients and gold decoration */
+  html body .ss-home footer.ss-footer {
+    position: relative !important;
+    background: #0b0b0d !important;
+    background-image: none !important;
+    color: #ffffff !important;
+    border-top: 2px solid #c8202f !important;
+  }
+
+  html body .ss-home footer.ss-footer::before,
+  html body .ss-home footer.ss-footer::after {
+    display: none !important;
+    content: none !important;
+    background: none !important;
+    animation: none !important;
+  }
+
+  html body .ss-home footer.ss-footer .ss-brand-words strong,
+  html body .ss-home footer.ss-footer .ss-brand-words strong span {
+    color: #ffffff !important;
+    -webkit-text-fill-color: #ffffff !important;
+    text-shadow: none !important;
+  }
+
+  html body .ss-home footer.ss-footer .ss-brand-words small {
+    color: #d1d1d5 !important;
+  }
+
+  html body .ss-home footer.ss-footer .library-brand {
+    --lb-copy: #ffffff !important;
+    --lb-subtle: #d1d1d5 !important;
+    --lb-gold: #ef5965 !important;
+  }
+
+  html body .ss-home footer.ss-footer .library-brand__name,
+  html body .ss-home footer.ss-footer .library-brand__tagline {
+    color: #ffffff !important;
+    text-shadow: none !important;
+  }
+
+  html body .ss-home footer.ss-footer .ss-contact-panel,
+  html body .ss-home footer.ss-footer .ss-developer-credit {
+    background: #111114 !important;
+    background-image: none !important;
+    color: #ffffff !important;
+    border: 1px solid #39393f !important;
+    box-shadow: none !important;
+  }
+
+  html body .ss-home footer.ss-footer .ss-contact-panel-heading h2,
+  html body .ss-home footer.ss-footer .ss-developer-credit p,
+  html body .ss-home footer.ss-footer .ss-developer-credit strong {
+    color: #ffffff !important;
+  }
+
+  html body .ss-home footer.ss-footer .ss-contact-panel-heading p,
+  html body .ss-home footer.ss-footer .ss-developer-credit small {
+    color: #c9c9ce !important;
+  }
+
+  html body .ss-home footer.ss-footer .ss-contact-panel-kicker,
+  html body .ss-home footer.ss-footer .ss-developer-kicker {
+    color: #ef5965 !important;
+  }
+
+  html body .ss-home footer.ss-footer .ss-contact-location-link {
+    background: #c8202f !important;
+    color: #ffffff !important;
+    border: 1px solid #c8202f !important;
+    box-shadow: none !important;
+  }
+
+  html body .ss-home footer.ss-footer .ss-footer-address-en,
+  html body .ss-home footer.ss-footer .ss-footer-contact-card {
+    background: #171719 !important;
+    background-image: none !important;
+    color: #ffffff !important;
+    border: 1px solid #39393f !important;
+    box-shadow: none !important;
+  }
+
+  html body .ss-home footer.ss-footer .ss-footer-address-copy strong,
+  html body .ss-home footer.ss-footer .ss-footer-contact-copy strong {
+    color: #ffffff !important;
+  }
+
+  html body .ss-home footer.ss-footer .ss-footer-address-copy p,
+  html body .ss-home footer.ss-footer .ss-footer-address-copy small,
+  html body .ss-home footer.ss-footer .ss-footer-contact-copy small,
+  html body .ss-home footer.ss-footer .ss-footer-contact-copy em {
+    color: #c9c9ce !important;
+  }
+
+  html body .ss-home footer.ss-footer .ss-footer-address-pin,
+  html body .ss-home footer.ss-footer .ss-footer-contact-icon {
+    background: #c8202f !important;
+    color: #ffffff !important;
+    border: 1px solid #c8202f !important;
+    box-shadow: none !important;
+  }
+
+  html body .ss-home footer.ss-footer .ss-footer-whatsapp-icon {
+    background: #c8202f !important;
+    color: #ffffff !important;
+  }
+
+  html body .ss-home footer.ss-footer .ss-footer-contact-arrow {
+    color: #ef5965 !important;
+  }
+
+  html body .ss-home footer.ss-footer > p,
+  html body .ss-home footer.ss-footer > nav,
+  html body .ss-home footer.ss-footer > nav a {
+    color: #e5e5e8 !important;
+  }
+
+  html body .ss-home footer.ss-footer > nav a:hover {
+    color: #ef5965 !important;
+  }
+
+  html body .ss-home footer.ss-footer .ss-copyright {
+    color: #a9a9b0 !important;
+    border-top-color: #39393f !important;
+  }
+
+  /* CURRENT AFFAIRS */
+  html body .ca-page,
+  html body .ca-coming-soon {
+    background: #ffffff !important;
+    color: #19191b !important;
+  }
+
+  html body .ca-topbar {
+    background: #0b0b0d !important;
+    color: #ffffff !important;
+    border-bottom: 2px solid #c8202f !important;
+  }
+
+  html body .ca-coming-icon {
+    background: #0b0b0d !important;
+    color: #ef5965 !important;
+    border: 1px solid #c8202f !important;
+  }
+
+  html body .ca-coming-kicker,
+  html body .ca-coming-soon h1 em,
+  html body .ca-kicker,
+  html body .ca-section-tag,
+  html body .ca-back-link {
+    color: #c8202f !important;
+  }
+
+  html body .ca-coming-home {
+    background: #c8202f !important;
+    color: #ffffff !important;
+    border-color: #c8202f !important;
+  }
+
+  html body .ca-footer {
+    background: #0b0b0d !important;
+    color: #ffffff !important;
+    border-top: 2px solid #c8202f !important;
+  }
+
+  /* MEMBERSHIP — one visual language, keep booking behaviour intact */
+  html body .booking-page {
+    background: #ffffff !important;
+    color: #19191b !important;
+    --bp-bg: #ffffff;
+    --bp-ink: #19191b;
+    --bp-muted: #66666c;
+    --bp-line: #e3e3e6;
+  }
+
+  /* Keep useful home/admin actions, remove the second logo from the sub-header. */
+  html body .booking-topbar {
+    min-height: 48px !important;
+    padding: 7px 16px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 12px !important;
+    background: #0b0b0d !important;
+    color: #ffffff !important;
+    border-bottom: 1px solid #c8202f !important;
+    box-shadow: none !important;
+  }
+
+  html body .booking-topbar .booking-brand,
+  html body .booking-topbar .library-brand {
+    display: none !important;
+  }
+
+  html body .booking-topbar .booking-back {
+    color: #ffffff !important;
+  }
+
+  html body .booking-topbar .booking-admin-link {
+    background: #c8202f !important;
+    color: #ffffff !important;
+    border-color: #c8202f !important;
+  }
+
+  html body .booking-hero,
+  html body .booking-form,
+  html body .booking-stats,
+  html body .booking-config-note,
+  html body .booking-id-note,
+  html body .booking-seat-legend,
+  html body .booking-selected-seat,
+  html body .admin-summary,
+  html body .admin-panel,
+  html body .admin-record,
+  html body .admin-login {
+    background: #ffffff !important;
+    background-image: none !important;
+    color: #19191b !important;
+    border-color: #e3e3e6 !important;
+    box-shadow: 0 8px 25px #00000008 !important;
+  }
+
+  html body .booking-hero h1,
+  html body .booking-form h2,
+  html body .booking-form h3,
+  html body .admin-panel h2,
+  html body .admin-panel h3 {
+    color: #0b0b0d !important;
+  }
+
+  html body .booking-kicker,
+  html body .booking-hero h1 em,
+  html body .booking-hero h1 span {
+    color: #c8202f !important;
+  }
+
+  html body .booking-page input,
+  html body .booking-page select,
+  html body .booking-page textarea,
+  html body .admin-login input,
+  html body .admin-search input {
+    background: #ffffff !important;
+    color: #19191b !important;
+    border: 1px solid #d8d8dd !important;
+    box-shadow: none !important;
+    accent-color: #c8202f !important;
+  }
+
+  html body .booking-page input:focus,
+  html body .booking-page select:focus,
+  html body .booking-page textarea:focus {
+    border-color: #c8202f !important;
+    outline: 2px solid #c8202f22 !important;
+  }
+
+  html body .booking-submit,
+  html body .booking-print,
+  html body .booking-admin-link,
+  html body .admin-login button {
+    background: #c8202f !important;
+    color: #ffffff !important;
+    border-color: #c8202f !important;
+    box-shadow: none !important;
+  }
+
+  html body .booking-seat.is-available {
+    background: #ffffff !important;
+    color: #19191b !important;
+    border-color: #c8202f !important;
+  }
+
+  html body .booking-seat.is-booked {
+    background: #eeeeef !important;
+    color: #77777d !important;
+    border-color: #dedee2 !important;
+  }
+
+  html body .booking-seat.is-selected {
+    background: #0b0b0d !important;
+    color: #ffffff !important;
+    border-color: #c8202f !important;
+  }
+
+  html body .seat-dot.available {
+    background: #c8202f !important;
+  }
+
+  html body .booking-success {
+    background: #ffffff !important;
+    color: #19191b !important;
+    border: 1px solid #c8202f !important;
+  }
+
+  html body .booking-error {
+    background: #fff0f1 !important;
+    color: #a51623 !important;
+    border: 1px solid #c8202f !important;
+  }
+
+  html body .admin-toolbar {
+    background: #0b0b0d !important;
+    color: #ffffff !important;
+    border-bottom: 2px solid #c8202f !important;
+  }
+
+  html body .admin-status {
+    border-color: #e3e3e6 !important;
+  }
+
+  html body button[type="submit"],
+  html body input[type="submit"] {
+    background: #c8202f !important;
+    color: #ffffff !important;
+    border-color: #c8202f !important;
+  }
+}

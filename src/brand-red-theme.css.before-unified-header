@@ -1,0 +1,564 @@
+/* SHRI JI LIBRARY — Unified Black, White & Red Brand */
+
+:root {
+  --brand-black: #0b0b0d;
+  --brand-black-soft: #171719;
+  --brand-white: #ffffff;
+  --brand-white-soft: #f7f7f8;
+  --brand-red: #d71920;
+  --brand-red-dark: #a90f17;
+  --brand-red-light: #ffe8e9;
+  --brand-text: #19191b;
+  --brand-muted: #66666c;
+  --brand-border: #e3e3e6;
+
+  --ss-navy: #0b0b0d;
+  --ss-ink: #19191b;
+  --ss-cream: #ffffff;
+  --ss-gold: #d71920;
+  --ss-goldlight: #ff555b;
+}
+
+/* Main page */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--brand-white);
+  color: var(--brand-text);
+}
+
+.ss-home {
+  background: var(--brand-white);
+  color: var(--brand-text);
+}
+
+/* Unified homepage header */
+.ss-navbar {
+  background: var(--brand-black) !important;
+  color: var(--brand-white);
+  border-bottom: 2px solid var(--brand-red);
+  box-shadow: 0 6px 24px #0002;
+}
+
+.ss-brand-words strong,
+.ss-brand-words strong span {
+  color: var(--brand-white) !important;
+  text-shadow: none;
+}
+
+.ss-brand-words small {
+  color: #d6d6d9 !important;
+}
+
+.ss-brand-emblem {
+  background: var(--brand-black-soft) !important;
+  border-color: var(--brand-red) !important;
+}
+
+.ss-brand-shri {
+  background: none !important;
+  color: var(--brand-white) !important;
+  -webkit-text-fill-color: var(--brand-white) !important;
+  -webkit-text-stroke: 0 !important;
+  filter: none !important;
+  text-shadow: none !important;
+}
+
+.ss-brand-ai {
+  color: var(--brand-red) !important;
+}
+
+.ss-nav-links {
+  color: var(--brand-white);
+}
+
+.ss-nav-links > a:not(.ss-nav-cta):hover,
+.ss-nav-links > a.active {
+  color: #ff555b !important;
+}
+
+.ss-nav-links > a.active:after {
+  background: var(--brand-red) !important;
+}
+
+.ss-nav-cta,
+.ss-button-gold {
+  background: var(--brand-red) !important;
+  color: var(--brand-white) !important;
+  border: 1px solid var(--brand-red);
+  box-shadow: 0 6px 18px #d7192028;
+}
+
+.ss-nav-cta:hover,
+.ss-button-gold:hover {
+  background: var(--brand-red-dark) !important;
+}
+
+.ss-menu-toggle {
+  color: var(--brand-white) !important;
+  border-color: var(--brand-red) !important;
+}
+
+/* Hero remains cinematic; add a subtle red accent */
+.ss-hero {
+  background-color: var(--brand-black);
+}
+
+.ss-hero:before {
+  background: var(--brand-red) !important;
+}
+
+.ss-hero h1 em,
+.ss-section h2 em,
+.ss-intro-copy h2 em,
+.ss-gallery-header h2 em,
+.ss-closing-cta h2 em {
+  color: #ff555b !important;
+}
+
+.ss-eyebrow,
+.ss-hero-kicker,
+.ss-overline {
+  color: var(--brand-red) !important;
+}
+
+.ss-eyebrow span {
+  background: var(--brand-red) !important;
+}
+
+/* White content sections */
+.ss-section,
+.ss-facilities-section {
+  background: var(--brand-white) !important;
+  color: var(--brand-text);
+}
+
+.ss-section h2,
+.ss-intro-copy h2,
+.ss-gallery-header h2 {
+  color: var(--brand-black);
+}
+
+.ss-facility-feature,
+.ss-gallery-section,
+.ss-closing-cta {
+  background: var(--brand-black) !important;
+}
+
+.ss-facility-feature {
+  border-top: 3px solid var(--brand-red);
+}
+
+.ss-facility-card {
+  background: var(--brand-white-soft) !important;
+  border: 1px solid var(--brand-border) !important;
+  color: var(--brand-text);
+}
+
+.ss-text-link,
+.ss-facility-footnote a {
+  color: var(--brand-red) !important;
+  border-color: var(--brand-red);
+}
+
+.ss-round-link {
+  color: var(--brand-white) !important;
+  border-color: var(--brand-red) !important;
+}
+
+.ss-footer {
+  background: var(--brand-black) !important;
+  color: var(--brand-white);
+  border-top: 2px solid var(--brand-red);
+}
+
+/* One navigation style across routed pages */
+.site-route-tabs {
+  background: var(--brand-black) !important;
+  border-bottom: 2px solid var(--brand-red) !important;
+}
+
+.site-route-tabs a {
+  color: var(--brand-white) !important;
+}
+
+.site-route-tabs a:hover,
+.site-route-tabs a.is-active {
+  background: #d7192020 !important;
+  color: #ff555b !important;
+}
+
+/* One shared logo appearance everywhere */
+.library-brand {
+  --lb-copy: #ffffff;
+  --lb-subtle: #d1d1d5;
+  --lb-gold: #ff555b;
+  color: var(--brand-white) !important;
+}
+
+.library-brand__emblem,
+.library-brand--compact-light .library-brand__emblem {
+  background: var(--brand-black-soft) !important;
+  border: 1px solid var(--brand-red) !important;
+  box-shadow: none !important;
+}
+
+.library-brand__shri {
+  background: none !important;
+  color: var(--brand-white) !important;
+  -webkit-text-fill-color: var(--brand-white) !important;
+  -webkit-text-stroke: 0 !important;
+  filter: none !important;
+  text-shadow: none !important;
+}
+
+.library-brand__name,
+.library-brand--compact-light .library-brand__name {
+  color: var(--brand-white) !important;
+  text-shadow: none !important;
+}
+
+.library-brand__tagline,
+.library-brand--compact-light .library-brand__tagline {
+  color: #e1e1e4 !important;
+}
+
+.library-brand__caption,
+.library-brand--compact-light .library-brand__caption {
+  color: #ff555b !important;
+}
+
+/* Current Affairs page */
+.ca-page {
+  --ca-ink: #19191b;
+  --ca-muted: #66666c;
+  --ca-gold: #d71920;
+  --ca-gold-dark: #a90f17;
+  --ca-paper: #ffffff;
+  --ca-line: #e3e3e6;
+  background: var(--brand-white) !important;
+  color: var(--brand-text) !important;
+}
+
+.ca-topbar {
+  background: var(--brand-black);
+  border-bottom: 2px solid var(--brand-red) !important;
+}
+
+.ca-brand {
+  color: var(--brand-white) !important;
+}
+
+.ca-brand small {
+  color: #d1d1d5 !important;
+}
+
+.ca-back-link,
+.ca-footer a {
+  color: var(--brand-red) !important;
+}
+
+.ca-hero-stamp,
+.ca-edition-bar,
+.ca-status,
+.ca-story-card,
+.ca-search {
+  background: var(--brand-white) !important;
+  border-color: var(--brand-border) !important;
+}
+
+.ca-hero-stamp svg,
+.ca-kicker,
+.ca-kicker span,
+.ca-trust-row svg,
+.ca-section-tag,
+.ca-edition-bar svg,
+.ca-source-link {
+  color: var(--brand-red) !important;
+}
+
+.ca-hero-stamp {
+  border-top: 3px solid var(--brand-red) !important;
+}
+
+.ca-hero h1 em {
+  color: var(--brand-red) !important;
+}
+
+.ca-category-tabs button.is-active,
+.ca-quiz-panel {
+  background: var(--brand-black) !important;
+  border-color: var(--brand-red) !important;
+}
+
+.ca-category-tabs button.is-active {
+  color: var(--brand-white) !important;
+}
+
+.ca-quiz-panel {
+  border-top: 3px solid var(--brand-red);
+}
+
+.ca-empty-icon {
+  background: var(--brand-red-light) !important;
+  color: var(--brand-red) !important;
+}
+
+.ca-status h3,
+.ca-story-card h3 {
+  color: var(--brand-black) !important;
+}
+
+/* Registration, Admin and form controls */
+input,
+select,
+textarea {
+  accent-color: var(--brand-red);
+}
+
+button {
+  accent-color: var(--brand-red);
+}
+
+button[type="submit"],
+input[type="submit"] {
+  background-color: var(--brand-red);
+  border-color: var(--brand-red);
+  color: var(--brand-white);
+}
+
+button[type="submit"]:hover,
+input[type="submit"]:hover {
+  background-color: var(--brand-red-dark);
+}
+
+/* Prevent logo and navigation overflow on small screens */
+.ss-brand,
+.library-brand {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.ss-brand-words,
+.library-brand__content {
+  min-width: 0;
+}
+
+.ss-brand-words strong,
+.library-brand__wordmark {
+  white-space: nowrap;
+}
+
+@media (max-width: 760px) {
+  .ss-navbar {
+    gap: 12px;
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  .ss-brand {
+    min-width: 0;
+  }
+
+  .ss-brand-words small {
+    letter-spacing: 0.5px;
+    font-size: 6px;
+  }
+
+  .ca-topbar {
+    padding: 16px;
+  }
+
+  .ca-hero {
+    padding: 38px 18px 30px;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 24px;
+  }
+
+  .ca-content-wrap {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}
+
+/* FINAL OVERRIDE: Current Affairs must match the main brand */
+html body .ca-page {
+  background: #ffffff !important;
+  color: #171719 !important;
+}
+
+html body .ca-page .ca-topbar {
+  max-width: none !important;
+  background: #0b0b0d !important;
+  color: #ffffff !important;
+  border-bottom: 2px solid #d71920 !important;
+}
+
+html body .ca-page .ca-brand,
+html body .ca-page .ca-brand b {
+  color: #ffffff !important;
+}
+
+html body .ca-page .ca-brand small {
+  color: #dddddf !important;
+}
+
+/* Remove the green-and-gold logo treatment */
+html body .ca-page .library-brand--compact-light .library-brand__emblem {
+  background: #171719 !important;
+  border: 1px solid #d71920 !important;
+  box-shadow: none !important;
+}
+
+html body .ca-page .library-brand--compact-light .library-brand__shri {
+  background: none !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  -webkit-text-stroke: 0 !important;
+  filter: none !important;
+  text-shadow: none !important;
+}
+
+html body .ca-page .library-brand--compact-light .library-brand__name {
+  color: #ffffff !important;
+  text-shadow: none !important;
+}
+
+html body .ca-page .library-brand--compact-light .library-brand__tagline {
+  color: #dddddf !important;
+}
+
+html body .ca-page .library-brand--compact-light .library-brand__caption {
+  color: #ff555b !important;
+}
+
+/* Current Affairs headings and accent colours */
+html body .ca-page .ca-hero h1,
+html body .ca-page .ca-list-heading h2,
+html body .ca-page .ca-quiz-intro h2,
+html body .ca-page .ca-status h3,
+html body .ca-page .ca-story-card h3 {
+  color: #171719 !important;
+}
+
+html body .ca-page .ca-hero h1 em,
+html body .ca-page .ca-kicker,
+html body .ca-page .ca-section-tag,
+html body .ca-page .ca-trust-row svg,
+html body .ca-page .ca-edition-bar svg,
+html body .ca-page .ca-source-link,
+html body .ca-page .ca-hero-stamp svg {
+  color: #d71920 !important;
+}
+
+html body .ca-page .ca-hero-stamp {
+  background: #ffffff !important;
+  border: 1px solid #e3e3e6 !important;
+  border-top: 3px solid #d71920 !important;
+  box-shadow: 0 8px 24px #0000000a !important;
+}
+
+html body .ca-page .ca-edition-bar,
+html body .ca-page .ca-status,
+html body .ca-page .ca-story-card,
+html body .ca-page .ca-search {
+  background: #ffffff !important;
+  border-color: #e3e3e6 !important;
+}
+
+html body .ca-page .ca-category-tabs button.is-active,
+html body .ca-page .ca-quiz-panel {
+  background: #0b0b0d !important;
+  border-color: #d71920 !important;
+}
+
+html body .ca-page .ca-category-tabs button.is-active {
+  color: #ffffff !important;
+}
+
+html body .ca-page .ca-quiz-panel {
+  border-top: 3px solid #d71920 !important;
+}
+
+html body .ca-page .ca-empty-icon {
+  background: #ffe8e9 !important;
+  color: #d71920 !important;
+}
+
+html body .ca-page .ca-footer {
+  border-top: 1px solid #e3e3e6 !important;
+  background: #ffffff !important;
+}
+
+html body .ca-page .ca-back-link,
+html body .ca-page .ca-footer a {
+  color: #d71920 !important;
+}
+
+
+/* Unified Current Affairs coming-soon page */
+html body .ca-page {
+  background: #ffffff !important;
+  color: #171719 !important;
+}
+
+html body .ca-coming-soon {
+  background: #ffffff !important;
+  color: #171719 !important;
+}
+
+html body .ca-coming-icon {
+  background: #0b0b0d !important;
+  color: #d71920 !important;
+  border: 1px solid #d71920 !important;
+  box-shadow: 0 8px 25px #00000018 !important;
+}
+
+html body .ca-coming-kicker {
+  color: #d71920 !important;
+}
+
+html body .ca-coming-soon h1 {
+  color: #171719 !important;
+}
+
+html body .ca-coming-soon h1 em {
+  color: #d71920 !important;
+}
+
+html body .ca-coming-soon p {
+  color: #55555b !important;
+}
+
+html body .ca-coming-note {
+  background: #ffffff !important;
+  color: #333338 !important;
+  border: 1px solid #dedee2 !important;
+}
+
+html body .ca-coming-note svg {
+  color: #d71920 !important;
+}
+
+html body .ca-coming-home {
+  background: #d71920 !important;
+  color: #ffffff !important;
+  border: 1px solid #d71920 !important;
+}
+
+html body .ca-footer {
+  background: #0b0b0d !important;
+  color: #ffffff !important;
+  border-top: 2px solid #d71920 !important;
+}
+
+html body .ca-footer a {
+  color: #ff555b !important;
+}
+
+html body .ca-footer span {
+  color: #dddddf !important;
+}
+
