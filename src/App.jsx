@@ -21,6 +21,18 @@ function readRoute() {
   return '/';
 }
 
+// Website pehli baar khulne par hamesha Home dikhe; baaki pages sirf buttons se khulein.
+// (Isi tab mein reload karne par user usi page par rehta hai.)
+try {
+  if (!sessionStorage.getItem('ss-started')) {
+    sessionStorage.setItem('ss-started', '1');
+    const first = window.location.hash.replace(/^#/, '');
+    if (first && first !== '/' && !first.startsWith('/admin') && !first.startsWith('/ca-admin')) {
+      window.history.replaceState(null, '', window.location.pathname + window.location.search + '#/');
+    }
+  }
+} catch (e) { /* storage band ho to koi dikkat nahi */ }
+
 export default function App() {
   const [route, setRoute] = useState(readRoute);
   useEffect(() => {

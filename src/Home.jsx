@@ -23,13 +23,11 @@ const gallery = [
 ];
 
 export default function Home({ page = 'home' }) {
-  useEffect(() => {
-    const id = page === 'about' ? 'about' : page === 'contact' ? 'contact' : null;
-    if (id) setTimeout(() => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' }), 120);
-  }, [page]);
+  useEffect(() => { window.scrollTo(0, 0); }, [page]);
 
   return (
     <main className="lx">
+      {page === 'home' && (<>
       <section className="lx-hero">
         <img className="lx-hero-img" src={heroImg} alt="श्री जी लाइब्रेरी का अध्ययन कक्ष" />
         <div className="lx-hero-shade" />
@@ -71,6 +69,10 @@ export default function Home({ page = 'home' }) {
         </a>
       </section>
 
+      </>)}
+
+      {page === 'about' && (<>
+      <section className="lx-sec lx-pagehead"><div className="lx-head"><h1>हमारे बारे में</h1></div></section>
       <section className="lx-sec lx-about" id="about">
         <div className="lx-photo lx-card"><img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=1200&q=85" alt="व्यवस्थित अध्ययन कक्ष" loading="lazy" /></div>
         <div className="lx-head">
@@ -93,6 +95,9 @@ export default function Home({ page = 'home' }) {
         </div>
       </section>
 
+      </>)}
+
+      {page !== 'contact' && (
       <section className="lx-sec">
         <div className="lx-final">
           <h2>आज से अपनी तैयारी को नई दिशा दें</h2>
@@ -101,13 +106,30 @@ export default function Home({ page = 'home' }) {
         </div>
       </section>
 
-      <footer className="lx-sec lx-foot" id="contact">
-        <div className="lx-head"><h2>हमसे जुड़ें</h2><p>Ward No. 3, Gurudwara Road, Bishnoi Mohalla, Suratgarh, Rajasthan – 335804. Landmark: 100 metres from Paras Hyundai.</p></div>
+      )}
+
+      {page === 'contact' && (<>
+      <section className="lx-sec lx-pagehead"><div className="lx-head"><h1>हमसे जुड़ें</h1><p>लाइब्रेरी आइए, कॉल कीजिए या WhatsApp पर पूछिए।</p></div></section>
+      <section className="lx-sec lx-contactwrap">
+        <address className="lx-card lx-addr">
+          <span className="lx-ico"><MapPin size={26} /></span>
+          <div>
+            <h2>SHREE JI LIBRARY</h2>
+            <p>Ward No. 3, Gurudwara Road,<br />Bishnoi Mohalla,<br />Suratgarh, Rajasthan – 335804</p>
+            <span className="lx-chip">Landmark: 100 metres from Paras Hyundai</span>
+            <a className="lx-btn lx-btn-red" href="https://maps.app.goo.gl/92QvGfjMJF5mAWTL7?g_st=ac" target="_blank" rel="noopener noreferrer">Google Maps पर खोलें <ArrowUpRight size={18} /></a>
+          </div>
+        </address>
         <div className="lx-contact">
-          <a className="lx-card" href="https://maps.app.goo.gl/92QvGfjMJF5mAWTL7?g_st=ac" target="_blank" rel="noopener noreferrer"><span className="lx-ico"><MapPin size={22} /></span><b>लाइब्रेरी की लोकेशन</b><ArrowUpRight size={18} /></a>
+          <div className="lx-card"><span className="lx-ico"><Clock3 size={22} /></span><b>सुबह 6:00 – रात 12:00</b></div>
           <a className="lx-card" href="tel:+918306349753"><span className="lx-ico"><Phone size={22} /></span><b>8306349753</b><ArrowUpRight size={18} /></a>
           <a className="lx-card" href="https://wa.me/919664050399" target="_blank" rel="noopener noreferrer"><span className="lx-ico"><MessageCircle size={22} /></span><b>WhatsApp 9664050399</b><ArrowUpRight size={18} /></a>
         </div>
+      </section>
+      </>)}
+
+      <footer className="lx-sec lx-foot">
+        <nav className="lx-fnav"><a href="#/">Home</a><a href="#/about">About Us</a><a href="#/current-affairs">Current Affairs</a><a href="#/register">Membership</a><a href="#/contact">Contact Us</a></nav>
         <p className="lx-credit">Website designed &amp; developed by <strong>Sartaj Soni</strong> · © {new Date().getFullYear()} श्री जी लाइब्रेरी</p>
       </footer>
     </main>
