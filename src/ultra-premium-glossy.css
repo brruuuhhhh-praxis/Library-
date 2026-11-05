@@ -1,0 +1,420 @@
+/* =====================================================================
+   SHRI JI LIBRARY - ULTRA PREMIUM GLOSSY LAYER
+   Sabse last mein import hota hai (main.jsx). Sirf look badalta hai.
+   Hatana ho to main.jsx se is file ki import line delete kar do.
+   ===================================================================== */
+
+:root {
+  --g-black: #07070a;
+  --g-black-2: #101015;
+  --g-red: #e11d2a;
+  --g-red-deep: #9d0b14;
+  --g-red-glow: #ff4b55;
+  --g-white: #ffffff;
+  --g-paper: #f6f6f8;
+  --g-ink: #15151a;
+  --g-muted: #6b6b75;
+
+  --g-glass: linear-gradient(145deg, rgba(255,255,255,.82), rgba(255,255,255,.52));
+  --g-glass-dark: linear-gradient(145deg, rgba(30,30,38,.78), rgba(10,10,14,.62));
+  --g-border: rgba(255,255,255,.75);
+  --g-border-dark: rgba(255,255,255,.14);
+  --g-shine: linear-gradient(115deg, transparent 30%, rgba(255,255,255,.55) 48%, transparent 66%);
+
+  --g-shadow-sm: 0 2px 6px rgba(15,15,25,.06), 0 10px 24px rgba(15,15,25,.08);
+  --g-shadow-md: 0 4px 10px rgba(15,15,25,.06), 0 18px 44px rgba(15,15,25,.14);
+  --g-shadow-lg: 0 8px 18px rgba(15,15,25,.08), 0 30px 70px rgba(15,15,25,.2);
+  --g-shadow-red: 0 10px 28px rgba(225,29,42,.38), 0 2px 0 rgba(255,255,255,.35) inset;
+  --g-ease: cubic-bezier(.22,.8,.24,1);
+}
+
+/* ---------- Page background: soft studio light ---------- */
+html body {
+  background:
+    radial-gradient(900px 500px at 8% -5%, rgba(225,29,42,.10), transparent 60%),
+    radial-gradient(800px 520px at 100% 20%, rgba(20,20,30,.07), transparent 60%),
+    linear-gradient(180deg, #fbfbfd 0%, #f1f1f5 100%) !important;
+  background-attachment: fixed !important;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+html body #root .ss-home { background: transparent !important; }
+
+::selection { background: var(--g-red); color: #fff; }
+
+/* ---------- Navbar: black glass with red hairline ---------- */
+html body #root .ss-navbar {
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,0) 45%),
+    linear-gradient(135deg, rgba(10,10,14,.92), rgba(24,24,30,.86)) !important;
+  -webkit-backdrop-filter: blur(22px) saturate(160%);
+  backdrop-filter: blur(22px) saturate(160%);
+  border-bottom: 1px solid rgba(255,255,255,.12) !important;
+  box-shadow:
+    0 1px 0 rgba(255,255,255,.14) inset,
+    0 -2px 0 var(--g-red) inset,
+    0 14px 40px rgba(0,0,0,.28) !important;
+}
+
+html body #root .ss-brand-emblem {
+  background: linear-gradient(145deg, #2a2a33, #0c0c10) !important;
+  border: 1px solid rgba(255,255,255,.25) !important;
+  box-shadow: 0 0 0 1px var(--g-red) inset, 0 6px 18px rgba(225,29,42,.35), 0 1px 0 rgba(255,255,255,.4) inset;
+}
+
+html body #root .ss-nav-links a {
+  position: relative;
+  transition: color .25s var(--g-ease), text-shadow .25s var(--g-ease);
+}
+html body #root .ss-nav-links a:not(.ss-nav-cta)::after {
+  content: '';
+  position: absolute; left: 12%; right: 12%; bottom: -6px; height: 2px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, transparent, var(--g-red-glow), transparent);
+  transform: scaleX(0); transition: transform .3s var(--g-ease);
+}
+html body #root .ss-nav-links a:not(.ss-nav-cta):hover::after,
+html body #root .ss-nav-links a.active:not(.ss-nav-cta)::after { transform: scaleX(1); }
+
+/* ---------- Glossy buttons (red gel + shine sweep) ---------- */
+html body #root .ss-button,
+html body #root .ss-nav-cta,
+html body #root .booking-submit,
+html body #root .booking-actions button,
+html body #root .booking-actions a {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  border-radius: 14px !important;
+  transition: transform .3s var(--g-ease), box-shadow .3s var(--g-ease), filter .3s var(--g-ease) !important;
+}
+
+html body #root .ss-button-gold,
+html body #root .ss-nav-cta,
+html body #root .booking-submit {
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.38) 0%, rgba(255,255,255,.06) 48%, rgba(0,0,0,.08) 50%, rgba(0,0,0,.0) 100%),
+    linear-gradient(135deg, var(--g-red-glow) 0%, var(--g-red) 45%, var(--g-red-deep) 100%) !important;
+  color: #fff !important;
+  border: 1px solid rgba(255,255,255,.28) !important;
+  box-shadow: var(--g-shadow-red) !important;
+  text-shadow: 0 1px 2px rgba(80,0,5,.45);
+}
+
+html body #root .ss-button-dark {
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.20) 0%, rgba(255,255,255,.03) 50%, rgba(0,0,0,.2) 52%),
+    linear-gradient(135deg, #2b2b33, #09090c) !important;
+  color: #fff !important;
+  border: 1px solid rgba(255,255,255,.18) !important;
+  box-shadow: 0 12px 30px rgba(0,0,0,.35), 0 1px 0 rgba(255,255,255,.25) inset !important;
+}
+
+html body #root .ss-button-outline {
+  background: linear-gradient(145deg, rgba(255,255,255,.22), rgba(255,255,255,.06)) !important;
+  border: 1px solid rgba(255,255,255,.55) !important;
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  box-shadow: 0 8px 24px rgba(0,0,0,.22), 0 1px 0 rgba(255,255,255,.45) inset !important;
+}
+
+html body #root .ss-button::before,
+html body #root .ss-nav-cta::before,
+html body #root .booking-submit::before {
+  content: '';
+  position: absolute; inset: 0; z-index: -1;
+  background: var(--g-shine);
+  transform: translateX(-130%);
+  transition: transform .8s var(--g-ease);
+}
+html body #root .ss-button:hover,
+html body #root .ss-nav-cta:hover,
+html body #root .booking-submit:hover { transform: translateY(-3px); filter: saturate(1.1); }
+html body #root .ss-button:hover::before,
+html body #root .ss-nav-cta:hover::before,
+html body #root .booking-submit:hover::before { transform: translateX(130%); }
+html body #root .ss-button:active,
+html body #root .ss-nav-cta:active,
+html body #root .booking-submit:active { transform: translateY(0) scale(.98); }
+
+/* ---------- Hero: deeper shade, glossy type, floating glass quote ---------- */
+html body #root .ss-hero { box-shadow: 0 30px 80px rgba(0,0,0,.35); }
+html body #root .ss-hero h1 {
+  text-shadow: 0 2px 0 rgba(0,0,0,.25), 0 18px 50px rgba(0,0,0,.55);
+}
+html body #root .ss-hero::after {
+  content: '';
+  position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.10), transparent 22%),
+    radial-gradient(700px 300px at 85% 0%, rgba(225,29,42,.22), transparent 70%);
+}
+html body #root .ss-hero-signature-quote,
+html body #root .ss-hero-note,
+html body #root .ss-hero-followup-cards > * {
+  background: var(--g-glass-dark) !important;
+  border: 1px solid var(--g-border-dark) !important;
+  border-top-color: rgba(255,255,255,.32) !important;
+  -webkit-backdrop-filter: blur(22px) saturate(170%);
+  backdrop-filter: blur(22px) saturate(170%);
+  box-shadow: 0 24px 60px rgba(0,0,0,.4), 0 1px 0 rgba(255,255,255,.25) inset !important;
+  border-radius: 20px !important;
+}
+
+/* ---------- Glass cards (light sections) ---------- */
+html body #root .ss-capacity-card,
+html body #root .ss-capacity-item,
+html body #root .ss-ca-preview,
+html body #root .ss-intro-photo-wrap,
+html body #root .booking-form,
+html body #root .booking-hero,
+html body #root .booking-stats > *,
+html body #root .booking-seat-grid,
+html body #root .booking-success,
+html body #root .ca-coming-soon,
+html body #root .ca-page > section {
+  position: relative;
+  background: var(--g-glass) !important;
+  border: 1px solid var(--g-border) !important;
+  border-radius: 26px !important;
+  -webkit-backdrop-filter: blur(20px) saturate(170%);
+  backdrop-filter: blur(20px) saturate(170%);
+  box-shadow:
+    var(--g-shadow-md),
+    0 1px 0 rgba(255,255,255,.95) inset,
+    0 -1px 0 rgba(0,0,0,.04) inset !important;
+  transition: transform .45s var(--g-ease), box-shadow .45s var(--g-ease) !important;
+}
+
+/* top gloss reflection on cards */
+html body #root .ss-capacity-card::before,
+html body #root .ss-ca-preview::before,
+html body #root .booking-form::before {
+  content: '';
+  position: absolute; left: 0; right: 0; top: 0; height: 46%;
+  border-radius: inherit;
+  background: linear-gradient(180deg, rgba(255,255,255,.55), rgba(255,255,255,0));
+  pointer-events: none;
+  z-index: 0;
+}
+html body #root .ss-capacity-card > *,
+html body #root .ss-ca-preview > *,
+html body #root .booking-form > * { position: relative; z-index: 1; }
+
+@media (hover: hover) {
+  html body #root .ss-facility-icon-tile { transition: transform .45s var(--g-ease) !important; }
+  html body #root .ss-facility-icon-tile:hover { transform: translateY(-6px); }
+  html body #root .ss-capacity-item:hover,
+  html body #root .ss-ca-preview:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--g-shadow-lg), 0 1px 0 rgba(255,255,255,.95) inset !important;
+  }
+}
+
+/* ---------- Section headings ---------- */
+html body #root .ss-section h2,
+html body #root .ss-intro-copy h2,
+html body #root .ss-gallery-header h2,
+html body #root .ss-section-heading h2 {
+  color: var(--g-ink) !important;
+  letter-spacing: -.5px;
+  text-shadow: 0 1px 0 #fff, 0 10px 24px rgba(15,15,25,.08);
+}
+html body #root .ss-section h2 em,
+html body #root .ss-intro-copy h2 em,
+html body #root .ss-gallery-header h2 em,
+html body #root .ss-closing-cta h2 em {
+  font-style: normal;
+  color: var(--g-red) !important;
+  -webkit-text-fill-color: var(--g-red) !important;
+  background: none !important;
+  text-shadow: 0 6px 22px rgba(225,29,42,.25);
+}
+html body #root .ss-closing-cta h2 em {
+  color: var(--g-red-glow) !important;
+  -webkit-text-fill-color: var(--g-red-glow) !important;
+}
+
+html body #root .ss-gold-rule,
+html body #root .ss-capacity-divider,
+html body #root .ss-label-mark {
+  background: linear-gradient(90deg, var(--g-red), var(--g-red-glow), transparent) !important;
+  height: 3px; border-radius: 3px; border: 0;
+  box-shadow: 0 0 14px rgba(255,75,85,.55);
+}
+
+/* ---------- Gallery ---------- */
+html body #root .ss-gallery-grid > * {
+  border-radius: 24px !important;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,.7);
+  box-shadow: var(--g-shadow-md);
+  transition: transform .5s var(--g-ease), box-shadow .5s var(--g-ease);
+}
+html body #root .ss-gallery-grid img { transition: transform 1.2s var(--g-ease); }
+@media (hover: hover) {
+  html body #root .ss-gallery-grid > *:hover { transform: translateY(-5px); box-shadow: var(--g-shadow-lg); }
+  html body #root .ss-gallery-grid > *:hover img { transform: scale(1.06); }
+}
+html body #root .ss-gallery-overlay {
+  background: linear-gradient(0deg, rgba(7,7,10,.82), rgba(7,7,10,.15) 55%, transparent) !important;
+}
+html body #root .ss-gallery-arrow,
+html body #root .ss-round-link {
+  background: linear-gradient(145deg, rgba(255,255,255,.9), rgba(255,255,255,.55)) !important;
+  border: 1px solid #fff !important;
+  -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px);
+  box-shadow: var(--g-shadow-sm), 0 1px 0 #fff inset;
+  transition: transform .3s var(--g-ease), box-shadow .3s var(--g-ease);
+}
+html body #root .ss-gallery-arrow:hover,
+html body #root .ss-round-link:hover { transform: scale(1.08); box-shadow: var(--g-shadow-red); color: var(--g-red); }
+
+/* ---------- Closing CTA: black glossy panel with red glow ---------- */
+html body #root .ss-closing-cta {
+  background:
+    radial-gradient(520px 260px at 88% 0%, rgba(225,29,42,.55), transparent 70%),
+    radial-gradient(420px 220px at 0% 100%, rgba(255,75,85,.22), transparent 70%),
+    linear-gradient(145deg, #1b1b22, #050507) !important;
+  border: 1px solid rgba(255,255,255,.14) !important;
+  border-radius: 32px !important;
+  box-shadow: 0 40px 90px rgba(0,0,0,.45), 0 1px 0 rgba(255,255,255,.3) inset !important;
+  overflow: hidden;
+}
+html body #root .ss-cta-orbit {
+  border-color: rgba(255,75,85,.35) !important;
+  box-shadow: 0 0 40px rgba(225,29,42,.25) inset;
+}
+
+/* ---------- Contact panel: dark glass, light text ---------- */
+html body #root .ss-contact-panel {
+  background:
+    radial-gradient(420px 200px at 100% 0%, rgba(225,29,42,.28), transparent 70%),
+    linear-gradient(145deg, rgba(34,34,42,.92), rgba(8,8,12,.92)) !important;
+  border: 1px solid rgba(255,255,255,.14) !important;
+  border-top-color: rgba(255,255,255,.32) !important;
+  border-radius: 28px !important;
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  backdrop-filter: blur(20px) saturate(160%);
+  box-shadow: 0 30px 70px rgba(0,0,0,.45), 0 1px 0 rgba(255,255,255,.22) inset !important;
+}
+html body #root .ss-contact-panel-heading h2 { color: #fff !important; text-shadow: none !important; }
+html body #root .ss-contact-panel-heading p { color: #c9c9d3 !important; }
+html body #root .ss-contact-panel-kicker { color: var(--g-red-glow) !important; }
+
+/* ---------- Membership stats: readable numbers ---------- */
+html body #root .booking-stats > * { text-align: center; }
+html body #root .booking-stats strong { color: var(--g-red) !important; text-shadow: none !important; }
+html body #root .booking-stats span,
+html body #root .booking-stats small { color: var(--g-muted) !important; }
+html body #root .booking-stats svg { color: var(--g-red) !important; }
+html body #root .booking-hero p { color: var(--g-muted) !important; }
+
+/* ---------- Footer ---------- */
+html body #root .ss-footer {
+  background:
+    radial-gradient(700px 240px at 50% 0%, rgba(225,29,42,.20), transparent 70%),
+    linear-gradient(180deg, #121217, #040406) !important;
+  border-top: 1px solid rgba(255,75,85,.55) !important;
+  box-shadow: 0 -1px 0 rgba(255,255,255,.12) inset, 0 -20px 60px rgba(0,0,0,.2);
+}
+html body #root .ss-footer-contact-card {
+  background: var(--g-glass-dark) !important;
+  border: 1px solid var(--g-border-dark) !important;
+  border-top-color: rgba(255,255,255,.28) !important;
+  border-radius: 20px !important;
+  -webkit-backdrop-filter: blur(18px); backdrop-filter: blur(18px);
+  box-shadow: 0 16px 40px rgba(0,0,0,.35), 0 1px 0 rgba(255,255,255,.2) inset !important;
+  transition: transform .35s var(--g-ease), box-shadow .35s var(--g-ease);
+}
+html body #root .ss-footer-contact-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 22px 50px rgba(225,29,42,.28), 0 1px 0 rgba(255,255,255,.3) inset !important;
+}
+html body #root .ss-footer-contact-icon {
+  background: linear-gradient(145deg, var(--g-red-glow), var(--g-red-deep)) !important;
+  color: #fff !important;
+  box-shadow: 0 8px 20px rgba(225,29,42,.45), 0 1px 0 rgba(255,255,255,.5) inset;
+}
+
+/* ---------- Forms (Membership page) ---------- */
+html body #root .booking-page { background: transparent !important; }
+html body #root .booking-form input,
+html body #root .booking-form select,
+html body #root .booking-form textarea {
+  background: linear-gradient(180deg, rgba(255,255,255,.95), rgba(246,246,250,.8)) !important;
+  border: 1px solid rgba(20,20,30,.12) !important;
+  border-radius: 14px !important;
+  box-shadow: 0 1px 0 #fff inset, 0 2px 6px rgba(15,15,25,.05) !important;
+  transition: border-color .25s var(--g-ease), box-shadow .25s var(--g-ease) !important;
+}
+html body #root .booking-form input:focus,
+html body #root .booking-form select:focus,
+html body #root .booking-form textarea:focus {
+  border-color: var(--g-red) !important;
+  box-shadow: 0 0 0 4px rgba(225,29,42,.15), 0 1px 0 #fff inset !important;
+  outline: none !important;
+}
+
+/* Seat dots: glossy beads */
+html body #root .seat-dot.available {
+  background: radial-gradient(circle at 30% 28%, #fff 0, #eaf8ef 22%, #34c076 70%, #1c8a52 100%) !important;
+  box-shadow: 0 4px 10px rgba(28,138,82,.35);
+}
+html body #root .seat-dot.booked {
+  background: radial-gradient(circle at 30% 28%, #fff 0, #ffd9db 22%, #e11d2a 70%, #9d0b14 100%) !important;
+  box-shadow: 0 4px 10px rgba(225,29,42,.35);
+}
+
+/* ---------- One orchestrated entrance (hero only) ---------- */
+@keyframes g-rise { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: none; } }
+html body #root .ss-hero-content > * { animation: g-rise .9s var(--g-ease) both; }
+html body #root .ss-hero-content > *:nth-child(2) { animation-delay: .08s; }
+html body #root .ss-hero-content > *:nth-child(3) { animation-delay: .16s; }
+html body #root .ss-hero-content > *:nth-child(4) { animation-delay: .24s; }
+html body #root .ss-hero-content > *:nth-child(5) { animation-delay: .32s; }
+
+@keyframes g-pulse { 0%,100% { box-shadow: 0 0 0 0 rgba(225,29,42,.55); } 50% { box-shadow: 0 0 0 9px rgba(225,29,42,0); } }
+html body #root .ss-live-dot { background: var(--g-red) !important; animation: g-pulse 2.2s ease-out infinite; }
+
+/* ---------- Scrollbar ---------- */
+html { scrollbar-color: var(--g-red) #111; }
+::-webkit-scrollbar { width: 11px; }
+::-webkit-scrollbar-track { background: #0c0c10; }
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--g-red-glow), var(--g-red-deep));
+  border-radius: 10px; border: 2px solid #0c0c10;
+}
+
+/* ---------- Mobile: lighter blur so phones stay smooth ---------- */
+@media (max-width: 760px) {
+  html body #root .ss-capacity-card,
+  html body #root .ss-capacity-item,
+  html body #root .ss-contact-panel,
+  html body #root .ss-ca-preview,
+  html body #root .ss-facility-bento > *,
+  html body #root .booking-form {
+    border-radius: 20px !important;
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+  }
+  html body #root .ss-closing-cta { border-radius: 24px !important; }
+}
+
+/* ---------- Respect reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  html body #root * { animation: none !important; transition: none !important; }
+}
+
+/* Print: membership form/ID card ko bilkul mat chhedo */
+@media print {
+  html body #root .membership-print-form,
+  html body #root .membership-print-docs,
+  html body #root .membership-id-card,
+  html body #root .membership-print-form *,
+  html body #root .membership-id-card * {
+    -webkit-backdrop-filter: none !important; backdrop-filter: none !important;
+    box-shadow: none !important; animation: none !important; text-shadow: none !important;
+  }
+}

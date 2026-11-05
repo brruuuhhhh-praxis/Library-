@@ -9,6 +9,9 @@ import './site-unified-theme.css';
 
 import './site-polish.css';
 import './brand-red-theme.css';
+import './ultra-premium-glossy.css';
+import './cinematic-3d.css';
+import { startCinematic } from './cinematic.js';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -16,4 +19,4 @@ createRoot(document.getElementById('root')).render(
   </StrictMode>,
 )
 
-
+startCinematic();
