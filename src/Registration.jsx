@@ -3,11 +3,24 @@ import { ArrowLeft, BookOpen, CheckCircle2, Printer, ShieldCheck } from 'lucide-
 import { isSupabaseConfigured, supabase } from './lib/supabase.js';
 import { getISTDate } from './lib/dateUtils.js';
 import './Booking.css';
-import { LIBRARY_NAME, LIBRARY_TAGLINE } from './libraryConfig.js';
+import { LIBRARY_NAME, LIBRARY_NAME_EN, LIBRARY_TAGLINE } from './libraryConfig.js';
 import LibraryBrand from './LibraryBrand.jsx';
 import './print-form.css';
 
 const blankForm = { full_name:'', father_name:'', date_of_birth:'', mobile:'', alternate_mobile:'', address:'', emergency_contact:'', id_type:'Aadhaar Card', joining_date:getISTDate(), seat_no:'' };
+
+// Print form / member card ke liye saaf, simple brand header
+function PrintBrand({ caption }) {
+  return <div className="pb"><span className="pb-mark">श्री</span><div className="pb-text"><strong>{LIBRARY_NAME}</strong><em>{LIBRARY_NAME_EN}</em><small>{caption}</small></div></div>;
+}
+// Joining date se ek mahina poora hone ki aakhri tareekh (jaise 7 Nov -> 6 Dec)
+function validTill(iso) {
+  if (!iso) return '';
+  const [y, m, d] = iso.split('-').map(Number);
+  const t = new Date(y, m, Math.min(d, new Date(y, m + 1, 0).getDate()));
+  t.setDate(t.getDate() - 1);
+  return `${t.getFullYear()}-${String(t.getMonth() + 1).padStart(2, '0')}-${String(t.getDate()).padStart(2, '0')}`;
+}
 
 export default function Registration({ onHome, onAdmin }) {
   const [form, setForm] = useState(blankForm);
@@ -115,7 +128,7 @@ export default function Registration({ onHome, onAdmin }) {
     <section className="membership-print-docs" aria-label="प्रिंट होने वाला सदस्यता फॉर्म और आईडी कार्ड">
       <article className="membership-print-form">
         <header className="mpf-header">
-          <LibraryBrand variant="print-dark" tagline={LIBRARY_TAGLINE} caption="MEMBERSHIP REGISTRATION FORM" />
+          <PrintBrand caption="MEMBERSHIP REGISTRATION FORM" />
           <div className="mpf-photo-box"><span>पासपोर्ट साइज<br/>फोटो</span></div>
         </header>
         <div className="mpf-meta"><span>रजिस्ट्रेशन नं.: <b>{receipt ? receipt.registration_no : 'रजिस्ट्रेशन के बाद जारी होगा'}</b></span><span>दिनांक: <b>{form.joining_date || '________________'}</b></span></div>
@@ -133,9 +146,26 @@ export default function Registration({ onHome, onAdmin }) {
         <footer className="mpf-footer"><span>{LIBRARY_NAME}</span><span>कार्यालय उपयोग हेतु · मूल पहचान-पत्र देखकर सत्यापित करें</span></footer>
       </article>
       <article className="membership-id-card">
-        <header className="mic-header"><LibraryBrand variant="id-card" tagline={LIBRARY_TAGLINE} caption="LIBRARY MEMBER ID CARD" /></header>
-        <div className="mic-body"><div className="mic-photo"><span>पासपोर्ट<br/>फोटो</span></div><div className="mic-member"><span className="mic-label">MEMBER NAME</span><h3>{form.full_name || 'सदस्य का नाम'}</h3><p><b>पिता / अभिभावक:</b> {form.father_name || '—'}</p><p><b>रजिस्ट्रेशन नं.:</b> {receipt ? receipt.registration_no : 'रजिस्ट्रेशन के बाद जारी होगा'}</p><p><b>चुनी हुई सीट:</b> {receipt?.seat_no ? `सीट ${receipt.seat_no}` : (form.seat_no ? `सीट ${form.seat_no}` : 'रजिस्ट्रेशन के बाद चुनें')}</p><p><b>जॉइनिंग:</b> {form.joining_date || '—'}</p></div></div>
-        <div className="mic-bottom"><div><span>सदस्य के हस्ताक्षर</span><i></i></div><div><span>अधिकृत हस्ताक्षर</span><i></i></div></div><footer>यह कार्ड {LIBRARY_NAME} की संपत्ति है। मिलने पर लाइब्रेरी में लौटाएँ।</footer>
+        <header className="mid-header"><PrintBrand caption="LIBRARY MEMBER ID CARD" /><div className="mid-photo"><span>पासपोर्ट साइज<br/>फोटो</span></div></header>
+        <div className="mid-strip"><span>रजिस्ट्रेशन नं.: <b>{receipt ? receipt.registration_no : 'रजिस्ट्रेशन के बाद जारी होगा'}</b></span><span>वैधता: <b>{validTill(form.joining_date) || '________________'}</b></span></div>
+        <h3 className="mid-title">सदस्य कार्ड</h3>
+        <div className="mid-grid">
+          <div className="mid-wide"><span>सदस्य का नाम</span><b>{form.full_name || ' '}</b></div>
+          <div><span>पिता / अभिभावक</span><b>{form.father_name || ' '}</b></div>
+          <div><span>मोबाइल नंबर</span><b>{form.mobile || ' '}</b></div>
+          <div><span>चुनी हुई सीट</span><b>{receipt?.seat_no ? `सीट ${receipt.seat_no}` : (form.seat_no ? `सीट ${form.seat_no}` : ' ')}</b></div>
+          <div><span>जॉइनिंग की तारीख</span><b>{form.joining_date || ' '}</b></div>
+        </div>
+        <section className="mid-wifi">
+          <h4>Wi-Fi एक्सेस</h4>
+          <div className="mid-wifi-grid">
+            <div><span>वन-टाइम Wi-Fi पासवर्ड</span><b className="mid-pass">{receipt?.wifi_password || ' '}</b></div>
+            <div><span>पासवर्ड की वैधता</span><b>{form.joining_date ? `${form.joining_date} से ${validTill(form.joining_date)} तक` : ' '}</b></div>
+          </div>
+          <p>पासवर्ड भुगतान की पुष्टि के बाद लाइब्रेरी द्वारा भरा जाएगा। यह सिर्फ आपके लिए है, किसी से साझा न करें। एक महीना पूरा होते ही यह बंद हो जाएगा।</p>
+        </section>
+        <div className="mid-sign"><div><span>सदस्य के हस्ताक्षर</span><i></i></div><div><span>अधिकृत हस्ताक्षर व मुहर</span><i></i></div></div>
+        <footer className="mid-foot"><span>{LIBRARY_NAME}</span><span>यह कार्ड {LIBRARY_NAME} की संपत्ति है। मिलने पर लाइब्रेरी में लौटाएँ।</span></footer>
       </article>
     </section>
     <footer className="booking-footer"><span>© {new Date().getFullYear()} {LIBRARY_NAME}</span><button type="button" onClick={onHome}>होमपेज पर वापस जाएँ</button></footer>
