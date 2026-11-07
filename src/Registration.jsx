@@ -1,3 +1,4 @@
+import './print-form.css';
 import React, { useEffect, useMemo, useState } from 'react';
 import { ArrowLeft, BookOpen, CheckCircle2, Printer, ShieldCheck } from 'lucide-react';
 import { isSupabaseConfigured, supabase } from './lib/supabase.js';
