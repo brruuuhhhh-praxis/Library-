@@ -1,4 +1,3 @@
-import './print-form.css';
 import React, { useEffect, useMemo, useState } from 'react';
 import { ArrowLeft, BookOpen, CheckCircle2, Printer, ShieldCheck } from 'lucide-react';
 import { isSupabaseConfigured, supabase } from './lib/supabase.js';
@@ -6,6 +5,7 @@ import { getISTDate } from './lib/dateUtils.js';
 import './Booking.css';
 import { LIBRARY_NAME, LIBRARY_TAGLINE } from './libraryConfig.js';
 import LibraryBrand from './LibraryBrand.jsx';
+import './print-form.css';
 
 const blankForm = { full_name:'', father_name:'', date_of_birth:'', mobile:'', alternate_mobile:'', address:'', emergency_contact:'', id_type:'Aadhaar Card', joining_date:getISTDate(), seat_no:'' };
 
